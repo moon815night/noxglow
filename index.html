@@ -438,7 +438,7 @@
         }
         .msg-bubble {
             padding: 10px 15px;
-            border-radius: var(--radius-lg);
+            border-radius: var(--bubble-radius, var(--radius-lg));
             font-size: 14.5px;
             line-height: 1.55;
             letter-spacing: 0.3px;
@@ -451,6 +451,7 @@
             transition: background-color 0.3s ease, box-shadow 0.2s ease, color 0.3s ease;
             cursor: default;
             -webkit-tap-highlight-color: transparent;
+            font-family: var(--bubble-font-family, inherit);
         }
         .msg-row.user .msg-bubble {
             background-color: rgba(253, 225, 229, var(--user-bubble-opacity));
@@ -1072,6 +1073,20 @@
         }
         .call-overlay.call-initial-bg { background: #faf6ef; }
         body.dark-mode .call-overlay.call-initial-bg { background: #2a2c34; }
+        .call-exit-btn {
+            position: absolute; top: 18px; right: 18px;
+            width: 36px; height: 36px; border-radius: 50%;
+            background: rgba(255,255,255,0.75);
+            border: 1px solid rgba(0,0,0,0.06);
+            color: #8a7d85; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 10; transition: all 0.2s ease;
+            backdrop-filter: blur(4px);
+        }
+        .call-exit-btn:hover { background: #fff; color: #c97070; transform: rotate(90deg); }
+        .call-exit-btn svg { width: 18px; height: 18px; }
+        .call-overlay:not(.call-initial-bg) .call-exit-btn { color: #f0e6d6; background: rgba(40,40,48,0.6); border-color: rgba(255,255,255,0.12); }
+        .call-overlay:not(.call-initial-bg) .call-exit-btn:hover { background: rgba(60,60,70,0.85); color: #fff; }
         .call-stage { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
         .call-cta-btn {
             padding: 14px 38px; font-size: 15px;
@@ -1195,20 +1210,50 @@
             .call-phone-frame { width: 92vw; height: 86vh; }
         }
         /* 系统设置中可折叠模块（与现有 setting-section 共用） */
-        .call-settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin-top:8px; }
-        .call-settings-grid label { display:flex; flex-direction:column; font-size:12px; color:var(--text-medium); gap:4px; }
+        .call-settings-scroll {
+            display: flex; gap: 12px; overflow-x: auto; overflow-y: hidden;
+            padding: 4px 2px 12px; margin-top: 8px;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: thin;
+            scrollbar-color: #e5c0cb transparent;
+        }
+        .call-settings-scroll::-webkit-scrollbar { height: 4px; }
+        .call-settings-scroll::-webkit-scrollbar-thumb { background: #e5c0cb; border-radius: 2px; }
+        .call-settings-scroll::-webkit-scrollbar-track { background: transparent; }
+        .call-settings-page {
+            flex: 0 0 auto; min-width: 78%; max-width: 100%;
+            background: #fffaf6; border-radius: 14px; padding: 12px 14px;
+            box-sizing: border-box; scroll-snap-align: start;
+            border: 1px solid #f0e0e5;
+        }
+        body.dark-mode .call-settings-page { background: #2f3038; border-color: #3a3c46; }
+        .call-settings-page-title {
+            font-size: 12.5px; color: #b87a8a; font-weight: 500;
+            margin-bottom: 10px; letter-spacing: 0.5px;
+        }
+        body.dark-mode .call-settings-page-title { color: #d4a0b0; }
+        .call-settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; }
+        .call-settings-grid label, .call-settings-row-stack { display:flex; flex-direction:column; font-size:12px; color:var(--text-medium); gap:4px; }
         .call-settings-grid input[type=text],
-        .call-settings-grid input[type=number] {
-            padding: 6px 10px; border: 1px solid #e5d8d8; border-radius: 8px;
-            font-size: 12.5px; background: #fffaf6; color: var(--text-dark);
+        .call-settings-grid input[type=number],
+        .call-settings-grid select,
+        .call-settings-row-stack input[type=text] {
+            padding: 7px 10px; border: 1px solid #e5d8d8; border-radius: 8px;
+            font-size: 12.5px; background: #fff; color: var(--text-dark);
+            min-width: 0; width: 100%; box-sizing: border-box;
+            font-family: inherit;
         }
         body.dark-mode .call-settings-grid input[type=text],
-        body.dark-mode .call-settings-grid input[type=number] { background:#363840; border-color:#454852; color:var(--text-dark); }
-        .call-settings-row { display:flex; align-items:center; gap:8px; margin-top:8px; }
-        .call-settings-row input[type=color] { width:32px; height:32px; border:none; background:none; cursor:pointer; padding:0; }
-        .call-settings-row span { font-size:12.5px; color:var(--text-medium); min-width: 92px; }
+        body.dark-mode .call-settings-grid input[type=number],
+        body.dark-mode .call-settings-grid select,
+        body.dark-mode .call-settings-row-stack input[type=text] { background:#363840; border-color:#454852; color:#e5d8d8; }
+        .call-settings-row { display:flex; align-items:center; gap:10px; margin-top:10px; }
+        .call-settings-row input[type=color] { width:36px; height:36px; border:none; background:none; cursor:pointer; padding:0; flex-shrink: 0; }
+        .call-settings-row > span { font-size:12.5px; color:var(--text-medium); min-width: 110px; }
         .call-settings-upload {
             display:flex; align-items:center; gap:8px; margin-top:6px;
+            flex-wrap: wrap;
         }
         .call-settings-upload input[type=file] { display:none; }
         .call-settings-upload label {
@@ -2886,6 +2931,33 @@
             font-family: var(--font);
             line-height: 1.5;
         }
+        .dm-storage-meter { margin-top:6px; }
+        .dm-storage-bar {
+            position: relative; width:100%; height:24px;
+            background: #f5edf0; border:1px solid #ead6dc; border-radius:14px;
+            overflow: hidden; box-sizing: border-box;
+        }
+        body.dark-mode .dm-storage-bar { background:#363840; border-color:#454852; }
+        .dm-storage-fill {
+            position: absolute; left:0; top:0; bottom:0; width:0;
+            background: linear-gradient(90deg, #f9c8d0 0%, #e8a6b3 100%);
+            transition: width 0.4s ease;
+            border-radius: 14px 0 0 14px;
+        }
+        .dm-storage-num {
+            position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+            font-size: 12px; font-weight: 600; color: #8a4458;
+            text-shadow: 0 0 4px rgba(255,255,255,0.6);
+            letter-spacing: 0.4px;
+        }
+        body.dark-mode .dm-storage-num { color: #fff; text-shadow: 0 0 4px rgba(0,0,0,0.6); }
+        .dm-storage-text { margin-top:6px; font-size:12px; color: var(--text-medium); }
+        @keyframes storageFade {
+            0% { opacity: 0; transform: translateY(8px); }
+            10% { opacity: 1; transform: translateY(0); }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateY(-4px); }
+        }
         .dm-divider {
             height: 1px;
             background: #f0e8eb;
@@ -4343,6 +4415,9 @@ body.dark-mode .user-letter-content .letter-body p {
 
     <!-- 致电顾时夜 全屏功能页 -->
     <div class="call-overlay" id="callOverlay" style="display:none;">
+        <button class="call-exit-btn" id="callExitBtn" title="退出">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
         <!-- 初始状态：致电按钮 -->
         <div class="call-stage call-stage-initial" id="callInitialStage">
             <button class="call-cta-btn" id="callStartBtn">
@@ -4401,7 +4476,6 @@ body.dark-mode .user-letter-content .letter-body p {
                     <div class="feature-card" data-page="dataManagement"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="13.5" y2="15"/></svg><span class="card-text">数据管理</span></div>
                     <div class="feature-card" data-page="patpatStatus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/><circle cx="7" cy="17" r="2.5"/><rect x="14" y="14" width="7" height="6" rx="2"/></svg><span class="card-text">互动中心</span></div>
                     <div class="feature-card" data-page="wordbankManager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="card-text">顾时夜说</span></div>
-                    <div class="feature-card" data-page="call" id="featureCardCall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg><span class="card-text">致电顾时夜</span></div>
                 </div>
                 <!-- 互动中心页面 -->
                 <div class="feature-page" id="patpatStatusPage">
@@ -4434,6 +4508,10 @@ body.dark-mode .user-letter-content .letter-body p {
                         <div class="feature-card" data-subpage="messageStats" style="aspect-ratio:1/1.2;">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="6" height="12" rx="1.5"/><rect x="12" y="3" width="6" height="15" rx="1.5"/><circle cx="6" cy="4" r="1.2"/><circle cx="15" cy="1.5" r="1.2"/></svg>
                             <span class="card-text">消息统计</span>
+                        </div>
+                        <div class="feature-card" data-subpage="call" id="featureCardCall" style="aspect-ratio:1/1.2;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+                            <span class="card-text">致电顾时夜</span>
                         </div>
                     </div>
                 </div>
@@ -4507,7 +4585,7 @@ body.dark-mode .user-letter-content .letter-body p {
                 <div class="feature-page" id="systemSettingsPage"><button class="btn-sm btn-ghost back-btn" id="backFromSystemSettings"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div id="settingsContent" style="display:flex;flex-direction:column;gap:14px;">
                         <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 使用者设置（自己）</span><div class="avatar-upload-area" style="margin-bottom:8px;"><div class="avatar-preview-lg" id="userAvatarPreviewLg"><img id="userAvatarPreviewImg" src="" alt="user avatar"></div><div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:100px;"><button class="btn-sm btn-pink" id="btnUploadUserAvatar"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 上传头像</button><button class="btn-sm btn-ghost" id="btnResetUserAvatar"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> 恢复默认</button></div></div><div class="setting-row"><input type="text" id="userNicknameInput" placeholder="你的昵称..." maxlength="20"><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">你的名字</span></div><input type="file" id="userAvatarFileInput" accept="image/*" style="display:none;"></div>
                         <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 联系人设置（对方）</span><div class="avatar-upload-area" style="margin-bottom:8px;"><div class="avatar-preview-lg" id="loverAvatarPreviewLg"><img id="loverAvatarPreviewImg" src="" alt="lover avatar"></div><div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:100px;"><button class="btn-sm btn-pink" id="btnUploadLoverAvatar"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 上传头像</button><button class="btn-sm btn-ghost" id="btnResetLoverAvatar"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> 恢复默认</button></div></div><div class="setting-row"><input type="text" id="loverNicknameInput" placeholder="联系人昵称..." maxlength="24"><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">标题显示</span></div><input type="file" id="loverAvatarFileInput" accept="image/*" style="display:none;"></div>
-                        <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/><path d="M12 2A15.3 15.3 0 0 0 8 12a15.3 15.3 0 0 0 4 10"/><path d="M2 12h20"/></svg> 主题自定义</span><div style="display:flex;flex-direction:column;gap:10px;"><div class="setting-row"><span>页面背景</span><input type="color" id="colorPageBg" value="#FCEFF0"><span class="color-swatch" id="swatchPageBg" style="background:#FCEFF0;"></span></div><div class="setting-row"><span>消息区域</span><input type="color" id="colorMsgAreaBg" value="#FEF7F8"><span class="color-swatch" id="swatchMsgAreaBg" style="background:#FEF7F8;"></span></div><div><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 你的气泡</span><div class="setting-row" style="margin-top:6px;"><span>颜色</span><input type="color" id="colorUserBubble" value="#FDE1E5"><span class="color-swatch" id="swatchUserBubble" style="background:#FDE1E5;"></span></div><div class="setting-row"><span>透明度</span><input type="range" id="rangeUserOpacity" min="0.1" max="1" step="0.05" value="1"><span class="range-label" id="labelUserOpacity" style="font-family:var(--font);">1.0</span></div><div class="setting-row"><span>字体颜色</span><input type="color" id="colorUserFont" value="#4a3f44"><span class="color-swatch" id="swatchUserFont" style="background:#4a3f44;"></span></div></div><div><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 对方的气泡</span><div class="setting-row" style="margin-top:6px;"><span>颜色</span><input type="color" id="colorLoverBubble" value="#E2F3FF"><span class="color-swatch" id="swatchLoverBubble" style="background:#E2F3FF;"></span></div><div class="setting-row"><span>透明度</span><input type="range" id="rangeLoverOpacity" min="0.1" max="1" step="0.05" value="1"><span class="range-label" id="labelLoverOpacity" style="font-family:var(--font);">1.0</span></div><div class="setting-row"><span>字体颜色</span><input type="color" id="colorLoverFont" value="#3f454a"><span class="color-swatch" id="swatchLoverFont" style="background:#3f454a;"></span></div></div><div style="border-top:1.5px solid #ede2e6;padding-top:10px;margin-top:2px;"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 气泡样式自定义</span><textarea id="bubbleCustomCss" placeholder="输入自定义CSS..." style="width:100%;height:80px;border-radius:12px;border:1.5px solid #ede2e6;font-family:monospace;font-size:12px;padding:8px 10px;resize:vertical;box-sizing:border-box;background:var(--modal-bg);color:var(--text-dark);"></textarea><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnApplyBubbleCss">保存新预设</button><button class="btn-sm btn-ghost" id="btnResetBubbleCss">恢复预设</button></div><details style="margin-top:4px;"><summary style="font-size:12px;color:#b0a6b4;cursor:pointer;user-select:none;">查看默认气泡CSS</summary><pre id="bubbleDefaultCssPreview" style="max-height:150px;overflow-y:auto;background:#f5f0f2;padding:10px;border-radius:8px;font-size:11px;white-space:pre-wrap;margin-top:6px;color:var(--text-medium);">/* 用户气泡 */
+                        <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10"/><path d="M12 2A15.3 15.3 0 0 0 8 12a15.3 15.3 0 0 0 4 10"/><path d="M2 12h20"/></svg> 主题自定义</span><div style="display:flex;flex-direction:column;gap:10px;"><div class="setting-row"><span>页面背景</span><input type="color" id="colorPageBg" value="#FCEFF0"><span class="color-swatch" id="swatchPageBg" style="background:#FCEFF0;"></span></div><div class="setting-row"><span>消息区域</span><input type="color" id="colorMsgAreaBg" value="#FEF7F8"><span class="color-swatch" id="swatchMsgAreaBg" style="background:#FEF7F8;"></span></div><div><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 你的气泡</span><div class="setting-row" style="margin-top:6px;"><span>颜色</span><input type="color" id="colorUserBubble" value="#FDE1E5"><span class="color-swatch" id="swatchUserBubble" style="background:#FDE1E5;"></span></div><div class="setting-row"><span>透明度</span><input type="range" id="rangeUserOpacity" min="0.1" max="1" step="0.05" value="1"><span class="range-label" id="labelUserOpacity" style="font-family:var(--font);">1.0</span></div><div class="setting-row"><span>字体颜色</span><input type="color" id="colorUserFont" value="#4a3f44"><span class="color-swatch" id="swatchUserFont" style="background:#4a3f44;"></span></div></div><div><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 对方的气泡</span><div class="setting-row" style="margin-top:6px;"><span>颜色</span><input type="color" id="colorLoverBubble" value="#E2F3FF"><span class="color-swatch" id="swatchLoverBubble" style="background:#E2F3FF;"></span></div><div class="setting-row"><span>透明度</span><input type="range" id="rangeLoverOpacity" min="0.1" max="1" step="0.05" value="1"><span class="range-label" id="labelLoverOpacity" style="font-family:var(--font);">1.0</span></div><div class="setting-row"><span>字体颜色</span><input type="color" id="colorLoverFont" value="#3f454a"><span class="color-swatch" id="swatchLoverFont" style="background:#3f454a;"></span></div></div><div style="border-top:1.5px solid #ede2e6;padding-top:10px;margin-top:2px;"><span style="display:flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:#8a7d85;text-transform:uppercase;letter-spacing:0.5px;font-family:var(--font);margin-bottom:6px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2v10z"/></svg> 气泡样式自定义</span><div style="font-size:11.5px;color:#b0a6b4;margin-bottom:8px;">可调整气泡颜色、透明度、字体颜色、字体、形状；下方为高级 CSS 区域，可复制当前默认 CSS 后自由修改。</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;"><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:11.5px;color:var(--text-medium);">形状</span><select id="bubbleShapePreset" style="padding:6px 8px;border-radius:8px;border:1px solid #e5d8d8;background:#fffaf6;font-size:12px;"><option value="rounded">圆角矩形（默认）</option><option value="pill">胶囊</option><option value="square">方形</option><option value="soft">柔和圆角</option><option value="bubble-tail">带尾巴</option></select></div><div style="display:flex;flex-direction:column;gap:3px;"><span style="font-size:11.5px;color:var(--text-medium);">字体</span><select id="bubbleFontFamily" style="padding:6px 8px;border-radius:8px;border:1px solid #e5d8d8;background:#fffaf6;font-size:12px;"><option value="">默认字体</option><option value="'KaiTi','STKaiti',楷体,serif">楷体</option><option value="'SimSun','STSong','Songti SC',宋体,serif">宋体</option><option value="'Heiti SC','SimHei',黑体,serif">黑体</option><option value="'Microsoft YaHei',微软雅黑,sans-serif">微软雅黑</option><option value="'PingFang SC',sans-serif">苹方</option><option value="Georgia,serif">Georgia</option><option value="monospace">等宽</option><option value="cursive">手写</option></select></div></div><textarea id="bubbleCustomCss" placeholder="输入自定义 CSS（留空则按上方表单应用）..." style="width:100%;height:100px;border-radius:12px;border:1.5px solid #ede2e6;font-family:monospace;font-size:11.5px;padding:8px 10px;resize:vertical;box-sizing:border-box;background:#fffaf6;color:var(--text-dark);margin-top:8px;"></textarea><div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;"><button class="btn-sm btn-pink" id="btnApplyBubbleCss">应用自定义 CSS</button><button class="btn-sm btn-ghost" id="btnResetBubbleCss">恢复默认</button><button class="btn-sm btn-blue" id="btnCopyBubbleCss">复制当前 CSS</button></div><div class="bubble-preview" style="margin-top:10px;padding:10px;border-radius:12px;background:#f5f0f2;display:flex;flex-direction:column;gap:8px;"><div style="font-size:11px;color:#b0a6b4;letter-spacing:0.3px;">实时预览：</div><div class="bubble-preview-row" style="display:flex;gap:8px;align-items:flex-end;"><div id="bubblePreviewUser" style="padding:8px 14px;border-radius:16px;background:#FDE1E5;color:#4a3f44;font-size:13px;max-width:80%;">我发的消息</div></div><div class="bubble-preview-row" style="display:flex;gap:8px;align-items:flex-end;flex-direction:row-reverse;"><div id="bubblePreviewLover" style="padding:8px 14px;border-radius:16px;background:#E2F3FF;color:#3f454a;font-size:13px;max-width:80%;">对方发的消息</div></div></div><details style="margin-top:6px;"><summary style="font-size:12px;color:#b0a6b4;cursor:pointer;user-select:none;">查看默认气泡 CSS（可复制后修改）</summary><pre id="bubbleDefaultCssPreview" style="max-height:180px;overflow-y:auto;background:#f5f0f2;padding:10px;border-radius:8px;font-size:11px;white-space:pre-wrap;margin-top:6px;color:var(--text-medium);">/* 用户气泡 */
 .msg-row.user .msg-bubble {
     background-color: rgba(253, 225, 229, 1);
     color: #4a3f44;
@@ -4534,11 +4612,11 @@ body.dark-mode .user-letter-content .letter-body p {
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>通知设置</div><div class="reply-strategy-row" style="align-items:center;"><span>浏览器通知</span><button class="btn-sm" id="btnEnableNotifications" style="padding:6px 12px;">启用通知</button><span id="notificationStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;"></span></div></div>
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>后台保活</div><div class="reply-strategy-row" style="align-items:center;"><span>循环播放音频</span><button class="btn-sm" id="btnToggleKeepAlive" style="padding:6px 12px;">开启</button><span id="keepAliveStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;">已关闭</span></div></div>
                         </div></div>
-                        <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 致电顾时夜（功能配置）</span><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label><label>背景类型<select id="callCfgBgType" style="padding:6px 10px;border:1px solid #e5d8d8;border-radius:8px;font-size:12.5px;background:#fffaf6;color:var(--text-dark);"><option value="color">纯色</option><option value="image">图片</option></select></label></div><div class="call-settings-row" style="margin-top:10px;"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload" style="margin-top:6px;"><span style="font-size:12.5px;color:var(--text-medium);min-width:92px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="call-settings-row" style="margin-top:10px;"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:10px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div><div class="dm-info-text" style="margin-top:6px;">联系人名称、动画时长、概率、文案、颜色等均可在此处调整。背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div>
+                        <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 致电顾时夜（功能配置）</span><div class="call-settings-scroll"><div class="call-settings-page"><div class="call-settings-page-title">① 基础 · 概率 · 时长</div><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>背景类型<select id="callCfgBgType"><option value="color">纯色</option><option value="image">图片</option></select></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">② 文案</div><div class="call-settings-grid" style="grid-template-columns:1fr;"><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">③ 背景设置</div><div class="call-settings-row"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload"><span style="font-size:12.5px;color:var(--text-medium);min-width:110px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="dm-info-text" style="margin-top:6px;">背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div><div class="call-settings-page"><div class="call-settings-page-title">④ 颜色配置</div><div class="call-settings-row"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:14px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div></div></div><div class="dm-info-text" style="margin-top:6px;">← 左右滑动查看全部配置项（4 页）</div></div>
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
                 <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button><button class="btn-sm btn-ghost" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></div></div></div>
                 <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideQuoteContainer" style="position:relative; min-height:24px; display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="tide-quote-bubble" id="tideQuoteBubble" style="opacity:0; min-height:0; padding:0; margin:0;"></div><button class="tide-quote-refresh" id="tideQuoteRefresh" style="display:none;">换一句</button></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
-                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
+                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
                 <div class="feature-page" id="mailboxPage"><button class="btn-sm btn-ghost back-btn" id="backFromMailbox"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 信箱</span><div class="mailbox-tab-row"><button class="mailbox-tab-btn active" id="mailTabSend">投递的信</button><button class="mailbox-tab-btn" id="mailTabReceive">回信</button></div><div id="mailSendArea" style="display:flex;flex-direction:column;gap:10px;"><button class="btn-sm btn-pink" id="btnNewLetter">写一封信</button><div class="letter-list" id="sendLetterList"></div></div><div id="mailReceiveArea" style="display:none;flex-direction:column;gap:10px;"><div class="letter-list" id="receiveLetterList"></div></div></div></div>
                 <div class="feature-page" id="importantDaysPage"><button class="btn-sm btn-ghost back-btn" id="backFromImportantDays"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="imd-page-container"><div class="imd-top-pane" id="imdTopPane"><button class="imd-top-edit-btn" id="imdTopEditBtn" title="编辑此重要日" style="display:none;"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><div class="imd-top-decor" id="imdBgDots" style="display:none;"></div><div class="imd-top-type-tag" id="imdTopTypeTag"></div><div class="imd-top-name" id="imdTopName"></div><div class="imd-top-date" id="imdTopDate"></div><div class="imd-top-days" id="imdTopDays"></div><div class="imd-top-days-sub" id="imdTopDaysSub"></div><div class="imd-top-empty" id="imdTopEmpty">还没有重要日，在下方添加吧</div></div><div class="imd-bottom-pane"><div class="imd-list-scroll" id="imdListScroll"></div><div class="imd-list-empty" id="imdListEmpty" style="display:none;">点击下方按钮添加重要日</div><div class="imd-add-btn-row"><button class="btn-sm btn-pink" id="btnImdAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加重要日</button></div></div></div></div>
             </div>
@@ -4932,7 +5010,22 @@ body.dark-mode .user-letter-content .letter-body p {
 
         function applyBgImage() { if (bgImage) { messagesArea.style.backgroundImage = `url(${bgImage})`; messagesArea.style.backgroundColor = 'transparent'; } else { messagesArea.style.backgroundImage = 'none'; messagesArea.style.backgroundColor = msgAreaBg; } if (bgPreview) bgPreview.style.backgroundImage = bgImage ? `url(${bgImage})` : 'none'; }
 
-        function applyAllColors() { document.documentElement.style.setProperty('--bg', pageBg); document.documentElement.style.setProperty('--msg-area-bg', msgAreaBg); document.documentElement.style.setProperty('--user-bubble-hex', userBubbleHex); document.documentElement.style.setProperty('--user-bubble-opacity', userBubbleOpacity); document.documentElement.style.setProperty('--lover-bubble-hex', loverBubbleHex); document.documentElement.style.setProperty('--lover-bubble-opacity', loverBubbleOpacity); document.documentElement.style.setProperty('--user-bubble-font', userBubbleFontHex); document.documentElement.style.setProperty('--lover-bubble-font', loverBubbleFontHex); document.documentElement.style.setProperty('--letter-paper-bg-user', letterPaperBgUser); document.documentElement.style.setProperty('--letter-paper-bg-lover', letterPaperBgLover); document.documentElement.style.setProperty('--letter-paper-border-user', letterPaperBorderUser); document.documentElement.style.setProperty('--letter-paper-border-lover', letterPaperBorderLover); appContainer.style.background = pageBg; applyBgImage(); updateAllBubbleColors(); updateTypingDotsColor(); updateDateDividerBg(); }
+        function applyAllColors() { document.documentElement.style.setProperty('--bg', pageBg); document.documentElement.style.setProperty('--msg-area-bg', msgAreaBg); document.documentElement.style.setProperty('--user-bubble-hex', userBubbleHex); document.documentElement.style.setProperty('--user-bubble-opacity', userBubbleOpacity); document.documentElement.style.setProperty('--lover-bubble-hex', loverBubbleHex); document.documentElement.style.setProperty('--lover-bubble-opacity', loverBubbleOpacity); document.documentElement.style.setProperty('--user-bubble-font', userBubbleFontHex); document.documentElement.style.setProperty('--lover-bubble-font', loverBubbleFontHex); document.documentElement.style.setProperty('--letter-paper-bg-user', letterPaperBgUser); document.documentElement.style.setProperty('--letter-paper-bg-lover', letterPaperBgLover); document.documentElement.style.setProperty('--letter-paper-border-user', letterPaperBorderUser); document.documentElement.style.setProperty('--letter-paper-border-lover', letterPaperBorderLover); appContainer.style.background = pageBg; applyBgImage(); updateAllBubbleColors(); updateTypingDotsColor(); updateDateDividerBg();
+            // 应用气泡形状和字体（来自 pc_bubble_state_v1）
+            try {
+                const bs = JSON.parse(localStorage.getItem('pc_bubble_state_v1') || '{}');
+                const shape = bs.shape || 'rounded';
+                let radius = '18px';
+                if (shape === 'pill') radius = '24px';
+                else if (shape === 'square') radius = '4px';
+                else if (shape === 'soft') radius = '12px';
+                document.documentElement.style.setProperty('--bubble-radius', radius);
+                if (bs.fontFamily) {
+                    document.documentElement.style.setProperty('--bubble-font-family', bs.fontFamily);
+                } else {
+                    document.documentElement.style.setProperty('--bubble-font-family', '');
+                }
+            } catch (e) {} }
 
         function updateAllBubbleColors() { 
     messagesArea.querySelectorAll('.msg-row.user .msg-bubble').forEach(b => {
@@ -5015,7 +5108,38 @@ body.dark-mode .user-letter-content .letter-body p {
         function saveHistory() { try { localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(chatHistory)); checkStorageWarning(); } catch (e) { console.error('saveHistory error:', e); if (e && (e.name === 'QuotaExceededError' || e.code === 22)) { try { showStorageWarning(true); } catch(_){} } } }
         let storageWarningShown = false;
         function checkStorageWarning() { try { let total = 0; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k) { const v = localStorage.getItem(k) || ''; total += k.length + v.length; } } const usedMB = (total * 2) / (1024 * 1024); if (usedMB >= 3.5) { showStorageWarning(false); } } catch (e) {} }
-        function showStorageWarning(isQuotaError) { if (storageWarningShown) return; storageWarningShown = true; if (typeof messagesArea === 'undefined' || !messagesArea) return; const row = document.createElement('div'); row.className = 'msg-row system storage-warning-bubble'; row.style.cssText = 'justify-content:center;padding:8px 12px;'; const span = document.createElement('span'); span.className = 'msg-system-text'; span.style.cssText = 'background:rgba(255, 236, 210, 0.95);color:#a86a3a;padding:10px 16px;border-radius:14px;font-size:13px;box-shadow:0 2px 8px rgba(180, 120, 60, 0.12);display:inline-flex;align-items:center;gap:6px;max-width:90%;text-align:center;line-height:1.5;'; if (darkMode) { span.style.background = 'rgba(80, 55, 35, 0.85)'; span.style.color = '#f3d6a8'; } span.innerHTML = '🗃 回忆太多了，该收纳一下啦☆˶> x <˶.⁺<br><span style="font-size:11px;opacity:0.85;">请到「数据管理」导出聊天记录</span>'; row.appendChild(span); messagesArea.appendChild(row); scrollBottom(); emptyState.style.display = 'none'; if (isQuotaError) { toast('⚠️ 存储空间不足，请尽快导出并清理'); } }
+        function showStorageWarning(isQuotaError) {
+            if (storageWarningShown) return;
+            storageWarningShown = true;
+            if (typeof messagesArea === 'undefined' || !messagesArea) return;
+            const row = document.createElement('div');
+            row.className = 'msg-row system storage-warning-bubble';
+            row.style.cssText = 'justify-content:center;padding:8px 12px;animation:storageFade 3s ease forwards;';
+            const span = document.createElement('span');
+            span.className = 'msg-system-text';
+            span.style.cssText = 'background:rgba(255, 236, 210, 0.95);color:#a86a3a;padding:10px 16px;border-radius:14px;font-size:13px;box-shadow:0 2px 8px rgba(180, 120, 60, 0.12);display:inline-flex;flex-direction:column;align-items:center;gap:3px;max-width:90%;text-align:center;line-height:1.5;';
+            if (darkMode) { span.style.background = 'rgba(80, 55, 35, 0.85)'; span.style.color = '#f3d6a8'; }
+            // 第一行：主提示
+            const line1 = document.createElement('div');
+            line1.textContent = '🗃 回忆太多了，该收纳一下啦☆˶> x <˶.⁺';
+            line1.style.cssText = 'font-size:13.5px;font-weight:500;';
+            // 第二行：系统提示
+            const line2 = document.createElement('div');
+            line2.textContent = '请到「数据管理」导出聊天记录';
+            line2.style.cssText = 'font-size:11.5px;opacity:0.85;';
+            span.appendChild(line1);
+            span.appendChild(line2);
+            row.appendChild(span);
+            messagesArea.appendChild(row);
+            scrollBottom();
+            emptyState.style.display = 'none';
+            // 3 秒后自动移除
+            setTimeout(() => {
+                if (row && row.parentNode) row.parentNode.removeChild(row);
+                storageWarningShown = false;
+            }, 3000);
+            if (isQuotaError) { toast('⚠️ 存储空间不足，请尽快导出并清理'); }
+        }
 
         function saveLastActive() { localStorage.setItem(STORAGE_KEYS.lastActive, Date.now().toString()); }
 
@@ -5216,13 +5340,34 @@ body.dark-mode .user-letter-content .letter-body p {
 
         function scheduleReply() { const delay = (replyDelayMin + Math.random() * (replyDelayMax - replyDelayMin)) * 1000; const timer = setTimeout(() => sendLoverMsgs(false), delay); replyTimers.push(timer); }
 
-        function scheduleActive() { 
-            if (activeMessageTimer) clearTimeout(activeMessageTimer); 
-            activeMessageTimer = setTimeout(() => { 
-                if (Math.random() < 0.15) sendLoverMsgs(true); 
-                if (Math.random() < 0.10) doPat(false); 
-                scheduleActive(); 
-            }, activeReplyInterval * 60 * 1000 + Math.random() * activeReplyInterval * 30 * 1000); 
+        function scheduleActive() {
+            if (activeMessageTimer) clearTimeout(activeMessageTimer);
+            const interval = Math.max(1, Number(activeReplyInterval) || 60);
+            const jitter = Math.max(0, Math.random() * interval * 30 * 1000);
+            const delay = interval * 60 * 1000 + jitter;
+            activeMessageTimer = setTimeout(() => {
+                try {
+                    // 概率保持不变：15% 主动文字/表情消息 + 10% 主动拍一拍
+                    if (Math.random() < 0.15) sendLoverMsgs(true);
+                    if (Math.random() < 0.10) doPat(false);
+                } catch (e) { console.warn('scheduleActive action error:', e); }
+                scheduleActive();
+            }, delay);
+        }
+
+        function checkMissedNotification() {
+            try {
+                if (typeof Notification === 'undefined') return;
+                if (Notification.permission !== 'granted') return;
+                const last = parseInt(localStorage.getItem(STORAGE_KEYS.lastActive) || '0');
+                if (!last) return;
+                const diff = Date.now() - last;
+                // 离开超过 5 分钟，弹一条"想你"通知
+                if (diff > 5 * 60 * 1000) {
+                    const msg = `${loverNickname}：想你了，回来了吗？`;
+                    sendBrowserNotification(loverNickname, msg);
+                }
+            } catch (e) {}
         }
 
         function checkMissed() { const last = localStorage.getItem(STORAGE_KEYS.lastActive); if (last && Date.now() - parseInt(last) > 120000 && Math.random() < 0.25) setTimeout(() => sendLoverMsgs(true), 3000 + Math.random() * 8000); saveLastActive(); }
@@ -5734,7 +5879,35 @@ function _doScrollToMsg(targetId) {
                 tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); triggerPeriodQuote(); }
 
         function showDataManagementPage() { hideAllPages();
-                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); }
+                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); updateDmStorageMeter(); }
+
+        function updateDmStorageMeter() {
+            const fill = document.getElementById('dmStorageFill');
+            const num = document.getElementById('dmStorageNum');
+            const text = document.getElementById('dmStorageText');
+            if (!fill || !num || !text) return;
+            let total = 0;
+            try {
+                for (let i = 0; i < localStorage.length; i++) {
+                    const k = localStorage.key(i);
+                    if (k) {
+                        const v = localStorage.getItem(k) || '';
+                        total += k.length + v.length;
+                    }
+                }
+            } catch (e) {}
+            // localStorage 通常为 5MB（字符约 2,621,440 个 UTF-16）
+            const totalBytes = total * 2;
+            const maxBytes = 5 * 1024 * 1024; // 5MB
+            const pct = Math.min(100, Math.max(0, (totalBytes / maxBytes) * 100));
+            fill.style.width = pct.toFixed(1) + '%';
+            num.textContent = pct.toFixed(1) + '%';
+            const usedKB = totalBytes / 1024;
+            const remainBytes = Math.max(0, maxBytes - totalBytes);
+            const remainKB = remainBytes / 1024;
+            const fmt = (kb) => kb >= 1024 ? (kb / 1024).toFixed(2) + ' MB' : kb.toFixed(1) + ' KB';
+            text.textContent = '已用 ' + fmt(usedKB) + ' / 剩余 ' + fmt(remainKB);
+        }
 
         function showMailboxPage() { hideAllPages();
                 mailboxPage.style.display = 'flex'; modalTitleText.textContent = '信箱'; setModalIcon('mailbox'); mailboxTab = 'send'; mailTabSend.classList.add('active'); mailTabReceive.classList.remove('active'); mailSendArea.style.display = 'flex'; mailReceiveArea.style.display = 'none'; renderSendLetters(); }
@@ -6145,7 +6318,7 @@ function _doScrollToMsg(targetId) {
         function clearTideQuote() { if (tideQuoteFadeTimer) clearTimeout(tideQuoteFadeTimer);
                 tideQuoteFadeTimer = null; const bubble = document.getElementById('tideQuoteBubble'); bubble.style.opacity = '0'; bubble.style.padding = '0'; bubble.style.minHeight = '0'; bubble.textContent = ''; bubble.classList.remove('fade-in', 'fade-out'); }
             featureCardsGrid.addEventListener('click', (e) => { const c = e.target.closest('.feature-card'); if (!c) return; const p = c.dataset.page; if (p === 'systemSettings') showSystemSettings(); else if (p === 'dataManagement') showDataManagementPage(); else if (p === 'wordbankManager') showWordbankManager(); else if (p === 'patpatStatus') showPatpatStatusPage(); });
-            patpatStatusPage.addEventListener('click', (e) => { const c = e.target.closest('.feature-card'); if (!c) return; const sub = c.dataset.subpage; if (sub === 'patpat') { showPatpatFromHub(); } else if (sub === 'statusManager') { showStatusFromHub(); } else if (sub === 'dailySign') { showDailySignHub(); } else if (sub === 'tide') { showTideFromHub(); } else if (sub === 'mailbox') { showMailboxFromHub(); } else if (sub === 'importantDays') { showImportantDaysFromHub(); } else if (sub === 'messageStats') { showMessageStatsFromHub(); } });
+            patpatStatusPage.addEventListener('click', (e) => { const c = e.target.closest('.feature-card'); if (!c) return; const sub = c.dataset.subpage; if (sub === 'patpat') { showPatpatFromHub(); } else if (sub === 'statusManager') { showStatusFromHub(); } else if (sub === 'dailySign') { showDailySignHub(); } else if (sub === 'tide') { showTideFromHub(); } else if (sub === 'mailbox') { showMailboxFromHub(); } else if (sub === 'importantDays') { showImportantDaysFromHub(); } else if (sub === 'messageStats') { showMessageStatsFromHub(); } else if (sub === 'call') { openCallPage(); } });
 
         function showPatpatStatusPage() { hideAllPages();
             patpatStatusPage.style.display = 'flex'; modalTitleText.textContent = '互动中心'; setModalIcon('patpat'); }
@@ -6448,6 +6621,117 @@ function _doScrollToMsg(targetId) {
             bgFileInput.addEventListener('change', () => { const f = bgFileInput.files[0]; if (f) handleBgUpload(f); bgFileInput.value = ''; });
             btnResetBg.addEventListener('click', resetBg);
             // 气泡自定义CSS按钮
+            const bubbleShapePreset = document.getElementById('bubbleShapePreset');
+            const bubbleFontFamilyEl = document.getElementById('bubbleFontFamily');
+            const btnCopyBubbleCss = document.getElementById('btnCopyBubbleCss');
+            const bubblePreviewUser = document.getElementById('bubblePreviewUser');
+            const bubblePreviewLover = document.getElementById('bubblePreviewLover');
+            function hexToRgba(hex, op) { const r = parseInt(hex.slice(1,3),16), g = parseInt(hex.slice(3,5),16), b = parseInt(hex.slice(5,7),16); return `rgba(${r},${g},${b},${op})`; }
+            function buildBubbleCssFromState() {
+                const shape = bubbleShapePreset ? bubbleShapePreset.value : 'rounded';
+                const fontFam = bubbleFontFamilyEl ? bubbleFontFamilyEl.value : '';
+                let borderRadius = '18px';
+                if (shape === 'pill') borderRadius = '24px';
+                else if (shape === 'square') borderRadius = '4px';
+                else if (shape === 'soft') borderRadius = '14px';
+                else if (shape === 'bubble-tail') borderRadius = '18px';
+                const uBg = hexToRgba(userBubbleHex, userBubbleOpacity);
+                const lBg = hexToRgba(loverBubbleHex, loverBubbleOpacity);
+                const fontFamCss = fontFam ? `\n    font-family: ${fontFam};` : '';
+                return `/* 用户气泡 */
+.msg-row.user .msg-bubble {
+    background-color: ${uBg};
+    color: ${userBubbleFontHex || '#4a3f44'};
+    border-bottom-right-radius: ${shape === 'bubble-tail' ? '4px' : '6px'};${fontFamCss}
+}
+/* 对方气泡 */
+.msg-row.lover .msg-bubble {
+    background-color: ${lBg};
+    color: ${loverBubbleFontHex || '#3f454a'};
+    border-bottom-left-radius: ${shape === 'bubble-tail' ? '4px' : '6px'};${fontFamCss}
+}
+/* 通用气泡 */
+.msg-bubble {
+    padding: 10px 15px;
+    border-radius: ${borderRadius};
+    font-size: 14.5px;
+    line-height: 1.55;${fontFamCss}
+}`;
+            }
+            function updateBubblePreview() {
+                if (!bubblePreviewUser || !bubblePreviewLover) return;
+                bubblePreviewUser.style.background = hexToRgba(userBubbleHex, userBubbleOpacity);
+                bubblePreviewUser.style.color = userBubbleFontHex || '#4a3f44';
+                bubblePreviewLover.style.background = hexToRgba(loverBubbleHex, loverBubbleOpacity);
+                bubblePreviewLover.style.color = loverBubbleFontHex || '#3f454a';
+                const shape = bubbleShapePreset ? bubbleShapePreset.value : 'rounded';
+                const fontFam = bubbleFontFamilyEl ? bubbleFontFamilyEl.value : '';
+                let r = '16px';
+                if (shape === 'pill') r = '24px';
+                else if (shape === 'square') r = '4px';
+                else if (shape === 'soft') r = '12px';
+                bubblePreviewUser.style.borderRadius = r;
+                bubblePreviewLover.style.borderRadius = r;
+                if (fontFam) {
+                    bubblePreviewUser.style.fontFamily = fontFam;
+                    bubblePreviewLover.style.fontFamily = fontFam;
+                } else {
+                    bubblePreviewUser.style.fontFamily = '';
+                    bubblePreviewLover.style.fontFamily = '';
+                }
+                // 同步 textarea 中的 CSS（如果为空或等于旧默认）
+                if (bubbleCustomCss) {
+                    const ta = bubbleCustomCss.value.trim();
+                    if (!ta || ta === bubbleCustomCss.dataset.lastBuilt) {
+                        const built = buildBubbleCssFromState();
+                        bubbleCustomCss.value = built;
+                        bubbleCustomCss.dataset.lastBuilt = built;
+                    }
+                }
+            }
+            function loadBubbleStateFromUI() {
+                const saved = (() => { try { return JSON.parse(localStorage.getItem('pc_bubble_state_v1') || '{}'); } catch(e){ return {}; } })();
+                if (bubbleShapePreset && saved.shape) bubbleShapePreset.value = saved.shape;
+                if (bubbleFontFamilyEl && saved.fontFamily) bubbleFontFamilyEl.value = saved.fontFamily;
+            }
+            function saveBubbleState() {
+                try {
+                    localStorage.setItem('pc_bubble_state_v1', JSON.stringify({
+                        shape: bubbleShapePreset ? bubbleShapePreset.value : 'rounded',
+                        fontFamily: bubbleFontFamilyEl ? bubbleFontFamilyEl.value : ''
+                    }));
+                } catch(e){}
+            }
+            loadBubbleStateFromUI();
+            if (bubbleShapePreset) bubbleShapePreset.addEventListener('change', () => { saveBubbleState(); updateBubblePreview(); });
+            if (bubbleFontFamilyEl) bubbleFontFamilyEl.addEventListener('change', () => { saveBubbleState(); updateBubblePreview(); });
+            // 重新绑定颜色/透明度变化以触发预览
+            const _oldOnColorChange = onColorChange;
+            const onColorChangeWithPreview = function() { _oldOnColorChange.apply(this, arguments); updateBubblePreview(); };
+            if (colorUserBubble) colorUserBubble.removeEventListener('input', _oldOnColorChange), colorUserBubble.addEventListener('input', onColorChangeWithPreview);
+            if (colorLoverBubble) colorLoverBubble.removeEventListener('input', _oldOnColorChange), colorLoverBubble.addEventListener('input', onColorChangeWithPreview);
+            if (rangeUserOpacity) rangeUserOpacity.removeEventListener('input', _oldOnColorChange), rangeUserOpacity.addEventListener('input', onColorChangeWithPreview);
+            if (rangeLoverOpacity) rangeLoverOpacity.removeEventListener('input', _oldOnColorChange), rangeLoverOpacity.addEventListener('input', onColorChangeWithPreview);
+            if (colorUserFont) colorUserFont.removeEventListener('input', _oldOnColorChange), colorUserFont.addEventListener('input', onColorChangeWithPreview);
+            if (colorLoverFont) colorLoverFont.removeEventListener('input', _oldOnColorChange), colorLoverFont.addEventListener('input', onColorChangeWithPreview);
+            // 复制当前 CSS
+            if (btnCopyBubbleCss) btnCopyBubbleCss.addEventListener('click', () => {
+                const css = buildBubbleCssFromState();
+                try {
+                    if (navigator.clipboard) {
+                        navigator.clipboard.writeText(css).then(() => toast('已复制当前 CSS')).catch(() => {
+                            bubbleCustomCss.value = css; toast('已写入 CSS 文本框，请手动复制');
+                        });
+                    } else {
+                        bubbleCustomCss.value = css; toast('已写入 CSS 文本框，请手动复制');
+                    }
+                } catch (e) {
+                    bubbleCustomCss.value = css; toast('已写入 CSS 文本框');
+                }
+            });
+            // 初始化预览
+            setTimeout(updateBubblePreview, 200);
+
             btnApplyBubbleCss.addEventListener('click', () => {
     const css = bubbleCustomCss.value.trim();
     let styleEl = document.getElementById('bubbleCustomStyle');
@@ -6511,15 +6795,15 @@ function _doScrollToMsg(targetId) {
         function startKeepAlive() { try { const ctx = new (window.AudioContext || window.webkitAudioContext)(); const buf = ctx.createBuffer(1, 1, 22050); const src = ctx.createBufferSource(); src.buffer = buf; src.loop = true; src.connect(ctx.destination); src.start(0); keepAliveAudio = { ctx, src }; keepAliveEnabled = true; localStorage.setItem(STORAGE_KEYS.keepAliveEnabled, 'true'); keepAliveStatusEl.textContent = '已开启'; btnToggleKeepAliveEl.textContent = '关闭'; } catch (e) { keepAliveStatusEl.textContent = '不支持'; } }
         function stopKeepAlive() { if (keepAliveAudio) { try { keepAliveAudio.src.stop(); keepAliveAudio.ctx.close(); } catch (e) {} keepAliveAudio = null; } keepAliveEnabled = false; localStorage.setItem(STORAGE_KEYS.keepAliveEnabled, 'false'); keepAliveStatusEl.textContent = '已关闭'; btnToggleKeepAliveEl.textContent = '开启'; }
             btnToggleKeepAliveEl.addEventListener('click', () => { if (keepAliveEnabled) stopKeepAlive(); else startKeepAlive(); });
-        function sendBrowserNotification(title, body) { 
-            try { 
+        function sendBrowserNotification(title, body) {
+            try {
                 if (typeof Notification === 'undefined') return;
                 if (Notification.permission !== 'granted') return;
-                if (!document.hidden) return;
-                try { 
-                    const options = { 
-                        body: body || '', 
-                        icon: DEFAULT_AVATAR_LOVER || '', 
+                // 不再判断 document.hidden：让通知始终弹窗
+                try {
+                    const options = {
+                        body: body || '',
+                        icon: DEFAULT_AVATAR_LOVER || '',
                         badge: DEFAULT_AVATAR_LOVER || '',
                         tag: 'pc-chat-' + Date.now(),
                         requireInteraction: false,
@@ -6528,18 +6812,18 @@ function _doScrollToMsg(targetId) {
                     if ('vibrate' in navigator) {
                         options.vibrate = [200, 100, 200];
                     }
-                    var n = new Notification(title, options); 
-                    n.onclick = function() { 
-                        window.focus(); 
+                    var n = new Notification(title, options);
+                    n.onclick = function() {
+                        window.focus();
                         if (window.parent) window.parent.focus();
-                        n.close(); 
+                        n.close();
                     };
                     n.onerror = function() { if (n && !n.closed) n.close(); };
-                    setTimeout(function() { if (n && !n.closed) n.close(); }, 5000);
-                } catch (e) { 
+                    setTimeout(function() { if (n && !n.closed) n.close(); }, 6000);
+                } catch (e) {
                     console.warn('Notification failed:', e);
-                } 
-            } catch (e) {} 
+                }
+            } catch (e) {}
         }
             btnEnableNotifEl.addEventListener('click', function() {
             try {
@@ -6616,7 +6900,7 @@ function _doScrollToMsg(targetId) {
             headerAvatarImg.addEventListener('error', () => headerAvatarImg.src = DEFAULT_AVATAR_LOVER);
             loverAvatarPreviewImg.addEventListener('error', () => loverAvatarPreviewImg.src = DEFAULT_AVATAR_LOVER);
             userAvatarPreviewImg.addEventListener('error', () => userAvatarPreviewImg.src = DEFAULT_AVATAR_USER);
-            document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { saveLastActive(); checkMissed(); scheduleActive(); } else saveLastActive(); });
+            document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'visible') { saveLastActive(); checkMissed(); checkMissedNotification(); scheduleActive(); } else saveLastActive(); });
             window.addEventListener('beforeunload', () => { saveLastActive(); saveHistory(); if (activeMessageTimer) clearTimeout(activeMessageTimer); replyTimers.forEach(t => clearTimeout(t)); });
             headerAvatar.addEventListener('dblclick', (e) => { e.preventDefault(); doPat(true); });
             ctxQuote.addEventListener('click', handleQuoteMsg);
@@ -7029,7 +7313,11 @@ function escapeHtml(str) {
 
         // 入口卡片点击
         const featureCardCall = document.getElementById('featureCardCall');
-        featureCardCall.addEventListener('click', openCallPage);
+        // 移除独立的 click 监听（已通过 patpatStatusPage 事件委派处理）
+
+        // 退出键
+        const callExitBtn = document.getElementById('callExitBtn');
+        if (callExitBtn) callExitBtn.addEventListener('click', () => closeCallPage());
 
         // ============== Canvas 动画 ==============
         function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
@@ -7056,9 +7344,11 @@ function escapeHtml(str) {
             callLastSuccess = isSuccess;
             callFailPattern = CALL_FAIL_PATTERNS[Math.floor(Math.random() * CALL_FAIL_PATTERNS.length)];
 
-            const lineDur = (Number(callConfig.lineDuration) || 3) * 1000;
-            const patDur = (Number(callConfig.patternDuration) || 4) * 1000;
-            const total = lineDur + patDur;
+            // 三段：1) 横向线条从无到有延伸 2) 汇聚后顶端往上走 3) 左右各绘制半边图案
+            const seg1 = (Number(callConfig.lineDuration) || 3) * 1000;
+            const seg2 = Math.min(1500, seg1 * 0.4); // 汇聚上走
+            const seg3 = (Number(callConfig.patternDuration) || 4) * 1000;
+            const total = seg1 + seg2 + seg3;
             const startT = performance.now();
             callPhase = 'line';
 
@@ -7073,32 +7363,52 @@ function escapeHtml(str) {
                 const midY = h / 2;
                 const centerX = w / 2;
                 const lineW = Math.min(3, Math.max(2, Math.round(w / 180)));
+                const lineColor = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
+                // 汇聚后顶部走的高度
+                const stemH = Math.max(40, h * 0.22);
+                // 图案基准点：垂直线底部（midY）
+                const patternBaseY = midY;
+                // 图案尺寸
+                const heartSize = Math.min(h * 0.62, w * 0.4);
 
-                if (elapsed < lineDur) {
+                ctx.strokeStyle = lineColor;
+                ctx.lineWidth = lineW;
+                ctx.lineCap = 'round';
+                ctx.lineJoin = 'round';
+
+                if (elapsed < seg1) {
+                    // 段1：左右两线从无到有向中心延伸（空→满）
                     callPhase = 'line';
-                    const t = easeInOutCubic(elapsed / lineDur);
-                    const leftEndX = centerX - 8 - (1 - t) * 4;
-                    const rightEndX = centerX + 8 + (1 - t) * 4;
-                    ctx.strokeStyle = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
-                    ctx.lineWidth = lineW;
-                    ctx.lineCap = 'round';
+                    const t = easeInOutCubic(elapsed / seg1);
+                    const leftEndX = t * centerX;
+                    const rightEndX = w - t * centerX;
                     ctx.beginPath();
                     ctx.moveTo(0, midY); ctx.lineTo(leftEndX, midY);
                     ctx.moveTo(w, midY); ctx.lineTo(rightEndX, midY);
                     ctx.stroke();
-                } else {
-                    callPhase = 'pattern';
-                    const patT = easeInOutCubic(Math.min(1, (elapsed - lineDur) / patDur));
-                    ctx.strokeStyle = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
-                    ctx.lineWidth = lineW;
-                    ctx.lineCap = 'round';
+                } else if (elapsed < seg1 + seg2) {
+                    // 段2：汇聚后顶端往上走 —— 两线已抵达中心，向上绘制一条竖直短线
+                    callPhase = 'stem';
+                    const t = easeInOutCubic((elapsed - seg1) / seg2);
+                    const stemY = midY - t * stemH;
                     ctx.beginPath();
-                    ctx.moveTo(0, midY); ctx.lineTo(centerX - 8, midY);
-                    ctx.moveTo(w, midY); ctx.lineTo(centerX + 8, midY);
+                    ctx.moveTo(0, midY); ctx.lineTo(centerX, midY);
+                    ctx.moveTo(w, midY); ctx.lineTo(centerX, midY);
+                    ctx.moveTo(centerX, midY); ctx.lineTo(centerX, stemY);
                     ctx.stroke();
-                    const heartSize = Math.min(h * 0.6, w * 0.36);
-                    drawHalfPattern(ctx, 'right', centerX, midY, heartSize, patT, isSuccess);
-                    drawHalfPattern(ctx, 'left', centerX, midY, heartSize, patT, isSuccess);
+                } else {
+                    // 段3：左右各绘制半边图案，从顶端向下/向外展开
+                    callPhase = 'pattern';
+                    const patT = easeInOutCubic(Math.min(1, (elapsed - seg1 - seg2) / seg3));
+                    // 先画两条横线 + 竖直短线
+                    ctx.beginPath();
+                    ctx.moveTo(0, midY); ctx.lineTo(centerX, midY);
+                    ctx.moveTo(w, midY); ctx.lineTo(centerX, midY);
+                    ctx.moveTo(centerX, midY); ctx.lineTo(centerX, midY - stemH);
+                    ctx.stroke();
+                    // 画半边图案（从顶端 stemY 往下展开）
+                    drawHalfPattern(ctx, 'right', centerX, midY - stemH, heartSize, patT, isSuccess);
+                    drawHalfPattern(ctx, 'left', centerX, midY - stemH, heartSize, patT, isSuccess);
 
                     if (elapsed >= total) {
                         callPhase = 'showing';
@@ -7127,25 +7437,29 @@ function escapeHtml(str) {
             }
         }
 
-        // 半颗爱心（右半或左半），dir: 1=右半, -1=左半
+        // 半颗爱心（dir: 1=右半, -1=左半），从顶端(cx,cy)向两侧+下方绘制到底部V点
         function drawHalfHeart(ctx, cx, cy, size, dir, t, color) {
             ctx.save();
             ctx.strokeStyle = color;
             ctx.lineWidth = Math.max(2, size * 0.04);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
+            // 用心形参数方程，方向：从顶端 t=π → 沿曲线向底部V点
             const steps = 80;
-            const startA = dir > 0 ? Math.PI : 0;
-            const endA = dir > 0 ? 2 * Math.PI : Math.PI;
             const sx = size / 32, sy = size / 28;
+            // dir=1(右半) 从 t=π 递减到 0
+            // dir=-1(左半) 从 t=π 递增到 2π
+            const startA = Math.PI;
+            const endA = dir > 0 ? 0 : 2 * Math.PI;
+            const drawEnd = startA + (endA - startA) * t;
             ctx.beginPath();
             let first = true;
             for (let i = 0; i <= steps; i++) {
                 const a = startA + (endA - startA) * (i / steps);
-                if (a > startA + (endA - startA) * t) break;
+                if (dir > 0 ? (a < drawEnd) : (a > drawEnd)) break;
                 const hx = 16 * Math.pow(Math.sin(a), 3);
-                const hy = 13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a);
-                const px = cx + hx * sx * dir;
+                const hy = -(13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a));
+                const px = cx + hx * sx;
                 const py = cy - hy * sy;
                 if (first) { ctx.moveTo(px, py); first = false; } else { ctx.lineTo(px, py); }
             }
@@ -7153,78 +7467,122 @@ function escapeHtml(str) {
             ctx.restore();
         }
 
-        // 失败的左侧：其他轴对称图案的一半（描边）
+        // 失败的左侧：其他轴对称图案的一半（描边），从顶端(cx,cy)向下方+左侧展开
         function drawHalfOther(ctx, cx, cy, size, dir, t, color, kind) {
             ctx.save();
             ctx.strokeStyle = color;
             ctx.lineWidth = Math.max(2, size * 0.04);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
+            const halfW = size * 0.5;
+            const totalH = size * 0.9;
             const r = size * 0.45;
+            // dir=-1（左侧）
+            const dx = -1; // x 方向系数：负
+            const drawTo = t;
+            ctx.beginPath();
             if (kind === 'half_diamond') {
-                const startA = -Math.PI / 2, endA = Math.PI / 2;
-                const drawEnd = startA + (endA - startA) * t;
-                const steps = 60;
-                ctx.beginPath();
-                ctx.moveTo(cx, cy - r);
-                let first = true;
-                for (let i = 0; i <= steps; i++) {
-                    const a = startA + (endA - startA) * (i / steps);
-                    if (a > drawEnd) break;
-                    const px = cx + r * Math.cos(a) * dir;
-                    const py = cy + r * Math.sin(a);
-                    if (first) { ctx.lineTo(px, py); first = false; } else { ctx.lineTo(px, py); }
+                // 菱形（左半）：顶端(0,0) → 左中(-halfW, totalH/2) → 底端(0,totalH)
+                const pts = [
+                    { x: 0, y: 0 },
+                    { x: dx * halfW, y: totalH / 2 },
+                    { x: 0, y: totalH }
+                ];
+                const seg = drawTo * (pts.length - 1);
+                const segI = Math.floor(seg);
+                const segT = seg - segI;
+                ctx.moveTo(cx + pts[0].x, cy + pts[0].y);
+                for (let i = 1; i <= segI && i < pts.length; i++) ctx.lineTo(cx + pts[i].x, cy + pts[i].y);
+                if (segI < pts.length - 1) {
+                    const a = pts[segI], b = pts[segI + 1];
+                    ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
                 }
-                ctx.lineTo(cx, cy + r);
-                ctx.stroke();
             } else if (kind === 'half_circle') {
-                const startA = -Math.PI / 2, endA = Math.PI / 2;
-                const drawEnd = startA + (endA - startA) * t;
-                ctx.beginPath();
-                ctx.arc(cx, cy, r, startA, drawEnd);
-                ctx.stroke();
+                // 半圆：直径朝右，圆心在(0, r)，从(0,0) 弧到 (0, 2r) 经过 (-2r, r)
+                // 左半：以左为外侧
+                const cxL = dx * r, cyL = r;
+                const startA = -Math.PI / 2;
+                const endA = Math.PI / 2;
+                const drawEnd = startA + (endA - startA) * drawTo;
+                ctx.moveTo(cx, cy);
+                ctx.arc(cx + cxL, cy + cyL, r, startA, drawEnd);
             } else if (kind === 'half_square') {
-                const u = r;
-                ctx.beginPath();
-                ctx.moveTo(cx, cy - u);
-                if (t > 0.33) ctx.lineTo(cx - u * dir, cy - u);
-                if (t > 0.66) ctx.lineTo(cx - u * dir, cy + u);
-                if (t > 0.99) ctx.lineTo(cx, cy + u);
-                ctx.stroke();
+                // 左半方块：顶端(0,0) → 左上(-halfW,0) → 左下(-halfW,totalH) → 底端(0,totalH)
+                const pts = [
+                    { x: 0, y: 0 },
+                    { x: dx * halfW, y: 0 },
+                    { x: dx * halfW, y: totalH },
+                    { x: 0, y: totalH }
+                ];
+                const seg = drawTo * (pts.length - 1);
+                const segI = Math.floor(seg);
+                const segT = seg - segI;
+                ctx.moveTo(cx + pts[0].x, cy + pts[0].y);
+                for (let i = 1; i <= segI && i < pts.length; i++) ctx.lineTo(cx + pts[i].x, cy + pts[i].y);
+                if (segI < pts.length - 1) {
+                    const a = pts[segI], b = pts[segI + 1];
+                    ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
+                }
             } else if (kind === 'half_triangle') {
-                const u = r;
-                ctx.beginPath();
-                ctx.moveTo(cx, cy - u);
-                if (t > 0.5) ctx.lineTo(cx - u * dir, cy + u);
-                if (t > 0.99) ctx.lineTo(cx, cy + u);
-                ctx.stroke();
+                // 左半三角：顶端(0,0) → 左下(-halfW, totalH) → 底端(0,totalH)
+                const pts = [
+                    { x: 0, y: 0 },
+                    { x: dx * halfW, y: totalH },
+                    { x: 0, y: totalH }
+                ];
+                const seg = drawTo * (pts.length - 1);
+                const segI = Math.floor(seg);
+                const segT = seg - segI;
+                ctx.moveTo(cx + pts[0].x, cy + pts[0].y);
+                for (let i = 1; i <= segI && i < pts.length; i++) ctx.lineTo(cx + pts[i].x, cy + pts[i].y);
+                if (segI < pts.length - 1) {
+                    const a = pts[segI], b = pts[segI + 1];
+                    ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
+                }
             } else if (kind === 'half_star') {
+                // 左半五角星：顶端 1 个点，左下/左下角等
+                const cxL = dx * halfW * 0.5, cyL = totalH * 0.5;
+                const ro = halfW * 0.9, ri = halfW * 0.35;
                 const pts = [];
-                const ro = r, ri = r * 0.4;
+                // 10 个点，只取左半（x ≤ 0）的部分
                 for (let i = 0; i < 10; i++) {
                     const a = -Math.PI / 2 + i * Math.PI / 5;
                     const rad = i % 2 === 0 ? ro : ri;
-                    pts.push({ x: cx + rad * Math.cos(a) * dir, y: cy + rad * Math.sin(a) });
+                    const x = cxL + rad * Math.cos(a);
+                    if (x > 0) continue; // 跳过右半
+                    pts.push({ x: x, y: cyL + rad * Math.sin(a) });
                 }
-                const totalPts = pts.length;
-                const drawTo = Math.floor(totalPts * t);
-                ctx.beginPath();
-                ctx.moveTo(pts[0].x, pts[0].y);
-                for (let i = 1; i < drawTo; i++) ctx.lineTo(pts[i].x, pts[i].y);
-                ctx.stroke();
+                // 排序：从顶端开始
+                pts.sort((a, b) => a.y - b.y);
+                const seg = drawTo * (pts.length - 1);
+                const segI = Math.floor(seg);
+                const segT = seg - segI;
+                if (pts.length > 0) {
+                    ctx.moveTo(cx + pts[0].x, cy + pts[0].y);
+                    for (let i = 1; i <= segI && i < pts.length; i++) ctx.lineTo(cx + pts[i].x, cy + pts[i].y);
+                    if (segI < pts.length - 1) {
+                        const a = pts[segI], b = pts[segI + 1];
+                        ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
+                    }
+                }
             } else if (kind === 'half_hexagon') {
-                const pts = [];
-                for (let i = 0; i < 6; i++) {
-                    const a = -Math.PI / 2 + i * Math.PI / 3;
-                    pts.push({ x: cx + r * Math.cos(a) * dir, y: cy + r * Math.sin(a) });
+                // 左半六边形：顶端(0,0) → 左中(-halfW*0.866, totalH/2) → 底端(0,totalH)
+                const pts = [
+                    { x: 0, y: 0 },
+                    { x: dx * halfW * 0.866, y: totalH / 2 },
+                    { x: 0, y: totalH }
+                ];
+                const seg = drawTo * (pts.length - 1);
+                const segI = Math.floor(seg);
+                const segT = seg - segI;
+                ctx.moveTo(cx + pts[0].x, cy + pts[0].y);
+                for (let i = 1; i <= segI && i < pts.length; i++) ctx.lineTo(cx + pts[i].x, cy + pts[i].y);
+                if (segI < pts.length - 1) {
+                    const a = pts[segI], b = pts[segI + 1];
+                    ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
                 }
-                ctx.beginPath();
-                ctx.moveTo(pts[0].x, pts[0].y);
-                if (t > 0.33) ctx.lineTo(pts[1].x, pts[1].y);
-                if (t > 0.66) ctx.lineTo(pts[2].x, pts[2].y);
-                if (t > 0.99) ctx.lineTo(pts[3].x, pts[3].y);
-                ctx.stroke();
             }
+            ctx.stroke();
             ctx.restore();
         }
 
@@ -7316,7 +7674,7 @@ function escapeHtml(str) {
             }, 200);
         });
 
-        function init() { loadSettings(); loadCallConfig(); if (keepAliveEnabled) startKeepAlive(); applyAllColors(); applyUI(); updateDarkModeIcon(); processPendingReplies(); renderHistory(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; scheduleActive(); checkMissed(); checkDailySignAuto(); checkLetterNotify();
+        function init() { loadSettings(); loadCallConfig(); if (keepAliveEnabled) startKeepAlive(); applyAllColors(); applyUI(); updateDarkModeIcon(); processPendingReplies(); renderHistory(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; scheduleActive(); checkMissed(); checkMissedNotification(); checkDailySignAuto(); checkLetterNotify();
             messageInput.focus(); initDmExportOptions(); checkStatusChangeOnInit(); updateStatusUI(); if (importantDays.length > 0 && !importantDays.find(d => d.id === imdSelectedId)) imdSelectedId = importantDays[0].id; else if (importantDays.length === 0) imdSelectedId = null; updateImdBgDots(); applyImdTopBg(); checkStorageWarning(); }
         init();
     })();
