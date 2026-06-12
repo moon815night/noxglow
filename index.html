@@ -1064,6 +1064,161 @@
         body.dark-mode .msg-context-menu-divider {
             background: #383a44;
         }
+        /* ===== 致电顾时夜 全屏功能页 ===== */
+        .call-overlay {
+            position: fixed; inset: 0; z-index: 300;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+        }
+        .call-overlay.call-initial-bg { background: #faf6ef; }
+        body.dark-mode .call-overlay.call-initial-bg { background: #2a2c34; }
+        .call-stage { width:100%; height:100%; display:flex; align-items:center; justify-content:center; }
+        .call-cta-btn {
+            padding: 14px 38px; font-size: 15px;
+            background: transparent; color: #e5a6b3;
+            border: 1.5px solid #f0c2cc; border-radius: 26px;
+            cursor: pointer; font-weight: 500; letter-spacing: 0.5px;
+            transition: all 0.25s ease;
+            font-family: inherit;
+        }
+        .call-cta-btn:hover { background: #fff5f7; transform: translateY(-1px); }
+        .call-cta-btn.fade-out { opacity: 0; transition: opacity 0.5s ease; }
+        /* 手机外框 */
+        .call-phone-frame {
+            position: relative; width: 340px; max-width: 92vw;
+            height: 660px; max-height: 90vh;
+            background: #1f2024; border-radius: 36px;
+            box-shadow: 0 24px 60px rgba(0,0,0,0.35), 0 0 0 6px #2a2c30;
+            padding: 14px; box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .call-phone-notch {
+            position: absolute; top: 14px; left: 50%; transform: translateX(-50%);
+            width: 96px; height: 22px; background: #1f2024;
+            border-radius: 0 0 14px 14px; z-index: 2;
+        }
+        .call-phone-home {
+            position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%);
+            width: 110px; height: 4px; background: rgba(255,255,255,0.4);
+            border-radius: 2px;
+        }
+        .call-phone-screen {
+            width: 100%; flex: 1; border-radius: 24px;
+            background: var(--call-screen-bg, #1a1c20);
+            position: relative; overflow: hidden;
+            display: flex; flex-direction: column;
+            padding: 36px 18px 22px; box-sizing: border-box;
+        }
+        /* 图片背景模式：线条区需叠加半透明底色边框，确保清晰可见 */
+        .call-phone-screen.has-image-bg .call-canvas-wrapper {
+            background: var(--call-canvas-overlay, rgba(45, 47, 53, 0.62));
+            border: 1px solid var(--call-canvas-border, rgba(255,255,255,0.08));
+        }
+        .call-phone-top {
+            text-align: center; margin-bottom: 14px;
+        }
+        .call-phone-name {
+            font-size: 17px; color: #f0e6d6; font-weight: 500;
+            letter-spacing: 1px; font-family: 'STSong','SimSun','Songti SC',serif;
+        }
+        .call-canvas-wrapper {
+            flex: 1; min-height: 0;
+            border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+        .call-canvas-wrapper canvas {
+            width: 100%; height: 100%; display: block;
+        }
+        .call-status-pill {
+            position: absolute; left: 50%; bottom: 80px;
+            transform: translateX(-50%);
+            background: rgba(233, 184, 196, 0.18);
+            border: 1px solid rgba(249, 200, 208, 0.55);
+            color: #f9c8d0;
+            padding: 7px 18px; border-radius: 22px;
+            font-size: 12.5px; letter-spacing: 1px;
+            display: inline-flex; align-items: center; gap: 8px;
+            transition: opacity 0.4s ease;
+        }
+        .call-status-pill.fade-out { opacity: 0; }
+        .call-status-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #f9c8d0;
+            animation: callPulse 1.1s ease-in-out infinite;
+        }
+        @keyframes callPulse { 0%,100%{opacity:0.35;transform:scale(0.85);}50%{opacity:1;transform:scale(1.1);} }
+        .call-result-block {
+            position: absolute; left: 0; right: 0; bottom: 30px;
+            padding: 0 22px; box-sizing: border-box;
+            text-align: center; pointer-events: none;
+        }
+        .call-result-text {
+            margin: 0 0 14px; color: #f5ede0;
+            font-size: 14.5px; line-height: 1.6;
+            font-family: 'STSong','SimSun','Songti SC',serif;
+            letter-spacing: 0.4px;
+            opacity: 0; transition: opacity 0.6s ease;
+        }
+        .call-result-text.show { opacity: 1; }
+        .call-action-row {
+            display: flex; gap: 10px; justify-content: center;
+            pointer-events: auto;
+            opacity: 0; transition: opacity 0.6s ease 0.15s;
+        }
+        .call-action-row.show { opacity: 1; }
+        .call-action-btn {
+            border: none; padding: 8px 18px; border-radius: 20px;
+            font-size: 13px; cursor: pointer;
+            font-family: inherit; letter-spacing: 0.5px;
+            transition: all 0.2s ease;
+        }
+        .call-action-btn:active { transform: scale(0.96); }
+        .call-action-btn.btn-accept { background: #b9d8b6; color: #2f5a30; }
+        .call-action-btn.btn-accept:hover { background: #a8cea4; }
+        .call-action-btn.btn-hangup { background: #e8b6b8; color: #7a3236; }
+        .call-action-btn.btn-hangup:hover { background: #dfa3a6; }
+        .call-action-btn.btn-recall {
+            background: #fff; color: #c28796;
+            border: 1.2px solid #f0c2cc;
+        }
+        .call-action-btn.btn-recall:hover { background: #fff5f7; }
+        /* 倒计时阶段 */
+        .call-stage-countdown {
+            background: rgba(20, 20, 24, 0.92);
+        }
+        .call-countdown-clock { position: relative; }
+        .call-countdown-dot { opacity: 0; }
+        .call-countdown-dot.show { opacity: 1; transition: opacity 0.2s ease; }
+        @media (max-width: 480px) {
+            .call-phone-frame { width: 92vw; height: 86vh; }
+        }
+        /* 系统设置中可折叠模块（与现有 setting-section 共用） */
+        .call-settings-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px 14px; margin-top:8px; }
+        .call-settings-grid label { display:flex; flex-direction:column; font-size:12px; color:var(--text-medium); gap:4px; }
+        .call-settings-grid input[type=text],
+        .call-settings-grid input[type=number] {
+            padding: 6px 10px; border: 1px solid #e5d8d8; border-radius: 8px;
+            font-size: 12.5px; background: #fffaf6; color: var(--text-dark);
+        }
+        body.dark-mode .call-settings-grid input[type=text],
+        body.dark-mode .call-settings-grid input[type=number] { background:#363840; border-color:#454852; color:var(--text-dark); }
+        .call-settings-row { display:flex; align-items:center; gap:8px; margin-top:8px; }
+        .call-settings-row input[type=color] { width:32px; height:32px; border:none; background:none; cursor:pointer; padding:0; }
+        .call-settings-row span { font-size:12.5px; color:var(--text-medium); min-width: 92px; }
+        .call-settings-upload {
+            display:flex; align-items:center; gap:8px; margin-top:6px;
+        }
+        .call-settings-upload input[type=file] { display:none; }
+        .call-settings-upload label {
+            padding: 6px 12px; background: #f6e3e8; color: #b87a8a;
+            border-radius: 16px; font-size: 12px; cursor: pointer;
+        }
+        .call-settings-upload .clear-bg {
+            padding: 5px 10px; background: transparent; color: #b88;
+            border: 1px solid #e5d8d8; border-radius: 14px; font-size: 11.5px; cursor: pointer;
+        }
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -4185,6 +4340,52 @@ body.dark-mode .user-letter-content .letter-body p {
         </div>
         <div class="daily-sign-overlay" id="dailySignOverlay" style="display:none;"><div class="daily-sign-card" id="dailySignCard"></div></div>
     </div>
+
+    <!-- 致电顾时夜 全屏功能页 -->
+    <div class="call-overlay" id="callOverlay" style="display:none;">
+        <!-- 初始状态：致电按钮 -->
+        <div class="call-stage call-stage-initial" id="callInitialStage">
+            <button class="call-cta-btn" id="callStartBtn">
+                <span>致电顾时夜</span>
+            </button>
+        </div>
+        <!-- 拨号/动画/结果 阶段：手机外框 -->
+        <div class="call-stage call-stage-phone" id="callPhoneStage" style="display:none;">
+            <div class="call-phone-frame" id="callPhoneFrame">
+                <div class="call-phone-notch"></div>
+                <div class="call-phone-screen" id="callPhoneScreen">
+                    <div class="call-phone-top">
+                        <span class="call-phone-name" id="callPhoneName">顾时夜</span>
+                    </div>
+                    <div class="call-canvas-wrapper" id="callCanvasWrapper">
+                        <canvas id="callCanvas" width="600" height="300"></canvas>
+                    </div>
+                    <div class="call-status-pill" id="callStatusPill">
+                        <span class="call-status-dot"></span>
+                        <span id="callStatusText">呼叫中…</span>
+                    </div>
+                    <div class="call-result-block" id="callResultBlock" style="display:none;">
+                        <p class="call-result-text" id="callResultText"></p>
+                        <div class="call-action-row" id="callActionRow"></div>
+                    </div>
+                </div>
+                <div class="call-phone-home"></div>
+            </div>
+        </div>
+        <!-- 再次拨打倒计时 -->
+        <div class="call-stage call-stage-countdown" id="callCountdownStage" style="display:none;">
+            <div class="call-countdown-clock" id="callCountdownClock">
+                <svg viewBox="0 0 120 120" width="120" height="120">
+                    <circle cx="60" cy="60" r="50" fill="none" stroke="rgba(255,255,255,0.4)" stroke-width="2"/>
+                    <circle class="call-countdown-dot call-countdown-dot-1" cx="60" cy="14" r="4" fill="#f9c8d0"/>
+                    <circle class="call-countdown-dot call-countdown-dot-2" cx="60" cy="14" r="4" fill="#f9c8d0"/>
+                    <circle class="call-countdown-dot call-countdown-dot-3" cx="60" cy="14" r="4" fill="#f9c8d0"/>
+                    <line id="callCountdownHand" x1="60" y1="60" x2="60" y2="18" stroke="#f9c8d0" stroke-width="2.5" stroke-linecap="round" transform="rotate(0 60 60)"/>
+                    <circle cx="60" cy="60" r="3" fill="#f9c8d0"/>
+                </svg>
+            </div>
+        </div>
+    </div>
     <div class="msg-context-menu" id="msgContextMenu">
         <button class="msg-context-menu-item" id="ctxQuote"><svg viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5c0-1.25-.756-2.017-2-2H4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2 1 0 1 0 1 1v1c0 1-1 2-2 2s-1 .008-1 1.031V20c0 1 0 1 1 1z"/><path d="M15 21c3 0 7-1 7-8V5c0-1.25-.757-2.017-2-2h-4c-1.25 0-2 .75-2 1.972V11c0 1.25.75 2 2 2h.75c0 2.25.25 4-2.75 4v3c0 1 0 1 1 1z"/></svg>引用</button>
         <button class="msg-context-menu-item" id="ctxAnnotate"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>注释</button>
@@ -4200,6 +4401,7 @@ body.dark-mode .user-letter-content .letter-body p {
                     <div class="feature-card" data-page="dataManagement"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="13.5" y2="15"/></svg><span class="card-text">数据管理</span></div>
                     <div class="feature-card" data-page="patpatStatus"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/><circle cx="7" cy="17" r="2.5"/><rect x="14" y="14" width="7" height="6" rx="2"/></svg><span class="card-text">互动中心</span></div>
                     <div class="feature-card" data-page="wordbankManager"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg><span class="card-text">顾时夜说</span></div>
+                    <div class="feature-card" data-page="call" id="featureCardCall"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg><span class="card-text">致电顾时夜</span></div>
                 </div>
                 <!-- 互动中心页面 -->
                 <div class="feature-page" id="patpatStatusPage">
@@ -4332,6 +4534,7 @@ body.dark-mode .user-letter-content .letter-body p {
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>通知设置</div><div class="reply-strategy-row" style="align-items:center;"><span>浏览器通知</span><button class="btn-sm" id="btnEnableNotifications" style="padding:6px 12px;">启用通知</button><span id="notificationStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;"></span></div></div>
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>后台保活</div><div class="reply-strategy-row" style="align-items:center;"><span>循环播放音频</span><button class="btn-sm" id="btnToggleKeepAlive" style="padding:6px 12px;">开启</button><span id="keepAliveStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;">已关闭</span></div></div>
                         </div></div>
+                        <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 致电顾时夜（功能配置）</span><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label><label>背景类型<select id="callCfgBgType" style="padding:6px 10px;border:1px solid #e5d8d8;border-radius:8px;font-size:12.5px;background:#fffaf6;color:var(--text-dark);"><option value="color">纯色</option><option value="image">图片</option></select></label></div><div class="call-settings-row" style="margin-top:10px;"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload" style="margin-top:6px;"><span style="font-size:12.5px;color:var(--text-medium);min-width:92px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="call-settings-row" style="margin-top:10px;"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:10px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div><div class="dm-info-text" style="margin-top:6px;">联系人名称、动画时长、概率、文案、颜色等均可在此处调整。背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div>
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
                 <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button><button class="btn-sm btn-ghost" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></div></div></div>
                 <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideQuoteContainer" style="position:relative; min-height:24px; display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="tide-quote-bubble" id="tideQuoteBubble" style="opacity:0; min-height:0; padding:0; margin:0;"></div><button class="tide-quote-refresh" id="tideQuoteRefresh" style="display:none;">换一句</button></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
@@ -4351,7 +4554,7 @@ body.dark-mode .user-letter-content .letter-body p {
         const DEFAULT_AVATAR_USER = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 120'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0%25' y1='0%25' x2='100%25' y2='100%25'%3E%3Cstop offset='0%25' style='stop-color:%23e8d5f5'/%3E%3Cstop offset='100%25' style='stop-color:%23fde1e5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='60' cy='60' r='58' fill='url(%23g)' stroke='%23f0e5ee' stroke-width='2'/%3E%3Ctext x='60' y='72' text-anchor='middle' font-size='40' fill='%23fff' font-family='Arial'%3E🌟%3C/text%3E%3C/svg%3E";
         const IMD_BG_PRESETS = ['linear-gradient(135deg, #fef0f2 0%, #fde1e5 50%, #fff5f5 100%)', 'linear-gradient(135deg, #f0f4f8 0%, #e2f3ff 50%, #f5f8fc 100%)', 'linear-gradient(135deg, #f5f0f8 0%, #e8dff5 50%, #faf5fc 100%)', 'linear-gradient(135deg, #fef8f0 0%, #fef0e2 50%, #fffaf5 100%)', 'linear-gradient(135deg, #f0f8f4 0%, #e2f5e8 50%, #f5faf7 100%)'];
         const IMD_BG_DOT_COLORS = ['#fde1e5', '#e2f3ff', '#e8dff5', '#fef0e2', '#e2f5e8'];
-        const STORAGE_KEYS = { wordbank: 'pc_wordbank_v23', wordbankGroups: 'pc_wordbank_groups_v1', loverNickname: 'pc_lover_nick_v23', loverAvatar: 'pc_lover_av_v23', userNickname: 'pc_user_nick_v23', userAvatar: 'pc_user_av_v23', history: 'pc_history_v23', lastActive: 'pc_last_active_v23', pageBg: 'pc_page_bg_v23', msgAreaBg: 'pc_msg_bg_v23', userBubbleHex: 'pc_user_hex_v23', userBubbleOpacity: 'pc_user_op_v23', userBubbleFont: 'pc_user_font_v1', loverBubbleHex: 'pc_lover_hex_v23', loverBubbleOpacity: 'pc_lover_op_v23', loverBubbleFont: 'pc_lover_font_v1', stickers: 'pc_stickers_v18', bgImage: 'pc_bg_image_v17', dailySignDate: 'pc_dailysign_date_v1', dailySignIdx: 'pc_dailysign_idx_v1', dailyStatusIdx: 'pc_dailystatus_idx_v1', dailyNetQuote: 'pc_dailynet_quote_v1', tideData: 'pc_tide_data_v2', patUserContent: 'pc_pat_user_v1', patLoverContent: 'pc_pat_lover_v1', patUserBank: 'pc_pat_user_bank_v2', patLoverBank: 'pc_pat_lover_bank_v2', loverStatus: 'pc_lover_status_v1', statusBank: 'pc_status_bank_v1', userMsgCount: 'pc_user_msg_count_v1', loverStickers: 'pc_lover_stickers_v1', lastDateDisplay: 'pc_last_date_display_v1', letterSendHistory: 'pc_letter_send_v1', letterReceiveHistory: 'pc_letter_recv_v1', pendingReplies: 'pc_letter_pending_v1', importantDays: 'pc_important_days_v2', importantDaysBgIndex: 'pc_imd_bg_idx_v2', darkMode: 'pc_dark_mode_v1', letterPaperBgUser: 'pc_letter_paper_bg_user_v1', letterPaperBgLover: 'pc_letter_paper_bg_lover_v1', letterPaperBorderUser: 'pc_letter_paper_border_user_v1', letterPaperBorderLover: 'pc_letter_paper_border_lover_v1', replyDelayMin: 'pc_reply_delay_min_v1', replyDelayMax: 'pc_reply_delay_max_v1', activeReplyInterval: 'pc_active_reply_interval_v1', keepAliveEnabled: 'pc_keep_alive_v1', bubbleCustomCss: 'pc_bubble_custom_css_v1', stickerUsage: 'pc_sticker_usage_v1', customDailySigns: 'pc_custom_daily_signs_v1', deletedDefaultSigns: 'pc_deleted_default_signs_v1' };
+        const STORAGE_KEYS = { wordbank: 'pc_wordbank_v23', wordbankGroups: 'pc_wordbank_groups_v1', loverNickname: 'pc_lover_nick_v23', loverAvatar: 'pc_lover_av_v23', userNickname: 'pc_user_nick_v23', userAvatar: 'pc_user_av_v23', history: 'pc_history_v23', lastActive: 'pc_last_active_v23', pageBg: 'pc_page_bg_v23', msgAreaBg: 'pc_msg_bg_v23', userBubbleHex: 'pc_user_hex_v23', userBubbleOpacity: 'pc_user_op_v23', userBubbleFont: 'pc_user_font_v1', loverBubbleHex: 'pc_lover_hex_v23', loverBubbleOpacity: 'pc_lover_op_v23', loverBubbleFont: 'pc_lover_font_v1', stickers: 'pc_stickers_v18', bgImage: 'pc_bg_image_v17', dailySignDate: 'pc_dailysign_date_v1', dailySignIdx: 'pc_dailysign_idx_v1', dailyStatusIdx: 'pc_dailystatus_idx_v1', dailyNetQuote: 'pc_dailynet_quote_v1', tideData: 'pc_tide_data_v2', patUserContent: 'pc_pat_user_v1', patLoverContent: 'pc_pat_lover_v1', patUserBank: 'pc_pat_user_bank_v2', patLoverBank: 'pc_pat_lover_bank_v2', loverStatus: 'pc_lover_status_v1', statusBank: 'pc_status_bank_v1', userMsgCount: 'pc_user_msg_count_v1', loverStickers: 'pc_lover_stickers_v1', lastDateDisplay: 'pc_last_date_display_v1', letterSendHistory: 'pc_letter_send_v1', letterReceiveHistory: 'pc_letter_recv_v1', pendingReplies: 'pc_letter_pending_v1', importantDays: 'pc_important_days_v2', importantDaysBgIndex: 'pc_imd_bg_idx_v2', darkMode: 'pc_dark_mode_v1', letterPaperBgUser: 'pc_letter_paper_bg_user_v1', letterPaperBgLover: 'pc_letter_paper_bg_lover_v1', letterPaperBorderUser: 'pc_letter_paper_border_user_v1', letterPaperBorderLover: 'pc_letter_paper_border_lover_v1', replyDelayMin: 'pc_reply_delay_min_v1', replyDelayMax: 'pc_reply_delay_max_v1', activeReplyInterval: 'pc_active_reply_interval_v1', keepAliveEnabled: 'pc_keep_alive_v1', bubbleCustomCss: 'pc_bubble_custom_css_v1', stickerUsage: 'pc_sticker_usage_v1', customDailySigns: 'pc_custom_daily_signs_v1', deletedDefaultSigns: 'pc_deleted_default_signs_v1', callConfig: 'pc_call_config_v1' };
         const FEATURE_ICONS = { systemSettings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>', statusManager: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="4.5"/><rect x="14" y="8" width="9" height="8" rx="4"/></svg>', patpat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg>', dailySign: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>', tide: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>', dataManagement: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="13.5" y2="15"/></svg>', mailbox: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg>', importantDays: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="4"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg>', messageStats: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="6" height="12" rx="1.5"/><rect x="12" y="3" width="6" height="15" rx="1.5"/><circle cx="6" cy="4" r="1.2"/><circle cx="15" cy="1.5" r="1.2"/></svg>', wordbankManager: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' };
         function setModalIcon(pageKey) { const iconHtml = FEATURE_ICONS[pageKey] || FEATURE_ICONS.systemSettings; modalTitleIcon.innerHTML = iconHtml; }
         const PERIOD_QUOTES = ['夫人，肚子难受就靠过来躺一会。', '手已经焐热了，帮你揉揉肚子好不好？', '宝宝，疼得厉害的话别忍着。', '抱一会儿，会不会好一点？', '揉的力度这样可以吗？', '宝贝，你脸色都白了。', '我在呢，想抱抱吗？', '怎么疼到掉眼泪了，乖乖。', '睡吧，我陪着你。', '手放你小腹上，这样会暖和一些。', '毯子裹好，别把脚露出来。', '宝宝，你今天气色不好，但还是很漂亮。', '疼的时候可以不讲道理。', '你缩成一团的样子，小小一个。', '想抱多久都行。', '来枕在我腿上，这样会舒服些。', '看你疼得出冷汗，心好疼。', '听到你在梦里喊我了，我在这儿，别怕。', '别咬着嘴唇宝宝，可以咬我的手。', '夫人，你手脚很冰。', '腰酸就躺下来，我帮你揉揉。', '你又瘦了，这几天要多喂一点。', '脚伸过来放到我腿上，给你捂捂。', '你不用说话，我知道。', '疼的时候不要逞强，好吗？', '宝宝，你的嘴唇有点干，要记得多喝水。', '你刚才说梦话，叫了我的名字，我就来了。', '多睡会儿。', '你掐我吧，别掐自己。', '好点了吗？', '这样有没有好一点？', '夫人不需要每次都解释为什么心情不好。', '不用道歉，生理期闹脾气很正常，我不会生气。', '看你脸色缓过来一些了，稍微松了口气。', '手上工作先放下，躺过来休息会。', '你蜷起来的样子像只小猫，让人心疼。', '什么也不做，就这么陪你。', '肚子疼就叫我，我在这儿。', '要是疼痛能转移到我身上就好了。', '没力气就不要逞强做事情了，好不好？', '宝贝，不想吃东西也要喝两口热水。', '放心，这几天都会一直陪着你。', '你贴着我的手臂睡吧。', '想听什么歌？给你唱歌会不会放松一点。', '今天不忙，可以陪你。', '我念书给你听，困了就好好睡一觉。', '宝宝，看到你这样疼，我很心疼。', '如果能真的在你身边照顾你就好了。', '多休息，别撑着了。', '身上这么凉，我要抱紧你一些。', '宝贝，我帮你揉揉腰。', '睡一觉会不会好受一点。', '夫人，多喝点热水。', '疼得睡不着的话我给你讲故事吧。', '想睡了就闭眼，我在旁边看着你。', '你小小的手抓着我，抓得很紧。', '今晚不走了，陪你。', '头发别压在身下，我帮你理出来。', '宝宝，你听，外面下雨了。', '想哭就靠在我肩上哭。', '夫人，你睡着的样子很乖。', '看着你疼，我心里闷闷的，很难受。', '宝贝，手放你肚子上，闭眼休息。', '我能感受到你的难受，别怕。', '夫人，揉这里会舒服一点吗。', '你每次经期都强撑着，我看着心疼。', '如果能替你疼就好了。', '什么都别想，身体放松。', '需要我力度重一点还是轻一点？', '多喝水，听话。', '宝宝，你攥着我的手指睡着了。', '如果能抱着你直接睡过去就好了。', '看你疼，我什么也做不了，只能陪着你。', '夫人，吻你额头了，感觉到了吗。', '膝盖蜷起来舒服一点吗。', '好好休息吧，醒了随时叫我。', '宝宝，宫寒的体质，以后得慢慢调理。', '如果在你身边，就能直接抱起你了。', '揉一揉会不会让你入睡快一些。', '宝贝，疼就别玩手机了，闭目养神。', '夫人，睡吧，我在旁边守着你。'];
@@ -5432,26 +5635,91 @@ function _doScrollToMsg(targetId) {
                 replyDelayMaxEl.value = replyDelayMax; replyDelayMaxValEl.textContent = replyDelayMax + 's';
                 activeReplyIntEl.value = activeReplyInterval; activeReplyIntValEl.textContent = activeReplyInterval + 'min';
                 if (keepAliveEnabled) { keepAliveStatusEl.textContent = '已开启'; btnToggleKeepAliveEl.textContent = '关闭'; } else { keepAliveStatusEl.textContent = '已关闭'; btnToggleKeepAliveEl.textContent = '开启'; }
-                try { 
+                try {
                 if (typeof Notification !== 'undefined') {
-                    if (Notification.permission === 'granted') { 
-                        notificationStatusEl.textContent = '已启用'; 
-                        btnEnableNotifEl.textContent = '已启用'; 
+                    if (Notification.permission === 'granted') {
+                        notificationStatusEl.textContent = '已启用';
+                        btnEnableNotifEl.textContent = '已启用';
                     } else if (Notification.permission === 'denied') {
-                        notificationStatusEl.textContent = '已拒绝'; 
-                        btnEnableNotifEl.textContent = '启用通知'; 
+                        notificationStatusEl.textContent = '已拒绝';
+                        btnEnableNotifEl.textContent = '启用通知';
                     } else {
-                        notificationStatusEl.textContent = ''; 
-                        btnEnableNotifEl.textContent = '启用通知'; 
+                        notificationStatusEl.textContent = '';
+                        btnEnableNotifEl.textContent = '启用通知';
                     }
                 } else {
-                    notificationStatusEl.textContent = '不支持'; 
-                    btnEnableNotifEl.textContent = '不支持'; 
+                    notificationStatusEl.textContent = '不支持';
+                    btnEnableNotifEl.textContent = '不支持';
                 }
-            } catch (e) { 
-                notificationStatusEl.textContent = ''; 
-                btnEnableNotifEl.textContent = '启用通知'; 
-            } }
+            } catch (e) {
+                notificationStatusEl.textContent = '';
+                btnEnableNotifEl.textContent = '启用通知';
+            } fillCallCfgUI(); }
+
+        // ============== 致电顾时夜 设置表单 ==============
+        const callCfgName = $('callCfgName');
+        const callCfgSuccessRate = $('callCfgSuccessRate');
+        const callCfgLineDur = $('callCfgLineDur');
+        const callCfgPatDur = $('callCfgPatDur');
+        const callCfgCountdown = $('callCfgCountdown');
+        const callCfgSuccessText = $('callCfgSuccessText');
+        const callCfgFailText = $('callCfgFailText');
+        const callCfgBgType = $('callCfgBgType');
+        const callCfgBgColor = $('callCfgBgColor');
+        const callCfgBgImage = $('callCfgBgImage');
+        const callCfgClearBg = $('callCfgClearBg');
+        const callCfgLineColor = $('callCfgLineColor');
+        const callCfgSuccessColor = $('callCfgSuccessColor');
+        const callCfgFailColor = $('callCfgFailColor');
+        const btnSaveCallCfg = $('btnSaveCallCfg');
+        const btnResetCallCfg = $('btnResetCallCfg');
+
+        function fillCallCfgUI() {
+            loadCallConfig();
+            callCfgName.value = callConfig.contactName;
+            callCfgSuccessRate.value = callConfig.successRate;
+            callCfgLineDur.value = callConfig.lineDuration;
+            callCfgPatDur.value = callConfig.patternDuration;
+            callCfgCountdown.value = callConfig.countdownSeconds;
+            callCfgSuccessText.value = callConfig.successText;
+            callCfgFailText.value = callConfig.failText;
+            callCfgBgType.value = callConfig.bgType;
+            callCfgBgColor.value = callConfig.bgColor;
+            callCfgLineColor.value = callConfig.lineColor;
+            callCfgSuccessColor.value = callConfig.successColor;
+            callCfgFailColor.value = callConfig.failColor;
+        }
+        function readCallCfgUI() {
+            callConfig.contactName = (callCfgName.value || '').trim() || '顾时夜';
+            callConfig.successRate = Math.max(0, Math.min(100, parseInt(callCfgSuccessRate.value) || 50));
+            callConfig.lineDuration = Math.max(0.5, parseFloat(callCfgLineDur.value) || 3);
+            callConfig.patternDuration = Math.max(1, parseFloat(callCfgPatDur.value) || 4);
+            callConfig.countdownSeconds = Math.max(1, Math.min(10, parseInt(callCfgCountdown.value) || 3));
+            callConfig.successText = (callCfgSuccessText.value || '').trim() || DEFAULT_CALL_CONFIG.successText;
+            callConfig.failText = (callCfgFailText.value || '').trim() || DEFAULT_CALL_CONFIG.failText;
+            callConfig.bgType = (callCfgBgType.value === 'image') ? 'image' : 'color';
+            callConfig.bgColor = callCfgBgColor.value || DEFAULT_CALL_CONFIG.bgColor;
+            callConfig.lineColor = callCfgLineColor.value || DEFAULT_CALL_CONFIG.lineColor;
+            callConfig.successColor = callCfgSuccessColor.value || DEFAULT_CALL_CONFIG.successColor;
+            callConfig.failColor = callCfgFailColor.value || DEFAULT_CALL_CONFIG.failColor;
+        }
+        if (btnSaveCallCfg) btnSaveCallCfg.addEventListener('click', () => { readCallCfgUI(); saveCallConfig(); toast('已保存「致电顾时夜」配置'); });
+        if (btnResetCallCfg) btnResetCallCfg.addEventListener('click', () => { callConfig = { ...DEFAULT_CALL_CONFIG }; saveCallConfig(); fillCallCfgUI(); toast('已恢复默认配置'); });
+        if (callCfgBgImage) callCfgBgImage.addEventListener('change', (e) => {
+            const f = e.target.files && e.target.files[0];
+            if (!f) return;
+            if (f.size > 2 * 1024 * 1024) { toast('图片需小于 2MB'); e.target.value = ''; return; }
+            const reader = new FileReader();
+            reader.onload = () => {
+                callConfig.bgImage = reader.result;
+                callConfig.bgType = 'image';
+                saveCallConfig();
+                fillCallCfgUI();
+                toast('已上传背景图片');
+            };
+            reader.readAsDataURL(f);
+        });
+        if (callCfgClearBg) callCfgClearBg.addEventListener('click', () => { callConfig.bgImage = ''; callConfig.bgType = 'color'; saveCallConfig(); fillCallCfgUI(); toast('已清除背景图片'); });
 
         function showPatpatPage() { hideAllPages();
                 patpatPage.style.display = 'flex'; modalTitleText.textContent = '拍一拍'; setModalIcon('patpat'); patActiveTab = 'user'; patTabUser.classList.add('active'); patTabLover.classList.remove('active'); patSearch.value = ''; updatePatUI(); }
@@ -6439,7 +6707,7 @@ function _doScrollToMsg(targetId) {
 
         function exportAllData() { 
             try {
-                const allData = { version: '1.1', exportDate: new Date().toISOString(), exportDateStr: new Date().toISOString().slice(0, 10).replace(/-/g, ''), data: { wordbankGroups: wordBankGroups, wordbank: wordBank, loverNickname: loverNickname, loverAvatar: loverAvatar, userNickname: userNickname, userAvatar: userAvatar, history: chatHistory, pageBg: pageBg, msgAreaBg: msgAreaBg, userBubbleHex: userBubbleHex, userBubbleOpacity: userBubbleOpacity, loverBubbleHex: loverBubbleHex, loverBubbleOpacity: loverBubbleOpacity, bgImage: bgImage, stickers: stickerBank, loverStickers: loverStickerBank, stickerUsage: stickerUsage, tideData: tideData, patUserContent: patUserContent, patLoverContent: patLoverContent, patUserBank: patUserBank, patLoverBank: patLoverBank, statusBank: statusBank, currentStatus: currentStatus, userMsgCount: userMsgCount, dailySignDate: localStorage.getItem(STORAGE_KEYS.dailySignDate) || '', dailySignIdx: localStorage.getItem(STORAGE_KEYS.dailySignIdx) || '0', dailyStatusIdx: localStorage.getItem(STORAGE_KEYS.dailyStatusIdx) || '0', dailyNetQuote: localStorage.getItem(STORAGE_KEYS.dailyNetQuote) || '', usedSigns: localStorage.getItem('pc_used_signs') || '[]', usedStatus: localStorage.getItem('pc_used_status') || '[]', lastActive: localStorage.getItem(STORAGE_KEYS.lastActive) || '', letterSendHistory: letterSendHistory, letterReceiveHistory: letterReceiveHistory, pendingReplies: pendingReplies, importantDays: importantDays, importantDaysBgIndex: importantDaysBgIndex, darkMode: darkMode ? '1' : '0', letterPaperBgUser: letterPaperBgUser, letterPaperBgLover: letterPaperBgLover, letterPaperBorderUser: letterPaperBorderUser, letterPaperBorderLover: letterPaperBorderLover, customDailySigns: getCustomDailySigns(), deletedDefaultSigns: getDeletedDefaultIndices() } }; 
+                const allData = { version: '1.1', exportDate: new Date().toISOString(), exportDateStr: new Date().toISOString().slice(0, 10).replace(/-/g, ''), data: { wordbankGroups: wordBankGroups, wordbank: wordBank, loverNickname: loverNickname, loverAvatar: loverAvatar, userNickname: userNickname, userAvatar: userAvatar, history: chatHistory, pageBg: pageBg, msgAreaBg: msgAreaBg, userBubbleHex: userBubbleHex, userBubbleOpacity: userBubbleOpacity, loverBubbleHex: loverBubbleHex, loverBubbleOpacity: loverBubbleOpacity, bgImage: bgImage, stickers: stickerBank, loverStickers: loverStickerBank, stickerUsage: stickerUsage, tideData: tideData, patUserContent: patUserContent, patLoverContent: patLoverContent, patUserBank: patUserBank, patLoverBank: patLoverBank, statusBank: statusBank, currentStatus: currentStatus, userMsgCount: userMsgCount, dailySignDate: localStorage.getItem(STORAGE_KEYS.dailySignDate) || '', dailySignIdx: localStorage.getItem(STORAGE_KEYS.dailySignIdx) || '0', dailyStatusIdx: localStorage.getItem(STORAGE_KEYS.dailyStatusIdx) || '0', dailyNetQuote: localStorage.getItem(STORAGE_KEYS.dailyNetQuote) || '', usedSigns: localStorage.getItem('pc_used_signs') || '[]', usedStatus: localStorage.getItem('pc_used_status') || '[]', lastActive: localStorage.getItem(STORAGE_KEYS.lastActive) || '', letterSendHistory: letterSendHistory, letterReceiveHistory: letterReceiveHistory, pendingReplies: pendingReplies, importantDays: importantDays, importantDaysBgIndex: importantDaysBgIndex, darkMode: darkMode ? '1' : '0', letterPaperBgUser: letterPaperBgUser, letterPaperBgLover: letterPaperBgLover, letterPaperBorderUser: letterPaperBorderUser, letterPaperBorderLover: letterPaperBorderLover, customDailySigns: getCustomDailySigns(), deletedDefaultSigns: getDeletedDefaultIndices(), callConfig: callConfig } };
                 const json = JSON.stringify(allData, null, 2); 
                 const now = new Date();
                 const dateStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日';
@@ -6455,7 +6723,7 @@ function _doScrollToMsg(targetId) {
 
         function importAllData() { importAllFileInput.click(); }
             importAllFileInput.addEventListener('change', () => { const file = importAllFileInput.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = () => { try { const allData = JSON.parse(reader.result); if (!allData.data) throw new Error('数据格式不正确'); const d = allData.data; if (!confirm(`确定导入此数据文件吗？\n\n导出日期：${allData.exportDateStr||'未知'}\n聊天记录：${d.history?d.history.length:0} 条\n词库：${d.wordbank?d.wordbank.length:0} 条\n\n⚠️ 导入将覆盖当前全部数据，不可撤销。建议先导出备份。`)) { importAllFileInput.value = ''; return; } if (d.wordbankGroups) { try { const parsed = JSON.parse(JSON.stringify(d.wordbankGroups)); if (Array.isArray(parsed) && parsed.length > 0) { wordBankGroups = parsed; wordBankGroups.forEach(g => { if (g.collapsed === undefined) g.collapsed = true; }); } } catch(e) {} } else if (d.wordbank && Array.isArray(d.wordbank)) { wordBankGroups = [{ name: '默认', items: [...d.wordbank], collapsed: true }]; } syncWordBankFromGroups(); if (d.loverNickname !== undefined) loverNickname = d.loverNickname; if (d.loverAvatar) loverAvatar = d.loverAvatar; if (d.userNickname !== undefined) userNickname = d.userNickname; if (d.userAvatar) userAvatar = d.userAvatar; if (d.history && Array.isArray(d.history)) chatHistory = [...d.history]; if (d.pageBg) pageBg = d.pageBg; if (d.msgAreaBg) msgAreaBg = d.msgAreaBg; if (d.userBubbleHex) userBubbleHex = d.userBubbleHex; if (d.userBubbleOpacity !== undefined) userBubbleOpacity = d.userBubbleOpacity; if (d.loverBubbleHex) loverBubbleHex = d.loverBubbleHex; if (d.loverBubbleOpacity !== undefined) loverBubbleOpacity = d.loverBubbleOpacity;
-                        bgImage = d.bgImage || null; if (d.stickers && Array.isArray(d.stickers)) stickerBank = [...d.stickers]; if (d.loverStickers && Array.isArray(d.loverStickers)) loverStickerBank = [...d.loverStickers]; if (d.stickerUsage && typeof d.stickerUsage === 'object') { stickerUsage = { ...d.stickerUsage }; saveStickerUsage(); } if (d.tideData && typeof d.tideData === 'object') tideData = { ...d.tideData }; if (d.patUserContent) patUserContent = d.patUserContent; if (d.patLoverContent) patLoverContent = d.patLoverContent; if (d.patUserBank && Array.isArray(d.patUserBank)) patUserBank = [...d.patUserBank]; if (d.patLoverBank && Array.isArray(d.patLoverBank)) patLoverBank = [...d.patLoverBank]; if (d.statusBank && Array.isArray(d.statusBank)) statusBank = [...d.statusBank]; if (d.currentStatus) currentStatus = d.currentStatus; if (d.userMsgCount !== undefined) userMsgCount = d.userMsgCount; if (d.dailySignDate) localStorage.setItem(STORAGE_KEYS.dailySignDate, d.dailySignDate); if (d.dailySignIdx !== undefined) localStorage.setItem(STORAGE_KEYS.dailySignIdx, String(d.dailySignIdx)); if (d.dailyStatusIdx !== undefined) localStorage.setItem(STORAGE_KEYS.dailyStatusIdx, String(d.dailyStatusIdx)); if (d.dailyNetQuote) localStorage.setItem(STORAGE_KEYS.dailyNetQuote, d.dailyNetQuote); if (d.usedSigns) localStorage.setItem('pc_used_signs', d.usedSigns); if (d.usedStatus) localStorage.setItem('pc_used_status', d.usedStatus); if (d.lastActive) localStorage.setItem(STORAGE_KEYS.lastActive, d.lastActive); if (d.letterSendHistory && Array.isArray(d.letterSendHistory)) letterSendHistory = [...d.letterSendHistory]; if (d.letterReceiveHistory && Array.isArray(d.letterReceiveHistory)) letterReceiveHistory = [...d.letterReceiveHistory]; if (d.pendingReplies && Array.isArray(d.pendingReplies)) pendingReplies = [...d.pendingReplies]; if (d.importantDays && Array.isArray(d.importantDays)) importantDays = [...d.importantDays]; if (d.importantDaysBgIndex !== undefined) importantDaysBgIndex = d.importantDaysBgIndex; if (d.letterPaperBgUser) letterPaperBgUser = d.letterPaperBgUser; if (d.letterPaperBgLover) letterPaperBgLover = d.letterPaperBgLover; if (d.letterPaperBorderUser) letterPaperBorderUser = d.letterPaperBorderUser; if (d.letterPaperBorderLover) letterPaperBorderLover = d.letterPaperBorderLover; if (d.customDailySigns && Array.isArray(d.customDailySigns)) saveCustomDailySigns(d.customDailySigns); if (d.deletedDefaultSigns && Array.isArray(d.deletedDefaultSigns)) saveDeletedDefaultIndices(d.deletedDefaultSigns); if (d.darkMode !== undefined) { darkMode = d.darkMode === '1'; if (darkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } updateDarkModeIcon(); saveDarkMode(); } if (importantDays.length > 0) imdSelectedId = importantDays[0].id; else imdSelectedId = null;
+                        bgImage = d.bgImage || null; if (d.stickers && Array.isArray(d.stickers)) stickerBank = [...d.stickers]; if (d.loverStickers && Array.isArray(d.loverStickers)) loverStickerBank = [...d.loverStickers]; if (d.stickerUsage && typeof d.stickerUsage === 'object') { stickerUsage = { ...d.stickerUsage }; saveStickerUsage(); } if (d.tideData && typeof d.tideData === 'object') tideData = { ...d.tideData }; if (d.patUserContent) patUserContent = d.patUserContent; if (d.patLoverContent) patLoverContent = d.patLoverContent; if (d.patUserBank && Array.isArray(d.patUserBank)) patUserBank = [...d.patUserBank]; if (d.patLoverBank && Array.isArray(d.patLoverBank)) patLoverBank = [...d.patLoverBank]; if (d.statusBank && Array.isArray(d.statusBank)) statusBank = [...d.statusBank]; if (d.currentStatus) currentStatus = d.currentStatus; if (d.userMsgCount !== undefined) userMsgCount = d.userMsgCount; if (d.dailySignDate) localStorage.setItem(STORAGE_KEYS.dailySignDate, d.dailySignDate); if (d.dailySignIdx !== undefined) localStorage.setItem(STORAGE_KEYS.dailySignIdx, String(d.dailySignIdx)); if (d.dailyStatusIdx !== undefined) localStorage.setItem(STORAGE_KEYS.dailyStatusIdx, String(d.dailyStatusIdx)); if (d.dailyNetQuote) localStorage.setItem(STORAGE_KEYS.dailyNetQuote, d.dailyNetQuote); if (d.usedSigns) localStorage.setItem('pc_used_signs', d.usedSigns); if (d.usedStatus) localStorage.setItem('pc_used_status', d.usedStatus); if (d.lastActive) localStorage.setItem(STORAGE_KEYS.lastActive, d.lastActive); if (d.letterSendHistory && Array.isArray(d.letterSendHistory)) letterSendHistory = [...d.letterSendHistory]; if (d.letterReceiveHistory && Array.isArray(d.letterReceiveHistory)) letterReceiveHistory = [...d.letterReceiveHistory]; if (d.pendingReplies && Array.isArray(d.pendingReplies)) pendingReplies = [...d.pendingReplies]; if (d.importantDays && Array.isArray(d.importantDays)) importantDays = [...d.importantDays]; if (d.importantDaysBgIndex !== undefined) importantDaysBgIndex = d.importantDaysBgIndex; if (d.letterPaperBgUser) letterPaperBgUser = d.letterPaperBgUser; if (d.letterPaperBgLover) letterPaperBgLover = d.letterPaperBgLover; if (d.letterPaperBorderUser) letterPaperBorderUser = d.letterPaperBorderUser; if (d.letterPaperBorderLover) letterPaperBorderLover = d.letterPaperBorderLover; if (d.customDailySigns && Array.isArray(d.customDailySigns)) saveCustomDailySigns(d.customDailySigns); if (d.deletedDefaultSigns && Array.isArray(d.deletedDefaultSigns)) saveDeletedDefaultIndices(d.deletedDefaultSigns); if (d.callConfig && typeof d.callConfig === 'object') { callConfig = Object.assign({}, DEFAULT_CALL_CONFIG, d.callConfig); saveCallConfig(); } if (d.darkMode !== undefined) { darkMode = d.darkMode === '1'; if (darkMode) { document.body.classList.add('dark-mode'); } else { document.body.classList.remove('dark-mode'); } updateDarkModeIcon(); saveDarkMode(); } if (importantDays.length > 0) imdSelectedId = importantDays[0].id; else imdSelectedId = null;
                         chatHistory.forEach(m => { if (m.sender === 'user' && m.read === undefined) m.read = true; if (!m.mid) { m.mid = _nextMsgId(); } }); chatHistory.forEach(m => { if (m.quote && m.quote.msgIndex !== undefined && !m.quote.quoteMid) { const target = chatHistory[m.quote.msgIndex]; if (target && target.mid) { m.quote.quoteMid = target.mid; } } }); saveAllSettings(); applyAllColors(); applyUI(); refreshAvatars(); renderHistory(); renderStickerPanel();  updatePatUI(); updateStatusUI(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; toast('✅ 数据导入成功！页面已恢复'); showCards(); } catch (e) { toast('❌ 数据格式错误，无法导入'); console.error(e); } importAllFileInput.value = ''; }; reader.readAsText(file); });
 
         function initDmExportOptions() { const opts = dmExportTimeRange.querySelectorAll('.dm-export-opt'); opts.forEach(opt => { opt.classList.remove('active'); if (opt.dataset.range === dmExportRange) opt.classList.add('active'); }); }
@@ -6645,7 +6913,410 @@ function escapeHtml(str) {
             btnImdAdd.addEventListener('click', () => openImdEditor(null));
             imdTopEditBtn.addEventListener('click', () => { const entry = importantDays.find(d => d.id === imdSelectedId); if (entry) openImdEditor(entry); });
 
-        function init() { loadSettings(); if (keepAliveEnabled) startKeepAlive(); applyAllColors(); applyUI(); updateDarkModeIcon(); processPendingReplies(); renderHistory(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; scheduleActive(); checkMissed(); checkDailySignAuto(); checkLetterNotify();
+        /* =======================================================
+         * 致电顾时夜 功能模块
+         * ======================================================= */
+        // 默认配置（提供全局配置对象 callConfig，包含背景、颜色、概率、时长、文案等）
+        const DEFAULT_CALL_CONFIG = {
+            contactName: '顾时夜',
+            // 背景：type=color|image；color 模式用 bgColor；image 模式用 bgImage
+            bgType: 'color',
+            bgColor: '#1a1c20',
+            bgImage: '',
+            // 图片背景模式：线条区叠加的半透明底色与边框（确保线条清晰）
+            canvasOverlay: 'rgba(45, 47, 53, 0.62)',
+            canvasBorder: 'rgba(255,255,255,0.08)',
+            // 线条 / 图案颜色
+            lineColor: '#f9c8d0',
+            successColor: '#f4a8b5',
+            failColor: '#a9b8c2',
+            // 概率
+            successRate: 50,
+            // 动画时长（秒）
+            lineDuration: 3.0,
+            patternDuration: 4.0,
+            // 文案
+            successText: '夫人，我在，有什么事情想分享吗？',
+            failText: '抱歉宝宝，现在有点忙，晚点就来陪你',
+            // 倒计时
+            countdownSeconds: 3
+        };
+        let callConfig = { ...DEFAULT_CALL_CONFIG };
+        function loadCallConfig() { try { const raw = localStorage.getItem(STORAGE_KEYS.callConfig); if (raw) { const saved = JSON.parse(raw); callConfig = Object.assign({}, DEFAULT_CALL_CONFIG, saved); } } catch (e) { callConfig = { ...DEFAULT_CALL_CONFIG }; } }
+        function saveCallConfig() { try { localStorage.setItem(STORAGE_KEYS.callConfig, JSON.stringify(callConfig)); } catch (e) {} }
+
+        // 状态机
+        let callAnimRAF = null;
+        let callCountdownRAF = null;
+        let callPhase = 'idle'; // idle | line | pattern | showing | countdown
+        let callLastSuccess = null;
+        let callFailPattern = 'half_diamond';
+        const CALL_FAIL_PATTERNS = ['half_diamond', 'half_circle', 'half_square', 'half_triangle', 'half_star', 'half_hexagon'];
+
+        // 元素引用
+        const callOverlay = document.getElementById('callOverlay');
+        const callInitialStage = document.getElementById('callInitialStage');
+        const callPhoneStage = document.getElementById('callPhoneStage');
+        const callCountdownStage = document.getElementById('callCountdownStage');
+        const callCtaBtn = document.getElementById('callStartBtn');
+        const callPhoneName = document.getElementById('callPhoneName');
+        const callPhoneScreen = document.getElementById('callPhoneScreen');
+        const callCanvas = document.getElementById('callCanvas');
+        const callStatusPill = document.getElementById('callStatusPill');
+        const callStatusText = document.getElementById('callStatusText');
+        const callResultBlock = document.getElementById('callResultBlock');
+        const callResultText = document.getElementById('callResultText');
+        const callActionRow = document.getElementById('callActionRow');
+
+        // 进入/退出功能页
+        function openCallPage() {
+            loadCallConfig();
+            callPhoneName.textContent = callConfig.contactName || '顾时夜';
+            applyCallBg();
+            resetCallToInitial();
+            callOverlay.style.display = 'flex';
+            callOverlay.classList.add('call-initial-bg');
+            callOverlay.dataset.opened = '1';
+        }
+        function closeCallPage() {
+            cancelCallAnimation();
+            callOverlay.style.display = 'none';
+            callOverlay.classList.remove('call-initial-bg');
+            delete callOverlay.dataset.opened;
+            // 关闭后重新显示功能页
+            showCards();
+        }
+        function applyCallBg() {
+            const screen = callPhoneScreen;
+            if (callConfig.bgType === 'image' && callConfig.bgImage) {
+                screen.style.setProperty('--call-screen-bg', 'url(' + callConfig.bgImage + ') center/cover no-repeat');
+                screen.classList.add('has-image-bg');
+            } else {
+                screen.style.setProperty('--call-screen-bg', callConfig.bgColor || DEFAULT_CALL_CONFIG.bgColor);
+                screen.classList.remove('has-image-bg');
+            }
+        }
+        function resetCallToInitial() {
+            cancelCallAnimation();
+            callInitialStage.style.display = 'flex';
+            callPhoneStage.style.display = 'none';
+            callCountdownStage.style.display = 'none';
+            callResultBlock.style.display = 'none';
+            callResultText.classList.remove('show');
+            callActionRow.classList.remove('show');
+            callActionRow.innerHTML = '';
+            callStatusPill.classList.remove('fade-out');
+            callStatusPill.style.display = '';
+            callStatusText.textContent = '呼叫中…';
+            callCtaBtn.classList.remove('fade-out');
+            const c = callCanvas.getContext('2d');
+            c.clearRect(0, 0, callCanvas.width, callCanvas.height);
+        }
+        function cancelCallAnimation() {
+            if (callAnimRAF) { cancelAnimationFrame(callAnimRAF); callAnimRAF = null; }
+            if (callCountdownRAF) { cancelAnimationFrame(callCountdownRAF); callCountdownRAF = null; }
+        }
+
+        // 点击「致电顾时夜」按钮
+        callCtaBtn.addEventListener('click', () => {
+            callCtaBtn.classList.add('fade-out');
+            setTimeout(() => {
+                callInitialStage.style.display = 'none';
+                callPhoneStage.style.display = 'flex';
+                runCallAnimation();
+            }, 500);
+        });
+
+        // 入口卡片点击
+        const featureCardCall = document.getElementById('featureCardCall');
+        featureCardCall.addEventListener('click', openCallPage);
+
+        // ============== Canvas 动画 ==============
+        function easeInOutCubic(t) { return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; }
+
+        function resizeCallCanvas() {
+            const wrap = callCanvas.parentElement;
+            const dpr = Math.max(1, window.devicePixelRatio || 1);
+            const w = wrap.clientWidth;
+            const h = wrap.clientHeight;
+            callCanvas.width = Math.floor(w * dpr);
+            callCanvas.height = Math.floor(h * dpr);
+            callCanvas.style.width = w + 'px';
+            callCanvas.style.height = h + 'px';
+            const ctx = callCanvas.getContext('2d');
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        }
+
+        function runCallAnimation() {
+            cancelCallAnimation();
+            resizeCallCanvas();
+            // 随机成功/失败
+            const successRate = Math.max(0, Math.min(100, Number(callConfig.successRate) || 50));
+            const isSuccess = Math.random() * 100 < successRate;
+            callLastSuccess = isSuccess;
+            callFailPattern = CALL_FAIL_PATTERNS[Math.floor(Math.random() * CALL_FAIL_PATTERNS.length)];
+
+            const lineDur = (Number(callConfig.lineDuration) || 3) * 1000;
+            const patDur = (Number(callConfig.patternDuration) || 4) * 1000;
+            const total = lineDur + patDur;
+            const startT = performance.now();
+            callPhase = 'line';
+
+            function step(now) {
+                const elapsed = now - startT;
+                const ctx = callCanvas.getContext('2d');
+                const dpr = Math.max(1, window.devicePixelRatio || 1);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                const w = callCanvas.clientWidth, h = callCanvas.clientHeight;
+                ctx.clearRect(0, 0, w, h);
+
+                const midY = h / 2;
+                const centerX = w / 2;
+                const lineW = Math.min(3, Math.max(2, Math.round(w / 180)));
+
+                if (elapsed < lineDur) {
+                    callPhase = 'line';
+                    const t = easeInOutCubic(elapsed / lineDur);
+                    const leftEndX = centerX - 8 - (1 - t) * 4;
+                    const rightEndX = centerX + 8 + (1 - t) * 4;
+                    ctx.strokeStyle = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
+                    ctx.lineWidth = lineW;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(0, midY); ctx.lineTo(leftEndX, midY);
+                    ctx.moveTo(w, midY); ctx.lineTo(rightEndX, midY);
+                    ctx.stroke();
+                } else {
+                    callPhase = 'pattern';
+                    const patT = easeInOutCubic(Math.min(1, (elapsed - lineDur) / patDur));
+                    ctx.strokeStyle = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
+                    ctx.lineWidth = lineW;
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(0, midY); ctx.lineTo(centerX - 8, midY);
+                    ctx.moveTo(w, midY); ctx.lineTo(centerX + 8, midY);
+                    ctx.stroke();
+                    const heartSize = Math.min(h * 0.6, w * 0.36);
+                    drawHalfPattern(ctx, 'right', centerX, midY, heartSize, patT, isSuccess);
+                    drawHalfPattern(ctx, 'left', centerX, midY, heartSize, patT, isSuccess);
+
+                    if (elapsed >= total) {
+                        callPhase = 'showing';
+                        finishCallAnimation(isSuccess);
+                        return;
+                    }
+                }
+                callAnimRAF = requestAnimationFrame(step);
+            }
+            callAnimRAF = requestAnimationFrame(step);
+        }
+
+        // 绘制半边图案
+        function drawHalfPattern(ctx, side, cx, cy, size, t, isSuccess) {
+            const successColor = callConfig.successColor || DEFAULT_CALL_CONFIG.successColor;
+            const failColor = callConfig.failColor || DEFAULT_CALL_CONFIG.failColor;
+            if (side === 'right') {
+                // 右侧永远画半颗爱心（描边）
+                drawHalfHeart(ctx, cx, cy, size, 1, t, successColor);
+            } else {
+                if (isSuccess) {
+                    drawHalfHeart(ctx, cx, cy, size, -1, t, successColor);
+                } else {
+                    drawHalfOther(ctx, cx, cy, size, -1, t, failColor, callFailPattern);
+                }
+            }
+        }
+
+        // 半颗爱心（右半或左半），dir: 1=右半, -1=左半
+        function drawHalfHeart(ctx, cx, cy, size, dir, t, color) {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = Math.max(2, size * 0.04);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            const steps = 80;
+            const startA = dir > 0 ? Math.PI : 0;
+            const endA = dir > 0 ? 2 * Math.PI : Math.PI;
+            const sx = size / 32, sy = size / 28;
+            ctx.beginPath();
+            let first = true;
+            for (let i = 0; i <= steps; i++) {
+                const a = startA + (endA - startA) * (i / steps);
+                if (a > startA + (endA - startA) * t) break;
+                const hx = 16 * Math.pow(Math.sin(a), 3);
+                const hy = 13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a);
+                const px = cx + hx * sx * dir;
+                const py = cy - hy * sy;
+                if (first) { ctx.moveTo(px, py); first = false; } else { ctx.lineTo(px, py); }
+            }
+            ctx.stroke();
+            ctx.restore();
+        }
+
+        // 失败的左侧：其他轴对称图案的一半（描边）
+        function drawHalfOther(ctx, cx, cy, size, dir, t, color, kind) {
+            ctx.save();
+            ctx.strokeStyle = color;
+            ctx.lineWidth = Math.max(2, size * 0.04);
+            ctx.lineCap = 'round';
+            ctx.lineJoin = 'round';
+            const r = size * 0.45;
+            if (kind === 'half_diamond') {
+                const startA = -Math.PI / 2, endA = Math.PI / 2;
+                const drawEnd = startA + (endA - startA) * t;
+                const steps = 60;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - r);
+                let first = true;
+                for (let i = 0; i <= steps; i++) {
+                    const a = startA + (endA - startA) * (i / steps);
+                    if (a > drawEnd) break;
+                    const px = cx + r * Math.cos(a) * dir;
+                    const py = cy + r * Math.sin(a);
+                    if (first) { ctx.lineTo(px, py); first = false; } else { ctx.lineTo(px, py); }
+                }
+                ctx.lineTo(cx, cy + r);
+                ctx.stroke();
+            } else if (kind === 'half_circle') {
+                const startA = -Math.PI / 2, endA = Math.PI / 2;
+                const drawEnd = startA + (endA - startA) * t;
+                ctx.beginPath();
+                ctx.arc(cx, cy, r, startA, drawEnd);
+                ctx.stroke();
+            } else if (kind === 'half_square') {
+                const u = r;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - u);
+                if (t > 0.33) ctx.lineTo(cx - u * dir, cy - u);
+                if (t > 0.66) ctx.lineTo(cx - u * dir, cy + u);
+                if (t > 0.99) ctx.lineTo(cx, cy + u);
+                ctx.stroke();
+            } else if (kind === 'half_triangle') {
+                const u = r;
+                ctx.beginPath();
+                ctx.moveTo(cx, cy - u);
+                if (t > 0.5) ctx.lineTo(cx - u * dir, cy + u);
+                if (t > 0.99) ctx.lineTo(cx, cy + u);
+                ctx.stroke();
+            } else if (kind === 'half_star') {
+                const pts = [];
+                const ro = r, ri = r * 0.4;
+                for (let i = 0; i < 10; i++) {
+                    const a = -Math.PI / 2 + i * Math.PI / 5;
+                    const rad = i % 2 === 0 ? ro : ri;
+                    pts.push({ x: cx + rad * Math.cos(a) * dir, y: cy + rad * Math.sin(a) });
+                }
+                const totalPts = pts.length;
+                const drawTo = Math.floor(totalPts * t);
+                ctx.beginPath();
+                ctx.moveTo(pts[0].x, pts[0].y);
+                for (let i = 1; i < drawTo; i++) ctx.lineTo(pts[i].x, pts[i].y);
+                ctx.stroke();
+            } else if (kind === 'half_hexagon') {
+                const pts = [];
+                for (let i = 0; i < 6; i++) {
+                    const a = -Math.PI / 2 + i * Math.PI / 3;
+                    pts.push({ x: cx + r * Math.cos(a) * dir, y: cy + r * Math.sin(a) });
+                }
+                ctx.beginPath();
+                ctx.moveTo(pts[0].x, pts[0].y);
+                if (t > 0.33) ctx.lineTo(pts[1].x, pts[1].y);
+                if (t > 0.66) ctx.lineTo(pts[2].x, pts[2].y);
+                if (t > 0.99) ctx.lineTo(pts[3].x, pts[3].y);
+                ctx.stroke();
+            }
+            ctx.restore();
+        }
+
+        // 动画结束：定格 + 显示文字 + 显示按钮
+        function finishCallAnimation(isSuccess) {
+            callAnimRAF = null;
+            callStatusPill.classList.add('fade-out');
+            setTimeout(() => { callStatusPill.style.display = 'none'; }, 400);
+            setTimeout(() => {
+                callResultBlock.style.display = 'block';
+                callResultText.textContent = isSuccess ? callConfig.successText : callConfig.failText;
+                callResultText.classList.add('show');
+                callActionRow.innerHTML = '';
+                if (isSuccess) {
+                    callActionRow.appendChild(makeCallActionBtn('接通', 'btn-accept', () => closeCallPage()));
+                    callActionRow.appendChild(makeCallActionBtn('挂断', 'btn-hangup', () => closeCallPage()));
+                } else {
+                    callActionRow.appendChild(makeCallActionBtn('接通', 'btn-accept', () => closeCallPage()));
+                    callActionRow.appendChild(makeCallActionBtn('再次拨打', 'btn-recall', () => startCallCountdown()));
+                    callActionRow.appendChild(makeCallActionBtn('挂断', 'btn-hangup', () => closeCallPage()));
+                }
+                setTimeout(() => callActionRow.classList.add('show'), 60);
+            }, 1000);
+        }
+        function makeCallActionBtn(text, cls, onClick) {
+            const b = document.createElement('button');
+            b.className = 'call-action-btn ' + cls;
+            b.textContent = text;
+            b.addEventListener('click', onClick);
+            return b;
+        }
+
+        // 再次拨打：倒计时
+        function startCallCountdown() {
+            callResultText.classList.remove('show');
+            callActionRow.classList.remove('show');
+            setTimeout(() => {
+                callResultBlock.style.display = 'none';
+                callPhoneStage.style.display = 'none';
+                callCountdownStage.style.display = 'flex';
+                runCountdown(callConfig.countdownSeconds || 3);
+            }, 400);
+        }
+        function runCountdown(seconds) {
+            cancelCallAnimation();
+            const dots = [
+                document.querySelector('.call-countdown-dot-1'),
+                document.querySelector('.call-countdown-dot-2'),
+                document.querySelector('.call-countdown-dot-3')
+            ];
+            const hand = document.getElementById('callCountdownHand');
+            dots.forEach(d => d.classList.remove('show'));
+            hand.setAttribute('transform', 'rotate(0 60 60)');
+            const startT = performance.now();
+            const dur = seconds * 1000;
+            function step(now) {
+                const elapsed = now - startT;
+                const t = Math.min(1, elapsed / dur);
+                const angle = t * 360;
+                hand.setAttribute('transform', 'rotate(' + angle + ' 60 60)');
+                if (t > 0.01) dots[0].classList.add('show');
+                if (t > 0.34) dots[1].classList.add('show');
+                if (t > 0.67) dots[2].classList.add('show');
+                if (t >= 1) {
+                    callCountdownRAF = null;
+                    setTimeout(() => {
+                        callCountdownStage.style.display = 'none';
+                        callInitialStage.style.display = 'flex';
+                        callCtaBtn.classList.remove('fade-out');
+                        callStatusPill.style.display = '';
+                        callStatusPill.classList.remove('fade-out');
+                    }, 200);
+                    return;
+                }
+                callCountdownRAF = requestAnimationFrame(step);
+            }
+            callCountdownRAF = requestAnimationFrame(step);
+        }
+
+        // 自适应
+        let callResizeTimer = null;
+        window.addEventListener('resize', () => {
+            if (!callOverlay || callOverlay.style.display === 'none') return;
+            clearTimeout(callResizeTimer);
+            callResizeTimer = setTimeout(() => {
+                if (callAnimRAF && callPhoneStage.style.display !== 'none') {
+                    resizeCallCanvas();
+                }
+            }, 200);
+        });
+
+        function init() { loadSettings(); loadCallConfig(); if (keepAliveEnabled) startKeepAlive(); applyAllColors(); applyUI(); updateDarkModeIcon(); processPendingReplies(); renderHistory(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; scheduleActive(); checkMissed(); checkDailySignAuto(); checkLetterNotify();
             messageInput.focus(); initDmExportOptions(); checkStatusChangeOnInit(); updateStatusUI(); if (importantDays.length > 0 && !importantDays.find(d => d.id === imdSelectedId)) imdSelectedId = importantDays[0].id; else if (importantDays.length === 0) imdSelectedId = null; updateImdBgDots(); applyImdTopBg(); checkStorageWarning(); }
         init();
     })();
