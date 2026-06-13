@@ -2952,12 +2952,56 @@
         }
         body.dark-mode .dm-storage-num { color: #fff; text-shadow: 0 0 4px rgba(0,0,0,0.6); }
         .dm-storage-text { margin-top:6px; font-size:12px; color: var(--text-medium); }
-        @keyframes storageFade {
-            0% { opacity: 0; transform: translateY(8px); }
-            10% { opacity: 1; transform: translateY(0); }
-            80% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-4px); }
+        /* 信箱导出月历 */
+        .mailbox-export-tab-row { display:flex; gap:4px; margin-top:8px; margin-bottom:8px; }
+        .mailbox-export-tab-btn {
+            padding: 6px 14px; border-radius: 14px; border: 1px solid #e8d0d8; background: #fff;
+            font-size: 12.5px; color: #8a6a7a; cursor: pointer; font-family: var(--font); transition: all 0.2s;
         }
+        .mailbox-export-tab-btn.active { background: #f5d7e0; border-color: #e8a6b8; color: #8a4458; font-weight: 600; }
+        body.dark-mode .mailbox-export-tab-btn { background: #2e2d34; border-color: #454852; color: #c0b0b8; }
+        body.dark-mode .mailbox-export-tab-btn.active { background: #5a3a4a; border-color: #8a5a6a; color: #f5c8d8; }
+        .dm-mail-calendar { margin-top: 8px; background: #fdf9fb; border: 1px solid #f0e0e8; border-radius: 12px; padding: 10px; }
+        body.dark-mode .dm-mail-calendar { background: #2a2a32; border-color: #3a3a44; }
+        .dm-mail-month-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
+        .dm-mail-month-nav button { background:none; border:none; padding:4px; cursor:pointer; color: #8a6a7a; }
+        .dm-mail-month-nav button svg { width: 16px; height: 16px; stroke:currentColor; fill:none; stroke-width:2; }
+        .dm-mail-month-title { font-size:13px; font-weight:600; color: #6a4a5a; }
+        body.dark-mode .dm-mail-month-title { color: #d0b8c8; }
+        .dm-mail-weekdays { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-size:11px; color:#b0a6b4; margin-bottom:4px; }
+        .dm-mail-days-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center; }
+        .dm-mail-day-cell {
+            aspect-ratio: 1; display:flex; flex-direction:column; align-items:center; justify-content:center;
+            font-size: 11px; border-radius: 8px; cursor: pointer; position: relative; color: #6a6a7a;
+            transition: background 0.15s; user-select: none;
+        }
+        .dm-mail-day-cell:hover { background: #f5edf0; }
+        body.dark-mode .dm-mail-day-cell { color: #b0b0b8; }
+        body.dark-mode .dm-mail-day-cell:hover { background: #3a3a44; }
+        .dm-mail-day-cell.other-month { color: #d0c8d0; }
+        .dm-mail-day-cell.today { font-weight: 700; color: #8a4458; }
+        .dm-mail-day-cell.selected { background: #f5d7e0; color: #8a4458; font-weight: 600; }
+        body.dark-mode .dm-mail-day-cell.selected { background: #5a3a4a; color: #f5c8d8; }
+        .dm-mail-day-dot { width: 5px; height: 5px; border-radius: 50%; position: absolute; bottom: 2px; }
+        .dm-mail-day-dot.send { background: #f0a0b8; left: 50%; margin-left: -7px; }
+        .dm-mail-day-dot.receive { background: #8ab8d8; left: 50%; margin-left: 2px; }
+        .dm-mail-day-cell:has(.dm-mail-day-dot.send + .dm-mail-day-dot.receive) .dm-mail-day-dot.send,
+        .dm-mail-day-cell:has(.dm-mail-day-dot.receive + .dm-mail-day-dot.send) .dm-mail-day-dot.send { margin-left: -7px; }
+        .dm-mail-day-cell:has(.dm-mail-day-dot.send + .dm-mail-day-dot.receive) .dm-mail-day-dot.receive,
+        .dm-mail-day-cell:has(.dm-mail-day-dot.receive + .dm-mail-day-dot.send) .dm-mail-day-dot.receive { margin-left: 2px; }
+        .dm-mail-day-cell.has-send { background: rgba(240,160,184,0.12); }
+        .dm-mail-day-cell.has-receive { background: rgba(138,184,216,0.12); }
+        .dm-mail-day-cell.has-both { background: linear-gradient(135deg, rgba(240,160,184,0.15) 0%, rgba(138,184,216,0.15) 100%); }
+        .dm-mail-legend { display:flex; gap:12px; margin-top:6px; font-size:11px; color:#a0a0a8; align-items:center; }
+        .dm-mail-legend-dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:2px; vertical-align:middle; }
+        .dm-mail-legend-dot.send { background: #f0a0b8; }
+        .dm-mail-legend-dot.receive { background: #8ab8d8; }
+        .dm-mail-selected { display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:#6a5a6a; }
+        /* 字卡导出导入 */
+        .dm-wordcard-section { margin-top: 8px; }
+        .dm-wordcard-group-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:12px; color:#6a5a6a; }
+        .dm-wordcard-group-row label { display:flex; align-items:center; gap:4px; cursor:pointer; }
+        .dm-wordcard-group-row input[type="checkbox"] { accent-color: #d895a8; }
         .dm-divider {
             height: 1px;
             background: #f0e8eb;
@@ -4616,7 +4660,7 @@ body.dark-mode .user-letter-content .letter-body p {
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
                 <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button><button class="btn-sm btn-ghost" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></div></div></div>
                 <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideQuoteContainer" style="position:relative; min-height:24px; display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="tide-quote-bubble" id="tideQuoteBubble" style="opacity:0; min-height:0; padding:0; margin:0;"></div><button class="tide-quote-refresh" id="tideQuoteRefresh" style="display:none;">换一句</button></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
-                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
+                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 导出信箱</span><div class="mailbox-export-tab-row"><button class="mailbox-export-tab-btn active" id="dmMailTabSend">投递的信</button><button class="mailbox-export-tab-btn" id="dmMailTabReceive">回信</button></div><div class="dm-mail-calendar" id="dmMailCalendar"><div class="dm-mail-month-nav"><button id="dmMailPrevMonth"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dm-mail-month-title" id="dmMailMonthTitle"></span><button id="dmMailNextMonth"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="dm-mail-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="dm-mail-days-grid" id="dmMailDaysGrid"></div><div class="dm-mail-legend"><span><span class="dm-mail-legend-dot send"></span> 寄出</span><span><span class="dm-mail-legend-dot receive"></span> 回信</span></div><div class="dm-mail-selected" id="dmMailSelected" style="display:none;"><span id="dmMailSelectedText"></span><button class="btn-sm btn-pink" id="btnDmMailExportSelected" style="margin-left:auto;">导出选中日期</button></div></div><div class="dm-btn-row" style="margin-top:6px;"><button class="btn-sm btn-pink" id="btnDmMailExportAllSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部投递信</button><button class="btn-sm btn-blue" id="btnDmMailExportAllReceive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部回信</button></div><div class="dm-info-text" style="margin-top:6px;">月历中粉色圆点表示有信寄出，蓝色圆点表示有回信。点击日期可选择单日或多日导出。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><line x1="12" y1="17" x2="12" y2="21"/></svg> 字卡库管理</span><div class="dm-wordcard-section" id="dmWordcardGroups"><div class="dm-info-text" style="margin-bottom:8px;">选择要导出的字卡分组，导出格式为JSON文件，可用于导入恢复。</div><div id="dmWordcardGroupList" style="max-height:160px;overflow-y:auto;margin-bottom:8px;"></div></div><div class="dm-btn-row" style="margin-top:6px;gap:8px;"><button class="btn-sm btn-pink" id="btnDmWordcardExport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出选中字卡</button><button class="btn-sm btn-blue" id="btnDmWordcardImport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入字卡库</button><input type="file" id="wordcardImportFileInput" accept=".json" style="display:none;"></div><div class="dm-info-text" style="margin-top:6px;">导出格式与导入格式统一，导入后字卡会按分组名合并到对应分组中。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
                 <div class="feature-page" id="mailboxPage"><button class="btn-sm btn-ghost back-btn" id="backFromMailbox"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 信箱</span><div class="mailbox-tab-row"><button class="mailbox-tab-btn active" id="mailTabSend">投递的信</button><button class="mailbox-tab-btn" id="mailTabReceive">回信</button></div><div id="mailSendArea" style="display:flex;flex-direction:column;gap:10px;"><button class="btn-sm btn-pink" id="btnNewLetter">写一封信</button><div class="letter-list" id="sendLetterList"></div></div><div id="mailReceiveArea" style="display:none;flex-direction:column;gap:10px;"><div class="letter-list" id="receiveLetterList"></div></div></div></div>
                 <div class="feature-page" id="importantDaysPage"><button class="btn-sm btn-ghost back-btn" id="backFromImportantDays"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="imd-page-container"><div class="imd-top-pane" id="imdTopPane"><button class="imd-top-edit-btn" id="imdTopEditBtn" title="编辑此重要日" style="display:none;"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><div class="imd-top-decor" id="imdBgDots" style="display:none;"></div><div class="imd-top-type-tag" id="imdTopTypeTag"></div><div class="imd-top-name" id="imdTopName"></div><div class="imd-top-date" id="imdTopDate"></div><div class="imd-top-days" id="imdTopDays"></div><div class="imd-top-days-sub" id="imdTopDaysSub"></div><div class="imd-top-empty" id="imdTopEmpty">还没有重要日，在下方添加吧</div></div><div class="imd-bottom-pane"><div class="imd-list-scroll" id="imdListScroll"></div><div class="imd-list-empty" id="imdListEmpty" style="display:none;">点击下方按钮添加重要日</div><div class="imd-add-btn-row"><button class="btn-sm btn-pink" id="btnImdAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加重要日</button></div></div></div></div>
             </div>
@@ -4959,6 +5003,17 @@ body.dark-mode .user-letter-content .letter-body p {
             importAllFileInput = $('importAllFileInput'),
             btnDeleteAllChat = $('btnDeleteAllChat'),
             btnDeleteAllData = $('btnDeleteAllData');
+        // 信箱导出
+        const dmMailTabSend = $('dmMailTabSend'), dmMailTabReceive = $('dmMailTabReceive'),
+            dmMailPrevMonth = $('dmMailPrevMonth'), dmMailNextMonth = $('dmMailNextMonth'),
+            dmMailMonthTitle = $('dmMailMonthTitle'), dmMailDaysGrid = $('dmMailDaysGrid'),
+            dmMailSelected = $('dmMailSelected'), dmMailSelectedText = $('dmMailSelectedText'),
+            btnDmMailExportAllSend = $('btnDmMailExportAllSend'), btnDmMailExportAllReceive = $('btnDmMailExportAllReceive'),
+            btnDmMailExportSelected = $('btnDmMailExportSelected');
+        let dmMailExportMode = 'send', dmMailMonthOffset = 0, dmMailSelectedDates = new Set();
+        // 字卡导出导入
+        const btnDmWordcardExport = $('btnDmWordcardExport'), btnDmWordcardImport = $('btnDmWordcardImport'),
+            wordcardImportFileInput = $('wordcardImportFileInput'), dmWordcardGroupList = $('dmWordcardGroupList');
         const statusCurrentDisplay = $('statusCurrentDisplay'),
             statusCurrentText = $('statusCurrentText'),
             statusSearch = $('statusSearch'),
@@ -5105,41 +5160,7 @@ body.dark-mode .user-letter-content .letter-body p {
 
         function saveAllSettings() { localStorage.setItem(STORAGE_KEYS.wordbankGroups, JSON.stringify(wordBankGroups)); localStorage.setItem(STORAGE_KEYS.wordbank, JSON.stringify(wordBank)); localStorage.setItem(STORAGE_KEYS.loverNickname, loverNickname); localStorage.setItem(STORAGE_KEYS.loverAvatar, loverAvatar); localStorage.setItem(STORAGE_KEYS.userNickname, userNickname); localStorage.setItem(STORAGE_KEYS.userAvatar, userAvatar); localStorage.setItem(STORAGE_KEYS.pageBg, pageBg); localStorage.setItem(STORAGE_KEYS.msgAreaBg, msgAreaBg); localStorage.setItem(STORAGE_KEYS.userBubbleHex, userBubbleHex); localStorage.setItem(STORAGE_KEYS.userBubbleOpacity, userBubbleOpacity.toString()); localStorage.setItem(STORAGE_KEYS.loverBubbleHex, loverBubbleHex); localStorage.setItem(STORAGE_KEYS.loverBubbleOpacity, loverBubbleOpacity.toString()); localStorage.setItem(STORAGE_KEYS.userBubbleFont, userBubbleFontHex); localStorage.setItem(STORAGE_KEYS.loverBubbleFont, loverBubbleFontHex); localStorage.setItem(STORAGE_KEYS.letterPaperBgUser, letterPaperBgUser); localStorage.setItem(STORAGE_KEYS.letterPaperBgLover, letterPaperBgLover); localStorage.setItem(STORAGE_KEYS.letterPaperBorderUser, letterPaperBorderUser); localStorage.setItem(STORAGE_KEYS.letterPaperBorderLover, letterPaperBorderLover); localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(chatHistory)); if (bgImage) localStorage.setItem(STORAGE_KEYS.bgImage, bgImage); else localStorage.removeItem(STORAGE_KEYS.bgImage); localStorage.setItem(STORAGE_KEYS.patUserContent, patUserContent); localStorage.setItem(STORAGE_KEYS.patLoverContent, patLoverContent); saveStickers();  saveTideData(); savePatBanks(); saveStatusData(); saveLetterData();  saveImportantDays(); saveDarkMode();  }
 
-        function saveHistory() { try { localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(chatHistory)); checkStorageWarning(); } catch (e) { console.error('saveHistory error:', e); if (e && (e.name === 'QuotaExceededError' || e.code === 22)) { try { showStorageWarning(true); } catch(_){} } } }
-        let storageWarningShown = false;
-        function checkStorageWarning() { try { let total = 0; for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k) { const v = localStorage.getItem(k) || ''; total += k.length + v.length; } } const usedMB = (total * 2) / (1024 * 1024); if (usedMB >= 3.5) { showStorageWarning(false); } } catch (e) {} }
-        function showStorageWarning(isQuotaError) {
-            if (storageWarningShown) return;
-            storageWarningShown = true;
-            if (typeof messagesArea === 'undefined' || !messagesArea) return;
-            const row = document.createElement('div');
-            row.className = 'msg-row system storage-warning-bubble';
-            row.style.cssText = 'justify-content:center;padding:8px 12px;animation:storageFade 3s ease forwards;';
-            const span = document.createElement('span');
-            span.className = 'msg-system-text';
-            span.style.cssText = 'background:rgba(255, 236, 210, 0.95);color:#a86a3a;padding:10px 16px;border-radius:14px;font-size:13px;box-shadow:0 2px 8px rgba(180, 120, 60, 0.12);display:inline-flex;flex-direction:column;align-items:center;gap:3px;max-width:90%;text-align:center;line-height:1.5;';
-            if (darkMode) { span.style.background = 'rgba(80, 55, 35, 0.85)'; span.style.color = '#f3d6a8'; }
-            // 第一行：主提示
-            const line1 = document.createElement('div');
-            line1.textContent = '🗃 回忆太多了，该收纳一下啦☆˶> x <˶.⁺';
-            line1.style.cssText = 'font-size:13.5px;font-weight:500;';
-            // 第二行：系统提示
-            const line2 = document.createElement('div');
-            line2.textContent = '请到「数据管理」导出聊天记录';
-            line2.style.cssText = 'font-size:11.5px;opacity:0.85;';
-            span.appendChild(line1);
-            span.appendChild(line2);
-            row.appendChild(span);
-            messagesArea.appendChild(row);
-            scrollBottom();
-            emptyState.style.display = 'none';
-            // 3 秒后自动移除
-            setTimeout(() => {
-                if (row && row.parentNode) row.parentNode.removeChild(row);
-                storageWarningShown = false;
-            }, 3000);
-            if (isQuotaError) { toast('⚠️ 存储空间不足，请尽快导出并清理'); }
-        }
+        function saveHistory() { try { localStorage.setItem(STORAGE_KEYS.history, JSON.stringify(chatHistory)); } catch (e) { console.error('saveHistory error:', e); } }
 
         function saveLastActive() { localStorage.setItem(STORAGE_KEYS.lastActive, Date.now().toString()); }
 
@@ -5161,7 +5182,7 @@ body.dark-mode .user-letter-content .letter-body p {
 
 
 
-        function renderHistory() { messagesArea.querySelectorAll('.msg-row:not(.storage-warning-bubble),.date-divider,.typing-indicator').forEach(e => e.remove()); typingIndicatorEl = null; const today = new Date(); const todayDateStr = fdate(today); if (chatHistory.length === 0 || fdate(new Date(chatHistory[0].time)) !== todayDateStr) { appendDateDiv(todayDateStr); } if (!chatHistory.length) { emptyState.style.display = 'flex'; return; } let lastDate = ''; chatHistory.forEach((m) => { const d = fdate(new Date(m.time)); if (d !== lastDate) { lastDate = d; appendDateDiv(d); } if (m.type === 'system') { appendSystemBubble(m.text, m.time); } else { const type = m.type || 'text',
+        function renderHistory() { messagesArea.querySelectorAll('.msg-row,.date-divider,.typing-indicator').forEach(e => e.remove()); typingIndicatorEl = null; const today = new Date(); const todayDateStr = fdate(today); if (chatHistory.length === 0 || fdate(new Date(chatHistory[0].time)) !== todayDateStr) { appendDateDiv(todayDateStr); } if (!chatHistory.length) { emptyState.style.display = 'flex'; return; } let lastDate = ''; chatHistory.forEach((m) => { const d = fdate(new Date(m.time)); if (d !== lastDate) { lastDate = d; appendDateDiv(d); } if (m.type === 'system') { appendSystemBubble(m.text, m.time); } else { const type = m.type || 'text',
                     text = type === 'text' ? (m.text || '') : '',
                     content = (type === 'image' || type === 'sticker') ? m.content : null; appendBubble(m.sender, text, m.time, false, type, content, m.quote || null, m.annotation || null, m.mid); } }); reattachBubbleEvents(); scrollBottom(); emptyState.style.display = 'none'; }
 
@@ -5879,7 +5900,7 @@ function _doScrollToMsg(targetId) {
                 tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); triggerPeriodQuote(); }
 
         function showDataManagementPage() { hideAllPages();
-                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); updateDmStorageMeter(); }
+                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); updateDmStorageMeter(); updateDmMailCalendarOnOpen(); }
 
         function updateDmStorageMeter() {
             const fill = document.getElementById('dmStorageFill');
@@ -6277,7 +6298,7 @@ function _doScrollToMsg(targetId) {
 
         function resetWordbank() { wordBankGroups = [{ name: '默认', items: [...DEFAULT_WORDBANK], collapsed: true }]; delete wordbankBatchMode[0]; delete wordbankBatchSelected[0]; saveWordBankGroups(); updateWordbankUI(); toast('已恢复默认词库（含分组）'); }
 
-        function clearHistory() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '140'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:18px;width:280px;padding:24px;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.16);'; if (darkMode) card.style.background = '#2a2c34'; card.innerHTML = '<p style="margin:0 0 20px;font-size:15px;color:var(--text-dark);">清空聊天记录？<br><span style="font-size:12px;color:var(--text-medium);">此操作不可撤销</span></p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn-sm btn-ghost" id="cancelClear">取消</button><button class="btn-sm btn-pink" id="confirmClear">确认清空</button></div>'; overlay.appendChild(card); document.body.appendChild(overlay); overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); }); card.querySelector('#cancelClear').addEventListener('click', () => overlay.remove()); card.querySelector('#confirmClear').addEventListener('click', () => { chatHistory = []; saveHistory(); messagesArea.querySelectorAll('.msg-row,.date-divider,.typing-indicator,.storage-warning-bubble').forEach(e => e.remove()); removeTyping(); emptyState.style.display = 'flex'; storageWarningShown = false; toast('聊天记录已清空'); overlay.remove(); }); }
+        function clearHistory() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '140'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:18px;width:280px;padding:24px;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.16);'; if (darkMode) card.style.background = '#2a2c34'; card.innerHTML = '<p style="margin:0 0 20px;font-size:15px;color:var(--text-dark);">清空聊天记录？<br><span style="font-size:12px;color:var(--text-medium);">此操作不可撤销</span></p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn-sm btn-ghost" id="cancelClear">取消</button><button class="btn-sm btn-pink" id="confirmClear">确认清空</button></div>'; overlay.appendChild(card); document.body.appendChild(overlay); overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); }); card.querySelector('#cancelClear').addEventListener('click', () => overlay.remove()); card.querySelector('#confirmClear').addEventListener('click', () => { chatHistory = []; saveHistory(); messagesArea.querySelectorAll('.msg-row,.date-divider,.typing-indicator').forEach(e => e.remove()); removeTyping(); emptyState.style.display = 'flex'; toast('聊天记录已清空'); overlay.remove(); }); }
 
         function handleAvatarUpload(input, preview, isLover) { const f = input.files[0]; if (!f) return; compressImage(f, 200, 0.75, b64 => { if (isLover) { loverAvatar = b64; headerAvatarImg.src = b64; } else userAvatar = b64;
                     preview.src = b64; dirty(); refreshAvatars(); }); input.value = ''; }
@@ -7018,10 +7039,180 @@ function _doScrollToMsg(targetId) {
             btnImportAll.addEventListener('click', importAllData);
             btnDeleteAllChat.addEventListener('click', handleDeleteAllChat);
             btnDeleteAllData.addEventListener('click', handleDeleteAllData);
+            // 信箱导出
+            dmMailTabSend.addEventListener('click', () => { dmMailTabSend.classList.add('active'); dmMailTabReceive.classList.remove('active'); dmMailExportMode = 'send'; dmMailSelectedDates.clear(); updateDmMailCalendar(); });
+            dmMailTabReceive.addEventListener('click', () => { dmMailTabReceive.classList.add('active'); dmMailTabSend.classList.remove('active'); dmMailExportMode = 'receive'; dmMailSelectedDates.clear(); updateDmMailCalendar(); });
+            dmMailPrevMonth.addEventListener('click', () => { dmMailMonthOffset--; dmMailSelectedDates.clear(); updateDmMailCalendar(); });
+            dmMailNextMonth.addEventListener('click', () => { dmMailMonthOffset++; dmMailSelectedDates.clear(); updateDmMailCalendar(); });
+            btnDmMailExportAllSend.addEventListener('click', () => dmExportAllLetters('send'));
+            btnDmMailExportAllReceive.addEventListener('click', () => dmExportAllLetters('receive'));
+            btnDmMailExportSelected.addEventListener('click', dmExportSelectedLetters);
+            // 字卡导出导入
+            btnDmWordcardExport.addEventListener('click', dmExportWordcards);
+            btnDmWordcardImport.addEventListener('click', () => wordcardImportFileInput.click());
+            wordcardImportFileInput.addEventListener('change', dmImportWordcards);
 
-        function handleDeleteAllChat() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '140'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:18px;width:300px;padding:24px;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.16);'; if (darkMode) card.style.background = '#2a2c34'; const cnt = chatHistory.length; card.innerHTML = '<p style="margin:0 0 6px;font-size:15px;color:var(--text-dark);">删除全部聊天记录？</p><p style="margin:0 0 18px;font-size:12px;color:var(--text-medium);">当前共 ' + cnt + ' 条消息，操作不可撤销<br>建议先导出聊天记录再删除</p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn-sm btn-ghost" id="cancelDelChat">取消</button><button class="btn-sm btn-pink" id="confirmDelChat" style="background:#d47878;">确认删除</button></div>'; overlay.appendChild(card); document.body.appendChild(overlay); overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); }); card.querySelector('#cancelDelChat').addEventListener('click', () => overlay.remove()); card.querySelector('#confirmDelChat').addEventListener('click', () => { chatHistory = []; saveHistory(); messagesArea.querySelectorAll('.msg-row,.date-divider,.typing-indicator,.storage-warning-bubble').forEach(e => e.remove()); removeTyping(); emptyState.style.display = 'flex'; storageWarningShown = false; toast('已删除全部聊天记录'); overlay.remove(); }); }
+        function handleDeleteAllChat() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '140'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:18px;width:300px;padding:24px;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.16);'; if (darkMode) card.style.background = '#2a2c34'; const cnt = chatHistory.length; card.innerHTML = '<p style="margin:0 0 6px;font-size:15px;color:var(--text-dark);">删除全部聊天记录？</p><p style="margin:0 0 18px;font-size:12px;color:var(--text-medium);">当前共 ' + cnt + ' 条消息，操作不可撤销<br>建议先导出聊天记录再删除</p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn-sm btn-ghost" id="cancelDelChat">取消</button><button class="btn-sm btn-pink" id="confirmDelChat" style="background:#d47878;">确认删除</button></div>'; overlay.appendChild(card); document.body.appendChild(overlay); overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); }); card.querySelector('#cancelDelChat').addEventListener('click', () => overlay.remove()); card.querySelector('#confirmDelChat').addEventListener('click', () => { chatHistory = []; saveHistory(); messagesArea.querySelectorAll('.msg-row,.date-divider,.typing-indicator').forEach(e => e.remove()); removeTyping(); emptyState.style.display = 'flex'; toast('已删除全部聊天记录'); overlay.remove(); }); }
 
         function handleDeleteAllData() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '140'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:18px;width:300px;padding:24px;text-align:center;box-shadow:0 16px 48px rgba(0,0,0,0.16);'; if (darkMode) card.style.background = '#2a2c34'; card.innerHTML = '<p style="margin:0 0 6px;font-size:15px;color:var(--text-dark);">删除全部数据并恢复出厂？</p><p style="margin:0 0 18px;font-size:12px;color:var(--text-medium);">将清空所有聊天记录、词库、表情包、设置等<br>操作不可撤销，强烈建议先导出备份</p><div style="display:flex;gap:10px;justify-content:center;"><button class="btn-sm btn-ghost" id="cancelDelAll">取消</button><button class="btn-sm btn-pink" id="confirmDelAll" style="background:#d47878;">确认恢复出厂</button></div>'; overlay.appendChild(card); document.body.appendChild(overlay); overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); }); card.querySelector('#cancelDelAll').addEventListener('click', () => overlay.remove()); card.querySelector('#confirmDelAll').addEventListener('click', () => { try { Object.keys(localStorage).forEach(k => { if (k.startsWith('pc_') || k === 'pc_used_signs' || k === 'pc_used_status') localStorage.removeItem(k); }); } catch (e) {} toast('已恢复出厂设置，页面将刷新'); setTimeout(() => location.reload(), 800); overlay.remove(); }); }
+
+        /* ===== 信箱导出功能 ===== */
+        function getLetterDataForMode(mode) { return mode === 'send' ? letterSendHistory : letterReceiveHistory; }
+        function getLetterDatesForMode(mode) { const data = getLetterDataForMode(mode); const set = new Set(); data.forEach(entry => { const d = new Date(entry.time); set.add(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')); }); return set; }
+        function getSendDates() { const set = new Set(); letterSendHistory.forEach(entry => { const d = new Date(entry.time); set.add(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')); }); return set; }
+        function getReceiveDates() { const set = new Set(); letterReceiveHistory.forEach(entry => { const d = new Date(entry.time); set.add(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0')); }); return set; }
+
+        function updateDmMailCalendar() {
+            const now = new Date(); const year = now.getFullYear(); const month = now.getMonth() + dmMailMonthOffset;
+            const displayMonth = month < 0 ? (month % 12 + 12) % 12 : month % 12;
+            const displayYear = year + Math.floor(month / 12);
+            const actualMonth = displayMonth, actualYear = displayYear;
+            dmMailMonthTitle.textContent = actualYear + '年 ' + (actualMonth + 1) + '月';
+            const firstDay = new Date(actualYear, actualMonth, 1).getDay();
+            const daysInMonth = new Date(actualYear, actualMonth + 1, 0).getDate();
+            const prevMonthDays = new Date(actualYear, actualMonth, 0).getDate();
+            const sendDates = getSendDates(), receiveDates = getReceiveDates();
+            const todayStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+
+            dmMailDaysGrid.innerHTML = '';
+            // 前月填充
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = prevMonthDays - i; const d = new Date(actualYear, actualMonth - 1, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                const cell = createDmMailDayCell(day, ds, false, sendDates, receiveDates, todayStr); cell.classList.add('other-month');
+                dmMailDaysGrid.appendChild(cell);
+            }
+            // 本月
+            for (let day = 1; day <= daysInMonth; day++) {
+                const d = new Date(actualYear, actualMonth, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                dmMailDaysGrid.appendChild(createDmMailDayCell(day, ds, true, sendDates, receiveDates, todayStr));
+            }
+            // 后月填充
+            const remaining = 42 - (firstDay + daysInMonth);
+            for (let day = 1; day <= remaining; day++) {
+                const d = new Date(actualYear, actualMonth + 1, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                const cell = createDmMailDayCell(day, ds, false, sendDates, receiveDates, todayStr); cell.classList.add('other-month');
+                dmMailDaysGrid.appendChild(cell);
+            }
+            updateDmMailSelectedUI();
+        }
+
+        function createDmMailDayCell(day, dateStr, isCurrentMonth, sendDates, receiveDates, todayStr) {
+            const cell = document.createElement('div'); cell.className = 'dm-mail-day-cell';
+            if (dateStr === todayStr) cell.classList.add('today');
+            const hasSend = sendDates.has(dateStr), hasReceive = receiveDates.has(dateStr);
+            if (hasSend && hasReceive) cell.classList.add('has-both');
+            else if (hasSend) cell.classList.add('has-send');
+            else if (hasReceive) cell.classList.add('has-receive');
+            if (dmMailSelectedDates.has(dateStr)) cell.classList.add('selected');
+            cell.textContent = day;
+            // 添加圆点指示
+            if (hasSend) { const dot = document.createElement('span'); dot.className = 'dm-mail-day-dot send'; cell.appendChild(dot); }
+            if (hasReceive) { const dot = document.createElement('span'); dot.className = 'dm-mail-day-dot receive'; cell.appendChild(dot); }
+            if (isCurrentMonth) {
+                cell.addEventListener('click', () => {
+                    if (dmMailSelectedDates.has(dateStr)) { dmMailSelectedDates.delete(dateStr); }
+                    else { dmMailSelectedDates.add(dateStr); }
+                    updateDmMailCalendar();
+                });
+            }
+            return cell;
+        }
+
+        function updateDmMailSelectedUI() {
+            if (dmMailSelectedDates.size === 0) { dmMailSelected.style.display = 'none'; return; }
+            dmMailSelected.style.display = 'flex';
+            const sorted = [...dmMailSelectedDates].sort();
+            dmMailSelectedText.textContent = '已选 ' + dmMailSelectedDates.size + ' 天：' + sorted.join(', ');
+        }
+
+        function dmExportAllLetters(mode) {
+            const data = getLetterDataForMode(mode);
+            if (!data.length) { toast('没有可导出的信件'); return; }
+            const exportData = data.map(entry => ({ id: entry.id, content: entry.content, time: entry.time, date: fdate(new Date(entry.time)) + ' ' + ftime(new Date(entry.time)), read: entry.read }));
+            const label = mode === 'send' ? '投递的信' : '回信';
+            downloadJson(exportData, '信箱_' + label + '_' + new Date().toISOString().slice(0,10) + '.json');
+            toast(label + '已导出（共 ' + data.length + ' 封）');
+        }
+
+        function dmExportSelectedLetters() {
+            if (dmMailSelectedDates.size === 0) { toast('请先在月历中选择日期'); return; }
+            const mode = dmMailExportMode; const data = getLetterDataForMode(mode);
+            const selected = data.filter(entry => {
+                const d = new Date(entry.time); return dmMailSelectedDates.has(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'));
+            });
+            if (!selected.length) { toast('选中日期内没有信件'); return; }
+            const exportData = selected.map(entry => ({ id: entry.id, content: entry.content, time: entry.time, date: fdate(new Date(entry.time)) + ' ' + ftime(new Date(entry.time)), read: entry.read }));
+            const label = mode === 'send' ? '投递的信' : '回信';
+            downloadJson(exportData, '信箱_' + label + '_' + [...dmMailSelectedDates].sort().join('_') + '.json');
+            toast(label + '已导出（共 ' + selected.length + ' 封）');
+        }
+
+        function downloadJson(data, filename) { const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); }
+
+        /* ===== 字卡导出导入功能 ===== */
+        function renderDmWordcardGroups() {
+            dmWordcardGroupList.innerHTML = '';
+            wordBankGroups.forEach((group, idx) => {
+                const row = document.createElement('div'); row.className = 'dm-wordcard-group-row';
+                const label = document.createElement('label');
+                const cb = document.createElement('input'); cb.type = 'checkbox'; cb.value = idx; cb.checked = true; cb.dataset.idx = idx;
+                label.appendChild(cb);
+                label.appendChild(document.createTextNode(group.name + '（' + (group.items ? group.items.length : 0) + ' 张）'));
+                row.appendChild(label);
+                dmWordcardGroupList.appendChild(row);
+            });
+        }
+
+        function dmExportWordcards() {
+            const checkboxes = dmWordcardGroupList.querySelectorAll('input[type="checkbox"]:checked');
+            if (!checkboxes.length) { toast('请至少选择一个分组'); return; }
+            const exportData = { version: '1.0', type: 'wordcard', exportedAt: new Date().toISOString(), groups: [] };
+            checkboxes.forEach(cb => {
+                const idx = parseInt(cb.dataset.idx);
+                if (idx >= 0 && idx < wordBankGroups.length) {
+                    exportData.groups.push({ name: wordBankGroups[idx].name, items: [...(wordBankGroups[idx].items || [])] });
+                }
+            });
+            downloadJson(exportData, '字卡库_' + new Date().toISOString().slice(0,10) + '.json');
+            toast('字卡已导出（共 ' + exportData.groups.length + ' 个分组）');
+        }
+
+        function dmImportWordcards(e) {
+            const file = e.target.files[0]; if (!file) return;
+            const reader = new FileReader();
+            reader.onload = function(ev) {
+                try {
+                    const data = JSON.parse(ev.target.result);
+                    if (data.type !== 'wordcard' || !data.groups || !Array.isArray(data.groups)) { toast('无效的字卡库文件'); return; }
+                    let importedGroups = 0, importedWords = 0;
+                    data.groups.forEach(importedGroup => {
+                        const items = importedGroup.items || importedGroup.words || [];
+                        let existing = wordBankGroups.find(g => g.name === importedGroup.name);
+                        if (existing) {
+                            const existingItems = existing.items || [];
+                            const existingSet = new Set(existingItems.map(w => w.trim().toLowerCase()));
+                            items.forEach(w => { if (!existingSet.has(w.trim().toLowerCase())) { existingItems.push(w); importedWords++; } });
+                            existing.items = existingItems;
+                        } else {
+                            wordBankGroups.push({ name: importedGroup.name, items: [...items], collapsed: true });
+                            importedWords += items.length;
+                        }
+                        importedGroups++;
+                    });
+                    saveWordBankGroups();
+                    renderDmWordcardGroups();
+                    if (typeof updateWordbankUI === 'function') updateWordbankUI();
+                    toast('已导入 ' + importedGroups + ' 个分组，共 ' + importedWords + ' 张新字卡');
+                } catch (err) { toast('文件解析失败：' + err.message); }
+            };
+            reader.readAsText(file);
+            e.target.value = '';
+        }
+
+        function updateDmMailCalendarOnOpen() { dmMailMonthOffset = 0; dmMailSelectedDates.clear(); updateDmMailCalendar(); renderDmWordcardGroups(); }
 
         function openNewLetterCompose() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '130'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:22px;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,0.16);overflow:hidden;'; if (darkMode) card.style.background = '#282a32'; card.innerHTML = `<div class="modal-header"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 写一封信</h3><button class="btn-close-modal" id="cancelCompose">✕</button></div><div class="modal-body" style="flex:1;overflow-y:auto;padding:14px 18px 18px;display:flex;flex-direction:column;gap:14px;"><textarea class="letter-textarea" id="composeTextarea" placeholder="在这里写下你想说的话……" style="min-height:220px;"></textarea><button class="btn-sm btn-pink letter-send-btn" id="sendLetterBtn">✉️ 投递</button></div>`; overlay.appendChild(card); document.body.appendChild(overlay); const cancel = card.querySelector('#cancelCompose'); const sendBtn = card.querySelector('#sendLetterBtn'); const textarea = card.querySelector('#composeTextarea'); const closeOverlay = () => { overlay.remove(); }; cancel.addEventListener('click', closeOverlay); overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); }); sendBtn.addEventListener('click', () => { const content = textarea.value.trim(); if (!content) { toast('请写点什么再投递吧'); return; } letterSendHistory.push({ id: Date.now(), content, time: Date.now() }); const delayMs = 28800000 + Math.floor(Math.random() * 57600000); const replyTime = Date.now() + delayMs; pendingReplies.push({ id: Date.now(), sendId: letterSendHistory[letterSendHistory.length - 1].id, replyTime }); saveLetterData(); closeOverlay(); renderSendLetters(); toast('✉️ 信已投递，对方将在8-24小时内回信'); }); textarea.focus(); }
 
@@ -7344,11 +7535,10 @@ function escapeHtml(str) {
             callLastSuccess = isSuccess;
             callFailPattern = CALL_FAIL_PATTERNS[Math.floor(Math.random() * CALL_FAIL_PATTERNS.length)];
 
-            // 三段：1) 横向线条从无到有延伸 2) 汇聚后顶端往上走 3) 左右各绘制半边图案
+            // 两段：1) 横向线条从无到有延伸 2) 交汇后立即向上绘制图案
             const seg1 = (Number(callConfig.lineDuration) || 3) * 1000;
-            const seg2 = Math.min(1500, seg1 * 0.4); // 汇聚上走
             const seg3 = (Number(callConfig.patternDuration) || 4) * 1000;
-            const total = seg1 + seg2 + seg3;
+            const total = seg1 + seg3;
             const startT = performance.now();
             callPhase = 'line';
 
@@ -7364,9 +7554,9 @@ function escapeHtml(str) {
                 const centerX = w / 2;
                 const lineW = Math.min(3, Math.max(2, Math.round(w / 180)));
                 const lineColor = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
-                // 汇聚后顶部走的高度
+                // 向上绘制的高度
                 const stemH = Math.max(40, h * 0.22);
-                // 图案基准点：垂直线底部（midY）
+                // 图案基准点：交汇点（midY）
                 const patternBaseY = midY;
                 // 图案尺寸
                 const heartSize = Math.min(h * 0.62, w * 0.4);
@@ -7386,29 +7576,23 @@ function escapeHtml(str) {
                     ctx.moveTo(0, midY); ctx.lineTo(leftEndX, midY);
                     ctx.moveTo(w, midY); ctx.lineTo(rightEndX, midY);
                     ctx.stroke();
-                } else if (elapsed < seg1 + seg2) {
-                    // 段2：汇聚后顶端往上走 —— 两线已抵达中心，向上绘制一条竖直短线
-                    callPhase = 'stem';
-                    const t = easeInOutCubic((elapsed - seg1) / seg2);
-                    const stemY = midY - t * stemH;
+                } else {
+                    // 段2：交汇后立即向上绘制图案 —— 竖线+图案同时从交汇点向上展开
+                    callPhase = 'pattern';
+                    const patT = easeInOutCubic(Math.min(1, (elapsed - seg1) / seg3));
+                    // 先画两条横线（已完成交汇）
                     ctx.beginPath();
                     ctx.moveTo(0, midY); ctx.lineTo(centerX, midY);
                     ctx.moveTo(w, midY); ctx.lineTo(centerX, midY);
+                    ctx.stroke();
+                    // 竖线从交汇点向上生长
+                    const stemY = midY - patT * stemH;
+                    ctx.beginPath();
                     ctx.moveTo(centerX, midY); ctx.lineTo(centerX, stemY);
                     ctx.stroke();
-                } else {
-                    // 段3：左右各绘制半边图案，从顶端向下/向外展开
-                    callPhase = 'pattern';
-                    const patT = easeInOutCubic(Math.min(1, (elapsed - seg1 - seg2) / seg3));
-                    // 先画两条横线 + 竖直短线
-                    ctx.beginPath();
-                    ctx.moveTo(0, midY); ctx.lineTo(centerX, midY);
-                    ctx.moveTo(w, midY); ctx.lineTo(centerX, midY);
-                    ctx.moveTo(centerX, midY); ctx.lineTo(centerX, midY - stemH);
-                    ctx.stroke();
-                    // 画半边图案（从顶端 stemY 往下展开）
-                    drawHalfPattern(ctx, 'right', centerX, midY - stemH, heartSize, patT, isSuccess);
-                    drawHalfPattern(ctx, 'left', centerX, midY - stemH, heartSize, patT, isSuccess);
+                    // 图案从竖线顶端向下展开（尖端朝下为正）
+                    drawHalfPattern(ctx, 'right', centerX, stemY, heartSize, patT, isSuccess);
+                    drawHalfPattern(ctx, 'left', centerX, stemY, heartSize, patT, isSuccess);
 
                     if (elapsed >= total) {
                         callPhase = 'showing';
@@ -7675,7 +7859,7 @@ function escapeHtml(str) {
         });
 
         function init() { loadSettings(); loadCallConfig(); if (keepAliveEnabled) startKeepAlive(); applyAllColors(); applyUI(); updateDarkModeIcon(); processPendingReplies(); renderHistory(); emptyState.style.display = chatHistory.length ? 'none' : 'flex'; scheduleActive(); checkMissed(); checkMissedNotification(); checkDailySignAuto(); checkLetterNotify();
-            messageInput.focus(); initDmExportOptions(); checkStatusChangeOnInit(); updateStatusUI(); if (importantDays.length > 0 && !importantDays.find(d => d.id === imdSelectedId)) imdSelectedId = importantDays[0].id; else if (importantDays.length === 0) imdSelectedId = null; updateImdBgDots(); applyImdTopBg(); checkStorageWarning(); }
+            messageInput.focus(); initDmExportOptions(); checkStatusChangeOnInit(); updateStatusUI(); if (importantDays.length > 0 && !importantDays.find(d => d.id === imdSelectedId)) imdSelectedId = importantDays[0].id; else if (importantDays.length === 0) imdSelectedId = null; updateImdBgDots(); applyImdTopBg(); }
         init();
     })();
 </script>
