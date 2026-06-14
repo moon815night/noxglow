@@ -1173,7 +1173,7 @@
         body.dark-mode .msg-context-menu-divider {
             background: #383a44;
         }
-        /* ===== 致电顾时夜 全屏功能页 ===== */
+        /* ===== 一一 全屏功能页 ===== */
         .call-overlay {
             position: fixed; inset: 0; z-index: 300;
             display: flex; align-items: center; justify-content: center;
@@ -4284,6 +4284,22 @@
             .msg-history-item-text {
                 font-size: 13px;
             }
+            /* 拍一拍页面移动端适配 */
+            .pat-tab-btn { padding: 8px 10px; font-size: 12px; }
+            .pat-list { max-height: 140px; }
+            .pat-item { padding: 6px 10px; font-size: 12px; }
+            .pat-preview-box { padding: 8px 10px; }
+            .pat-preview-box .pat-preview-label { font-size: 11px; }
+            .pat-preview-box .pat-preview-text { font-size: 13px; }
+            #patpatPage .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+            #patpatPage .batch-import-textarea { font-size: 12px; padding: 7px 10px 7px 30px; }
+            #patpatPage .batch-import-wrapper svg { top: 16px; width: 14px; height: 14px; }
+            #patpatPage .wordbank-add-row { gap: 6px; }
+            #patpatPage .wordbank-add-row .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+            #patpatPage .wordbank-add-row input { font-size: 12px; padding: 6px 10px; }
+            #patpatPage .wordbank-search { font-size: 12px; }
+            #patpatPage .wordbank-count { font-size: 11px; }
+            #patpatPage .section-label { font-size: 13px; }
         }
         .msg-stats-grid {
             display: grid;
@@ -4657,7 +4673,7 @@ body.dark-mode .user-letter-content .letter-body p {
         <div class="daily-sign-overlay" id="dailySignOverlay" style="display:none;"><div class="daily-sign-card" id="dailySignCard"></div></div>
     </div>
 
-    <!-- 致电顾时夜 全屏功能页 -->
+    <!-- 一一 全屏功能页 -->
     <div class="call-overlay" id="callOverlay" style="display:none;">
         <button class="call-exit-btn" id="callExitBtn" title="退出">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -4665,7 +4681,7 @@ body.dark-mode .user-letter-content .letter-body p {
         <!-- 初始状态：致电按钮 -->
         <div class="call-stage call-stage-initial" id="callInitialStage">
             <button class="call-cta-btn" id="callStartBtn">
-                <span>致电顾时夜</span>
+                <span>一一</span>
             </button>
         </div>
         <!-- 拨号/动画/结果 阶段：手机外框 -->
@@ -4674,7 +4690,7 @@ body.dark-mode .user-letter-content .letter-body p {
                 <div class="call-phone-notch"></div>
                 <div class="call-phone-screen" id="callPhoneScreen">
                     <div class="call-phone-top">
-                        <span class="call-phone-name" id="callPhoneName">顾时夜</span>
+                        <span class="call-phone-name" id="callPhoneName">一一</span>
                     </div>
                     <div class="call-canvas-wrapper" id="callCanvasWrapper">
                         <canvas id="callCanvas" width="600" height="300"></canvas>
@@ -4755,7 +4771,7 @@ body.dark-mode .user-letter-content .letter-body p {
                         </div>
                         <div class="feature-card" data-subpage="call" id="featureCardCall" style="aspect-ratio:1/1.2;">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
-                            <span class="card-text">致电顾时夜</span>
+                            <span class="card-text">一一</span>
                         </div>
                     </div>
                 </div>
@@ -4856,7 +4872,7 @@ body.dark-mode .user-letter-content .letter-body p {
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>通知设置</div><div class="reply-strategy-row" style="align-items:center;"><span>浏览器通知</span><button class="btn-sm" id="btnEnableNotifications" style="padding:6px 12px;">启用通知</button><span id="notificationStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;"></span></div></div>
                             <div class="reply-strategy-group"><div class="reply-strategy-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/></svg>后台保活</div><div class="reply-strategy-row" style="align-items:center;"><span>循环播放音频</span><button class="btn-sm" id="btnToggleKeepAlive" style="padding:6px 12px;">开启</button><span id="keepAliveStatus" style="font-size:11px;color:#b0a6b4;margin-left:4px;">已关闭</span></div></div>
                         </div></div>
-                        <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 致电顾时夜（功能配置）</span><div class="call-settings-scroll"><div class="call-settings-page"><div class="call-settings-page-title">① 基础 · 概率 · 时长</div><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>背景类型<select id="callCfgBgType"><option value="color">纯色</option><option value="image">图片</option></select></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">② 文案</div><div class="call-settings-grid" style="grid-template-columns:1fr;"><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">③ 背景设置</div><div class="call-settings-row"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload"><span style="font-size:12.5px;color:var(--text-medium);min-width:110px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="dm-info-text" style="margin-top:6px;">背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div><div class="call-settings-page"><div class="call-settings-page-title">④ 颜色配置</div><div class="call-settings-row"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:14px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div></div></div><div class="dm-info-text" style="margin-top:6px;">← 左右滑动查看全部配置项（4 页）</div></div>
+                        <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 一一（功能配置）</span><div class="call-settings-scroll"><div class="call-settings-page"><div class="call-settings-page-title">① 基础 · 概率 · 时长</div><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>背景类型<select id="callCfgBgType"><option value="color">纯色</option><option value="image">图片</option></select></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">② 文案</div><div class="call-settings-grid" style="grid-template-columns:1fr;"><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">③ 背景设置</div><div class="call-settings-row"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload"><span style="font-size:12.5px;color:var(--text-medium);min-width:110px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="dm-info-text" style="margin-top:6px;">背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div><div class="call-settings-page"><div class="call-settings-page-title">④ 颜色配置</div><div class="call-settings-row"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:14px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div></div></div><div class="dm-info-text" style="margin-top:6px;">← 左右滑动查看全部配置项（4 页）</div></div>
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
                 <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><span id="patResetUserWrapper"><button class="btn-sm btn-pink" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button></span><span id="patResetLoverWrapper" style="display:none;"><button class="btn-sm btn-pink" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></span><button class="btn-sm btn-pink" id="btnPatExportTxt"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导出 (TXT)</button></div></div></div>
                 <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
@@ -5753,7 +5769,7 @@ function _doScrollToMsg(targetId) {
 
         function renderStickerGridSplit(grid, bank) { grid.innerHTML = ''; grid.style.flexDirection = 'column'; grid.style.gap = '0px'; grid.style.maxHeight = '240px'; if (!bank.length) { grid.innerHTML = '<div class="sticker-empty">空空的</div>'; return; } const wrapper = document.createElement('div'); wrapper.className = 'sticker-section-wrapper'; const sorted = bank.slice().sort((a, b) => (stickerUsage[b] || 0) - (stickerUsage[a] || 0)); const top20 = sorted.slice(0, 20); const commonLabel = document.createElement('div'); commonLabel.className = 'sticker-section-label'; commonLabel.textContent = '常用表情'; wrapper.appendChild(commonLabel); const commonGrid = document.createElement('div'); commonGrid.className = 'sticker-section-grid'; top20.forEach(b64 => { const item = createStickerItem(b64, bank); commonGrid.appendChild(item); }); wrapper.appendChild(commonGrid); const divider = document.createElement('div'); divider.className = 'sticker-section-divider'; wrapper.appendChild(divider); const allLabel = document.createElement('div'); allLabel.className = 'sticker-section-label'; const allLabelText = document.createElement('span'); allLabelText.textContent = '全部表情 (' + bank.length + ')'; const toggleBtn = document.createElement('button'); toggleBtn.className = 'sticker-section-toggle'; toggleBtn.textContent = '展开'; allLabel.appendChild(allLabelText); allLabel.appendChild(toggleBtn); wrapper.appendChild(allLabel); const allCollapsed = document.createElement('div'); allCollapsed.className = 'sticker-section-collapsed'; const allGrid = document.createElement('div'); allGrid.className = 'sticker-section-grid'; bank.forEach(b64 => { const item = createStickerItem(b64, bank); allGrid.appendChild(item); }); allCollapsed.appendChild(allGrid); wrapper.appendChild(allCollapsed); toggleBtn.addEventListener('click', () => { const collapsed = allCollapsed.classList.contains('show'); if (collapsed) { allCollapsed.classList.remove('show'); toggleBtn.textContent = '展开'; grid.style.maxHeight = '240px'; } else { allCollapsed.classList.add('show'); toggleBtn.textContent = '收起'; grid.style.maxHeight = '450px'; } }); grid.appendChild(wrapper); }
 
-        function createStickerItem(b64, bank) { const item = document.createElement('div'); item.className = 'sticker-item'; if (stickerBatchMode) { item.classList.add('batch-mode'); if (stickerBatchSelected.has(b64)) item.classList.add('batch-selected'); const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'sticker-batch-checkbox'; cb.checked = stickerBatchSelected.has(b64); cb.addEventListener('change', () => { if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); item.appendChild(cb); item.addEventListener('click', (e) => { if (e.target === cb) return; cb.checked = !cb.checked; if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); } else { const img = document.createElement('img'); img.src = b64; item.appendChild(img); item.addEventListener('click', () => { sendSticker(b64); closeStickerPanel(); }); } return item; }
+        function createStickerItem(b64, bank) { const item = document.createElement('div'); item.className = 'sticker-item'; if (stickerBatchMode) { item.classList.add('batch-mode'); if (stickerBatchSelected.has(b64)) item.classList.add('batch-selected'); const img = document.createElement('img'); img.src = b64; img.style.pointerEvents = 'none'; item.appendChild(img); const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'sticker-batch-checkbox'; cb.checked = stickerBatchSelected.has(b64); cb.addEventListener('change', () => { if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); item.appendChild(cb); item.addEventListener('click', (e) => { if (e.target === cb) return; cb.checked = !cb.checked; if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); } else { const img = document.createElement('img'); img.src = b64; item.appendChild(img); item.addEventListener('click', () => { sendSticker(b64); closeStickerPanel(); }); } return item; }
 
         function toggleStickerBatchMode() {
             if (stickerPanelTab === 'pat') return;
@@ -6056,7 +6072,7 @@ function _doScrollToMsg(targetId) {
                 btnEnableNotifEl.textContent = '启用通知';
             } fillCallCfgUI(); }
 
-        // ============== 致电顾时夜 设置表单 ==============
+        // ============== 一一 设置表单 ==============
         const callCfgName = $('callCfgName');
         const callCfgSuccessRate = $('callCfgSuccessRate');
         const callCfgLineDur = $('callCfgLineDur');
@@ -6090,7 +6106,7 @@ function _doScrollToMsg(targetId) {
             callCfgFailColor.value = callConfig.failColor;
         }
         function readCallCfgUI() {
-            callConfig.contactName = (callCfgName.value || '').trim() || '顾时夜';
+            callConfig.contactName = (callCfgName.value || '').trim() || '一一';
             callConfig.successRate = Math.max(0, Math.min(100, parseInt(callCfgSuccessRate.value) || 50));
             callConfig.lineDuration = Math.max(0.5, parseFloat(callCfgLineDur.value) || 3);
             callConfig.patternDuration = Math.max(1, parseFloat(callCfgPatDur.value) || 4);
@@ -6103,7 +6119,7 @@ function _doScrollToMsg(targetId) {
             callConfig.successColor = callCfgSuccessColor.value || DEFAULT_CALL_CONFIG.successColor;
             callConfig.failColor = callCfgFailColor.value || DEFAULT_CALL_CONFIG.failColor;
         }
-        if (btnSaveCallCfg) btnSaveCallCfg.addEventListener('click', () => { readCallCfgUI(); saveCallConfig(); toast('已保存「致电顾时夜」配置'); });
+        if (btnSaveCallCfg) btnSaveCallCfg.addEventListener('click', () => { readCallCfgUI(); saveCallConfig(); toast('已保存「一一」配置'); });
         if (btnResetCallCfg) btnResetCallCfg.addEventListener('click', () => { callConfig = { ...DEFAULT_CALL_CONFIG }; saveCallConfig(); fillCallCfgUI(); toast('已恢复默认配置'); });
         if (callCfgBgImage) callCfgBgImage.addEventListener('change', (e) => {
             const f = e.target.files && e.target.files[0];
@@ -7722,11 +7738,11 @@ function escapeHtml(str) {
             imdTopEditBtn.addEventListener('click', () => { const entry = importantDays.find(d => d.id === imdSelectedId); if (entry) openImdEditor(entry); });
 
         /* =======================================================
-         * 致电顾时夜 功能模块
+         * 一一 功能模块
          * ======================================================= */
         // 默认配置（提供全局配置对象 callConfig，包含背景、颜色、概率、时长、文案等）
         const DEFAULT_CALL_CONFIG = {
-            contactName: '顾时夜',
+            contactName: '一一',
             // 背景：type=color|image；color 模式用 bgColor；image 模式用 bgImage
             bgType: 'color',
             bgColor: '#1a1c20',
@@ -7779,7 +7795,7 @@ function escapeHtml(str) {
         // 进入/退出功能页
         function openCallPage() {
             loadCallConfig();
-            callPhoneName.textContent = callConfig.contactName || '顾时夜';
+            callPhoneName.textContent = callConfig.contactName || '一一';
             applyCallBg();
             resetCallToInitial();
             callOverlay.style.display = 'flex';
@@ -7825,7 +7841,7 @@ function escapeHtml(str) {
             if (callCountdownRAF) { cancelAnimationFrame(callCountdownRAF); callCountdownRAF = null; }
         }
 
-        // 点击「致电顾时夜」按钮
+        // 点击「一一」按钮
         callCtaBtn.addEventListener('click', () => {
             callCtaBtn.classList.add('fade-out');
             setTimeout(() => {
@@ -7968,8 +7984,8 @@ function escapeHtml(str) {
                 const hx = 16 * Math.pow(Math.sin(a), 3);
                 const hy = 13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a);
                 const px = cx + hx * sx;
-                // 尖端朝下：t=0时hy=5→尖端在cy；t=π时hy=-17→V在cy上方
-                const py = cy + (hy - 5) * sy;
+                // 尖端朝上：t=0时hy=5→尖端在cy上方；t=π时hy=-17→V在cy
+                const py = cy - (hy - 5) * sy;
                 if (first) { ctx.moveTo(px, py); first = false; } else { ctx.lineTo(px, py); }
             }
             ctx.stroke();
