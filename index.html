@@ -619,6 +619,12 @@
             stroke-linecap: round;
             stroke-linejoin: round;
         }
+        body.dark-mode .empty-chat {
+            color: #7a7d88;
+        }
+        body.dark-mode .empty-illustration svg {
+            stroke: #7a7d88;
+        }
         .typing-indicator {
             align-self: flex-start;
             display: flex;
@@ -820,6 +826,15 @@
             border-color: #f9c8d0;
             color: #5e444b;
         }
+        body.dark-mode .sticker-tab-btn:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .sticker-tab-btn.active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+            color: #f0c8d4;
+        }
         .sticker-grid {
             display: flex;
             flex-wrap: wrap;
@@ -860,6 +875,12 @@
             object-fit: contain;
             background: #fefafb;
         }
+        body.dark-mode .sticker-item img {
+            background: #2a2c34;
+        }
+        body.dark-mode .sticker-item:hover {
+            border-color: #8a5a6a;
+        }
         .sticker-item .del-sticker {
             position: absolute;
             top: -2px;
@@ -881,6 +902,15 @@
             background: #ffe0e0;
             color: #b05050;
         }
+        body.dark-mode .sticker-item .del-sticker {
+            background: rgba(40, 42, 50, 0.9);
+            border-color: #3a3c46;
+            color: #d8a0a0;
+        }
+        body.dark-mode .sticker-item .del-sticker:hover {
+            background: #4a3838;
+            color: #e8b0b0;
+        }
         .sticker-panel-footer {
             display: flex;
             gap: 8px;
@@ -898,6 +928,70 @@
             font-family: var(--font);
             transition: var(--transition);
         }
+        .sticker-hint {
+            font-size: 11px;
+            color: #b0a6b4;
+            text-align: center;
+            margin-top: 4px;
+        }
+        body.dark-mode .sticker-hint {
+            color: #6a6d78;
+        }
+        .sticker-batch-checkbox {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            z-index: 5;
+            accent-color: #d47878;
+        }
+        .sticker-item.batch-mode {
+            border-color: #e8dde1;
+        }
+        .sticker-item.batch-selected {
+            border-color: #d47878 !important;
+            background: rgba(212, 120, 120, 0.08);
+        }
+        .sticker-item.batch-mode .del-sticker {
+            display: none;
+        }
+        .sticker-item.batch-mode img {
+            pointer-events: none;
+        }
+        .sticker-batch-actions {
+            display: none;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 6px;
+        }
+        .sticker-batch-actions button {
+            padding: 6px 16px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 500;
+            font-family: var(--font);
+            transition: var(--transition);
+        }
+        .sticker-batch-actions .btn-confirm-delete {
+            background: #d47878;
+            color: #fff;
+        }
+        .sticker-batch-actions .btn-cancel-batch {
+            background: #e8dde1;
+            color: #6a5d6a;
+        }
+        body.dark-mode .sticker-batch-actions .btn-confirm-delete {
+            background: #8a3a3a;
+            color: #f0d0d0;
+        }
+        body.dark-mode .sticker-batch-actions .btn-cancel-batch {
+            background: #3a3c46;
+            color: #a0a4b0;
+        }
         .sticker-batch-info {
             font-size: 11px;
             color: #8a7d85;
@@ -905,6 +999,9 @@
             font-family: var(--font);
             padding: 4px 0;
             text-align: center;
+        }
+        body.dark-mode .sticker-batch-info {
+            color: #a0a4b0;
         }
         .pat-quick-item {
             padding: 10px 14px;
@@ -939,6 +1036,14 @@
             border-color: #f9c8d0;
             transform: scale(0.98);
         }
+        body.dark-mode .pat-quick-item:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .pat-quick-item:active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+        }
         .sticker-empty {
             text-align: center;
             color: #c8bcc4;
@@ -946,6 +1051,9 @@
             padding: 20px;
             letter-spacing: 0.3px;
             font-family: var(--font);
+        }
+        body.dark-mode .sticker-empty {
+            color: #6a6d78;
         }
         .sticker-section-wrapper {
             display: flex;
@@ -1389,6 +1497,10 @@
             color: #6b606b;
             transform: rotate(90deg);
         }
+        body.dark-mode .btn-close-modal:hover {
+            background: #3a3c46;
+            color: #a0a4b0;
+        }
         .modal-body {
             flex: 1;
             overflow-y: auto;
@@ -1516,6 +1628,9 @@
             text-transform: uppercase;
             font-family: var(--font);
         }
+        body.dark-mode .setting-section .section-label {
+            color: #a0a4b0;
+        }
         .setting-section .section-label svg {
             width: 16px;
             height: 16px;
@@ -1642,12 +1757,26 @@
         .btn-pink:hover {
             background: #f9cfd6;
         }
+        body.dark-mode .btn-pink {
+            background: #5a3a4a;
+            color: #f0c8d4;
+        }
+        body.dark-mode .btn-pink:hover {
+            background: #6a4a5a;
+        }
         .btn-blue {
             background: #e2f3ff;
             color: #3f505a;
         }
         .btn-blue:hover {
             background: #d0e8f7;
+        }
+        body.dark-mode .btn-blue {
+            background: #2a3a4a;
+            color: #b0d0e8;
+        }
+        body.dark-mode .btn-blue:hover {
+            background: #3a4a5a;
         }
         .btn-ghost {
             background: var(--btn-ghost-bg);
@@ -1671,6 +1800,14 @@
         .btn-danger-sm:hover {
             background: #ffe0e0;
             color: #b05050;
+        }
+        body.dark-mode .btn-danger-sm {
+            background: #3a2828;
+            color: #d8a0a0;
+        }
+        body.dark-mode .btn-danger-sm:hover {
+            background: #4a3838;
+            color: #e8b0b0;
         }
         .btn-save-all {
             display: flex;
@@ -1702,6 +1839,19 @@
             transform: translateY(0) scale(0.97);
             box-shadow: 0 2px 8px rgba(200, 160, 170, 0.25);
             filter: brightness(0.96);
+        }
+        body.dark-mode .btn-save-all {
+            background: linear-gradient(135deg, #3a2830 0%, #28303a 100%);
+            color: #d0c8cc;
+            box-shadow: 0 3px 12px rgba(80, 60, 70, 0.3);
+        }
+        body.dark-mode .btn-save-all:hover {
+            box-shadow: 0 6px 20px rgba(80, 60, 70, 0.45);
+            filter: brightness(1.08);
+        }
+        body.dark-mode .btn-save-all:active {
+            box-shadow: 0 2px 8px rgba(80, 60, 70, 0.25);
+            filter: brightness(0.92);
         }
         .btn-save-all svg {
             width: 18px;
@@ -2349,6 +2499,10 @@
             text-align: center;
             gap: 1px;
         }
+        body.dark-mode .daily-sign-date-circle {
+            border-color: #8a5a6a;
+            background: rgba(200, 120, 140, 0.08);
+        }
         .daily-sign-date-solar {
             font-size: 12px;
             font-weight: 600;
@@ -2356,11 +2510,17 @@
             line-height: 1.2;
             text-align: center;
         }
+        body.dark-mode .daily-sign-date-solar {
+            color: #d8a0b0;
+        }
         .daily-sign-date-year {
             font-size: 11px;
             font-weight: 500;
             color: #c0889a;
             line-height: 1.2;
+        }
+        body.dark-mode .daily-sign-date-year {
+            color: #a8788a;
         }
         .daily-sign-date-md {
             font-size: 14px;
@@ -2368,11 +2528,17 @@
             color: #e2889a;
             line-height: 1.2;
         }
+        body.dark-mode .daily-sign-date-md {
+            color: #d8a0b0;
+        }
         .daily-sign-date-week {
             font-size: 11px;
             font-weight: 500;
             color: #c0889a;
             line-height: 1.2;
+        }
+        body.dark-mode .daily-sign-date-week {
+            color: #a8788a;
         }
         .daily-sign-date-lunar {
             font-size: 13px;
@@ -2380,6 +2546,9 @@
             color: #8a7d85;
             line-height: 1.4;
             text-align: left;
+        }
+        body.dark-mode .daily-sign-date-lunar {
+            color: #a0a4b0;
         }
         .daily-sign-date-info {
             display: none;
@@ -2563,6 +2732,9 @@
         .tide-month-title:hover {
             background: #fef0f2;
         }
+        body.dark-mode .tide-month-title:hover {
+            background: #30323a;
+        }
         .tide-weekdays {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
@@ -2573,6 +2745,9 @@
             letter-spacing: 0.3px;
             padding: 4px 0;
             font-family: var(--font);
+        }
+        body.dark-mode .tide-weekdays {
+            color: #7a7d88;
         }
         .tide-days-grid {
             display: grid;
@@ -2658,64 +2833,6 @@
             background: #fef5e7;
             border: 1px solid #e8d4c0;
         }
-        .tide-quote-bubble {
-            position: relative;
-            padding: 12px 16px;
-            border-radius: 18px;
-            font-size: 13.5px;
-            line-height: 1.55;
-            letter-spacing: 0.3px;
-            color: #4a3f44;
-            font-family: var(--font);
-            box-shadow: var(--shadow-soft);
-            transition: opacity 0.6s ease, transform 0.5s ease;
-            word-break: break-word;
-            text-align: center;
-            min-height: 20px;
-        }
-        .tide-quote-bubble.fade-in {
-            animation: quoteFadeIn 0.7s ease forwards;
-        }
-        .tide-quote-bubble.fade-out {
-            animation: quoteFadeOut 0.5s ease forwards;
-        }
-        @keyframes quoteFadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(12px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes quoteFadeOut {
-            from {
-                opacity: 1;
-                transform: translateY(0);
-            }
-            to {
-                opacity: 0;
-                transform: translateY(-8px);
-            }
-        }
-        .tide-quote-refresh {
-            align-self: center;
-            cursor: pointer;
-            font-size: 12px;
-            color: #b0a6b4;
-            letter-spacing: 0.3px;
-            transition: var(--transition);
-            font-family: var(--font);
-            background: none;
-            border: none;
-            padding: 4px 10px;
-            border-radius: 10px;
-        }
-        .tide-quote-refresh:hover {
-            color: #8a7d85;
-            background: #fef0f2;
-        }
         .tide-detail-panel {
             background: #fffefd;
             border-radius: 14px;
@@ -2772,6 +2889,18 @@
             color: #5e444b;
             font-weight: 600;
         }
+        body.dark-mode .tide-detail-opt {
+            color: #b0a8b0;
+        }
+        body.dark-mode .tide-detail-opt:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .tide-detail-opt.active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+            color: #f0c8d4;
+        }
         .tide-detail-actions {
             display: flex;
             gap: 8px;
@@ -2788,6 +2917,9 @@
             font-family: var(--font);
             padding: 2px 4px;
         }
+        body.dark-mode .tide-summary-row {
+            color: #7a7d88;
+        }
         .tide-summary-row span {
             background: var(--card-bg);
             padding: 4px 10px;
@@ -2797,6 +2929,9 @@
         .tide-summary-row .highlight {
             font-weight: 600;
             color: #5e5666;
+        }
+        body.dark-mode .tide-summary-row .highlight {
+            color: #c8ccd4;
         }
         .pat-tab-row {
             display: flex;
@@ -2826,6 +2961,15 @@
             background: #fde1e5;
             border-color: #f9c8d0;
             color: #5e444b;
+        }
+        body.dark-mode .pat-tab-btn:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .pat-tab-btn.active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+            color: #f0c8d4;
         }
         .pat-list {
             max-height: 180px;
@@ -2884,17 +3028,26 @@
             text-align: center;
             margin-top: 4px;
         }
+        body.dark-mode .pat-preview-box {
+            color: #a0a4b0;
+        }
         .pat-preview-box .pat-preview-label {
             font-size: 11px;
             color: #b0a6b4;
             letter-spacing: 0.3px;
             margin-bottom: 4px;
         }
+        body.dark-mode .pat-preview-box .pat-preview-label {
+            color: #7a7d88;
+        }
         .pat-preview-box .pat-preview-text {
             font-size: 13.5px;
             color: #5e5666;
             font-weight: 500;
             word-break: break-word;
+        }
+        body.dark-mode .pat-preview-box .pat-preview-text {
+            color: #c8ccd4;
         }
         .dm-export-options {
             display: flex;
@@ -2924,12 +3077,27 @@
             color: #5e444b;
             font-weight: 600;
         }
+        body.dark-mode .dm-export-opt {
+            color: #b0a8b0;
+        }
+        body.dark-mode .dm-export-opt:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .dm-export-opt.active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+            color: #f0c8d4;
+        }
         .dm-info-text {
             font-size: 12px;
             color: #b0a6b4;
             letter-spacing: 0.3px;
             font-family: var(--font);
             line-height: 1.5;
+        }
+        body.dark-mode .dm-info-text {
+            color: #7a7d88;
         }
         .dm-storage-meter { margin-top:6px; }
         .dm-storage-bar {
@@ -2965,10 +3133,12 @@
         body.dark-mode .dm-mail-calendar { background: #2a2a32; border-color: #3a3a44; }
         .dm-mail-month-nav { display:flex; align-items:center; justify-content:space-between; margin-bottom:6px; }
         .dm-mail-month-nav button { background:none; border:none; padding:4px; cursor:pointer; color: #8a6a7a; }
+        body.dark-mode .dm-mail-month-nav button { color: #a0a4b0; }
         .dm-mail-month-nav button svg { width: 16px; height: 16px; stroke:currentColor; fill:none; stroke-width:2; }
         .dm-mail-month-title { font-size:13px; font-weight:600; color: #6a4a5a; }
         body.dark-mode .dm-mail-month-title { color: #d0b8c8; }
         .dm-mail-weekdays { display:grid; grid-template-columns:repeat(7,1fr); text-align:center; font-size:11px; color:#b0a6b4; margin-bottom:4px; }
+        body.dark-mode .dm-mail-weekdays { color: #7a7d88; }
         .dm-mail-days-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; text-align:center; }
         .dm-mail-day-cell {
             aspect-ratio: 1; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -3002,6 +3172,20 @@
         .dm-wordcard-group-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:12px; color:#6a5a6a; }
         .dm-wordcard-group-row label { display:flex; align-items:center; gap:4px; cursor:pointer; }
         .dm-wordcard-group-row input[type="checkbox"] { accent-color: #d895a8; }
+        /* 数据管理折叠 */
+        .dm-collapse-header {
+            display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+            user-select: none; padding: 2px 0;
+        }
+        .dm-collapse-header .section-label { flex: 1; margin: 0; }
+        .dm-collapse-arrow {
+            display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px;
+            transition: transform 0.25s ease; color: #b0a6b4; flex-shrink: 0;
+        }
+        .dm-collapse-arrow svg { width: 16px; height: 16px; stroke: currentColor; fill: none; stroke-width: 2; }
+        .dm-collapse-header.collapsed .dm-collapse-arrow { transform: rotate(-90deg); }
+        .dm-collapse-content { overflow: hidden; transition: max-height 0.3s ease, opacity 0.25s ease; max-height: 2000px; opacity: 1; }
+        .dm-collapse-content.collapsed { max-height: 0; opacity: 0; margin-top: 0; }
         .dm-divider {
             height: 1px;
             background: #f0e8eb;
@@ -3169,6 +3353,15 @@
             border-color: #f9c8d0;
             color: #5e444b;
         }
+        body.dark-mode .mailbox-tab-btn:hover {
+            background: #30323a;
+            border-color: #5a3a4a;
+        }
+        body.dark-mode .mailbox-tab-btn.active {
+            background: #5a3a4a;
+            border-color: #8a5a6a;
+            color: #f0c8d4;
+        }
         .letter-compose-area {
             display: flex;
             flex-direction: column;
@@ -3246,12 +3439,18 @@
             color: #b0a6b4;
             font-size: 12px;
         }
+        body.dark-mode .letter-item-date {
+            color: #7a7d88;
+        }
         .letter-item-preview {
             font-size: 12px;
             color: #8a7d85;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+        }
+        body.dark-mode .letter-item-preview {
+            color: #7a7d88;
         }
         .letter-item.unread {
             background: #fef0f2;
@@ -4449,9 +4648,10 @@ body.dark-mode .user-letter-content .letter-body p {
                 <div class="sticker-tabs"><button class="sticker-tab-btn active" data-tab="my">我的</button><button class="sticker-tab-btn" data-tab="lover">他的</button><button class="sticker-tab-btn" data-tab="pat">拍一拍</button></div>
                 <div id="stickerContentArea"><div class="sticker-grid" id="stickerGridMy"></div><div class="sticker-grid" id="stickerGridLover" style="display:none;"></div><div id="patQuickListInSticker" style="display:none;"></div></div>
                 <div class="sticker-batch-info" id="stickerBatchInfo" style="display:none;"></div>
-                <div class="sticker-panel-footer" id="stickerPanelFooter"><button class="btn-sm btn-ghost" id="btnAddSticker"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 批量添加表情</button><button class="btn-sm btn-ghost" id="btnCloseStickerPanel">✕ 关闭</button></div>
+                <div class="sticker-batch-actions" id="stickerBatchActions"><button class="btn-confirm-delete" id="btnConfirmBatchDelete">确认删除所选</button><button class="btn-cancel-batch" id="btnCancelBatch">取消</button></div>
+                <div class="sticker-panel-footer" id="stickerPanelFooter"><button class="btn-sm btn-ghost" id="btnAddSticker"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 批量添加表情</button><button class="btn-sm btn-ghost" id="btnBatchDeleteSticker">🗑 批量删除</button></div>
                 <input type="file" id="stickerFileInput" accept="image/*" style="display:none;" multiple>
-                <div style="font-size:11px;color:#b0a6b4;text-align:center;margin-top:4px;">📱 手机端若无法多选，可重复添加或使用电脑管理</div>
+                <div class="sticker-hint" style="font-size:11px;color:#b0a6b4;text-align:center;margin-top:4px;">📱 手机端若无法多选，可重复添加或使用电脑管理</div>
             </div>
         </div>
         <div class="daily-sign-overlay" id="dailySignOverlay" style="display:none;"><div class="daily-sign-card" id="dailySignCard"></div></div>
@@ -4586,7 +4786,7 @@ body.dark-mode .user-letter-content .letter-body p {
                             <div style="display:flex;gap:8px;flex-wrap:wrap;">
                                 <button class="btn-sm btn-ghost" id="btnQuotesBatchImport"><svg viewBox="0 0 24 24" width="14" height="14"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/><polyline points="16 16 12 12 8 16"/></svg> 批量导入</button>
                                 <button class="btn-sm btn-ghost" id="btnQuotesBatchDel" style="color:#d47878;"><svg viewBox="0 0 24 24" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg> <span id="btnQuotesBatchDelText">批量删除</span></button>
-                                <button class="btn-sm btn-ghost" id="btnQuotesReset" style="color:#d47878;"><svg viewBox="0 0 24 24" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 0 0 2.13-9.36L1 10"/></svg> 恢复默认</button>
+                                <button class="btn-sm btn-ghost" id="btnQuotesReset" style="color:#d47878;"><svg viewBox="0 0 24 24" width="14" height="14"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 0 0 2.13-9.36L1 10"/></svg> 恢复默认</button><button class="btn-sm btn-ghost" id="btnQuotesExportTxt" style="color:#6a9fb5;"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导出语录 (TXT)</button>
                             </div>
                         </div>
                         <div id="quotesSelectAllRow" style="display:none;align-items:center;gap:8px;padding:6px 12px;margin-bottom:4px;">
@@ -4625,7 +4825,7 @@ body.dark-mode .user-letter-content .letter-body p {
                         </div>
                     </div>
                 </div>
-                <div class="feature-page" id="statusManagerPage"><button class="btn-sm btn-ghost back-btn" id="backFromStatusManager"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="4.5"/><rect x="14" y="8" width="9" height="8" rx="4"/></svg> 状态栏管理</span><div class="status-current-display" id="statusCurrentDisplay"><span class="status-current-dot"></span><span id="statusCurrentText">在线</span><span style="font-size:11px;color:#8a7d85;margin-left:auto;">当前状态</span></div><div class="wordbank-header" style="margin-top:10px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="statusSearch" placeholder="搜索状态..."></div><span class="wordbank-count" id="statusCount">共 0 条</span></div><div class="wordbank-list" id="statusList" style="max-height:200px;"></div><div class="wordbank-add-row"><input type="text" id="statusAddInput" placeholder="添加新状态..." maxlength="60"><button class="btn-sm btn-blue" id="btnStatusAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="statusBatchImportTextarea" rows="3" placeholder="将分行的状态内容粘贴在这里..."></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnStatusBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnStatusReset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复默认状态库</button></div></div></div>
+                <div class="feature-page" id="statusManagerPage"><button class="btn-sm btn-ghost back-btn" id="backFromStatusManager"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="4.5"/><rect x="14" y="8" width="9" height="8" rx="4"/></svg> 状态栏管理</span><div class="status-current-display" id="statusCurrentDisplay"><span class="status-current-dot"></span><span id="statusCurrentText">在线</span><span style="font-size:11px;color:#8a7d85;margin-left:auto;">当前状态</span></div><div class="wordbank-header" style="margin-top:10px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="statusSearch" placeholder="搜索状态..."></div><span class="wordbank-count" id="statusCount">共 0 条</span></div><div class="wordbank-list" id="statusList" style="max-height:200px;"></div><div class="wordbank-add-row"><input type="text" id="statusAddInput" placeholder="添加新状态..." maxlength="60"><button class="btn-sm btn-blue" id="btnStatusAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="statusBatchImportTextarea" rows="3" placeholder="将分行的状态内容粘贴在这里..."></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnStatusBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnStatusReset"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复默认状态库</button><button class="btn-sm btn-ghost" id="btnStatusExportTxt" style="color:#6a9fb5;"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导出 (TXT)</button></div></div></div>
                 <div class="feature-page" id="systemSettingsPage"><button class="btn-sm btn-ghost back-btn" id="backFromSystemSettings"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div id="settingsContent" style="display:flex;flex-direction:column;gap:14px;">
                         <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 使用者设置（自己）</span><div class="avatar-upload-area" style="margin-bottom:8px;"><div class="avatar-preview-lg" id="userAvatarPreviewLg"><img id="userAvatarPreviewImg" src="" alt="user avatar"></div><div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:100px;"><button class="btn-sm btn-pink" id="btnUploadUserAvatar"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 上传头像</button><button class="btn-sm btn-ghost" id="btnResetUserAvatar"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> 恢复默认</button></div></div><div class="setting-row"><input type="text" id="userNicknameInput" placeholder="你的昵称..." maxlength="20"><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">你的名字</span></div><input type="file" id="userAvatarFileInput" accept="image/*" style="display:none;"></div>
                         <div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> 联系人设置（对方）</span><div class="avatar-upload-area" style="margin-bottom:8px;"><div class="avatar-preview-lg" id="loverAvatarPreviewLg"><img id="loverAvatarPreviewImg" src="" alt="lover avatar"></div><div style="display:flex;flex-direction:column;gap:6px;flex:1;min-width:100px;"><button class="btn-sm btn-pink" id="btnUploadLoverAvatar"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 上传头像</button><button class="btn-sm btn-ghost" id="btnResetLoverAvatar"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg> 恢复默认</button></div></div><div class="setting-row"><input type="text" id="loverNicknameInput" placeholder="联系人昵称..." maxlength="24"><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">标题显示</span></div><input type="file" id="loverAvatarFileInput" accept="image/*" style="display:none;"></div>
@@ -4658,8 +4858,8 @@ body.dark-mode .user-letter-content .letter-body p {
                         </div></div>
                         <div class="setting-section" id="callSettingsSection"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg> 致电顾时夜（功能配置）</span><div class="call-settings-scroll"><div class="call-settings-page"><div class="call-settings-page-title">① 基础 · 概率 · 时长</div><div class="call-settings-grid"><label>联系人名称<input type="text" id="callCfgName" maxlength="20"></label><label>成功概率(%)<input type="number" id="callCfgSuccessRate" min="0" max="100" step="5"></label><label>线条时长(秒)<input type="number" id="callCfgLineDur" min="0.5" max="10" step="0.5"></label><label>图案时长(秒)<input type="number" id="callCfgPatDur" min="1" max="15" step="0.5"></label><label>倒计时(秒)<input type="number" id="callCfgCountdown" min="1" max="10" step="1"></label><label>背景类型<select id="callCfgBgType"><option value="color">纯色</option><option value="image">图片</option></select></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">② 文案</div><div class="call-settings-grid" style="grid-template-columns:1fr;"><label>成功文案<input type="text" id="callCfgSuccessText" maxlength="40"></label><label>失败文案<input type="text" id="callCfgFailText" maxlength="40"></label></div></div><div class="call-settings-page"><div class="call-settings-page-title">③ 背景设置</div><div class="call-settings-row"><span>背景纯色</span><input type="color" id="callCfgBgColor"></div><div class="call-settings-upload"><span style="font-size:12.5px;color:var(--text-medium);min-width:110px;">背景图片</span><input type="file" id="callCfgBgImage" accept="image/*"><label for="callCfgBgImage">选择图片</label><button class="clear-bg" id="callCfgClearBg">清除</button></div><div class="dm-info-text" style="margin-top:6px;">背景支持纯色与图片模式；图片模式下线条绘制区会自动叠加半透明底色与边框，确保线条清晰可见。</div></div><div class="call-settings-page"><div class="call-settings-page-title">④ 颜色配置</div><div class="call-settings-row"><span>线条颜色</span><input type="color" id="callCfgLineColor"></div><div class="call-settings-row"><span>成功色（爱心）</span><input type="color" id="callCfgSuccessColor"></div><div class="call-settings-row"><span>失败色（非爱心）</span><input type="color" id="callCfgFailColor"></div><div style="display:flex;gap:8px;margin-top:14px;"><button class="btn-sm btn-pink" id="btnSaveCallCfg">保存配置</button><button class="btn-sm btn-ghost" id="btnResetCallCfg">恢复默认</button></div></div></div><div class="dm-info-text" style="margin-top:6px;">← 左右滑动查看全部配置项（4 页）</div></div>
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
-                <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button><button class="btn-sm btn-ghost" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></div></div></div>
-                <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideQuoteContainer" style="position:relative; min-height:24px; display:flex; flex-direction:column; align-items:center; gap:6px;"><div class="tide-quote-bubble" id="tideQuoteBubble" style="opacity:0; min-height:0; padding:0; margin:0;"></div><button class="tide-quote-refresh" id="tideQuoteRefresh" style="display:none;">换一句</button></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
+                <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><button class="btn-sm btn-ghost" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button><button class="btn-sm btn-ghost" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button><button class="btn-sm btn-ghost" id="btnPatExportTxt" style="color:#6a9fb5;"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导出 (TXT)</button></div></div></div>
+                <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
                 <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 导出信箱</span><div class="mailbox-export-tab-row"><button class="mailbox-export-tab-btn active" id="dmMailTabSend">投递的信</button><button class="mailbox-export-tab-btn" id="dmMailTabReceive">回信</button></div><div class="dm-mail-calendar" id="dmMailCalendar"><div class="dm-mail-month-nav"><button id="dmMailPrevMonth"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dm-mail-month-title" id="dmMailMonthTitle"></span><button id="dmMailNextMonth"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="dm-mail-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="dm-mail-days-grid" id="dmMailDaysGrid"></div><div class="dm-mail-legend"><span><span class="dm-mail-legend-dot send"></span> 寄出</span><span><span class="dm-mail-legend-dot receive"></span> 回信</span></div><div class="dm-mail-selected" id="dmMailSelected" style="display:none;"><span id="dmMailSelectedText"></span><button class="btn-sm btn-pink" id="btnDmMailExportSelected" style="margin-left:auto;">导出选中日期</button></div></div><div class="dm-btn-row" style="margin-top:6px;"><button class="btn-sm btn-pink" id="btnDmMailExportAllSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部投递信</button><button class="btn-sm btn-blue" id="btnDmMailExportAllReceive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部回信</button></div><div class="dm-info-text" style="margin-top:6px;">月历中粉色圆点表示有信寄出，蓝色圆点表示有回信。点击日期可选择单日或多日导出。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><line x1="12" y1="17" x2="12" y2="21"/></svg> 字卡库管理</span><div class="dm-wordcard-section" id="dmWordcardGroups"><div class="dm-info-text" style="margin-bottom:8px;">选择要导出的字卡分组，导出格式为JSON文件，可用于导入恢复。</div><div id="dmWordcardGroupList" style="max-height:160px;overflow-y:auto;margin-bottom:8px;"></div></div><div class="dm-btn-row" style="margin-top:6px;gap:8px;"><button class="btn-sm btn-pink" id="btnDmWordcardExport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出选中字卡</button><button class="btn-sm btn-blue" id="btnDmWordcardImport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入字卡库</button><input type="file" id="wordcardImportFileInput" accept=".json" style="display:none;"></div><div class="dm-info-text" style="margin-top:6px;">导出格式与导入格式统一，导入后字卡会按分组名合并到对应分组中。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
                 <div class="feature-page" id="mailboxPage"><button class="btn-sm btn-ghost back-btn" id="backFromMailbox"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 信箱</span><div class="mailbox-tab-row"><button class="mailbox-tab-btn active" id="mailTabSend">投递的信</button><button class="mailbox-tab-btn" id="mailTabReceive">回信</button></div><div id="mailSendArea" style="display:flex;flex-direction:column;gap:10px;"><button class="btn-sm btn-pink" id="btnNewLetter">写一封信</button><div class="letter-list" id="sendLetterList"></div></div><div id="mailReceiveArea" style="display:none;flex-direction:column;gap:10px;"><div class="letter-list" id="receiveLetterList"></div></div></div></div>
                 <div class="feature-page" id="importantDaysPage"><button class="btn-sm btn-ghost back-btn" id="backFromImportantDays"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="imd-page-container"><div class="imd-top-pane" id="imdTopPane"><button class="imd-top-edit-btn" id="imdTopEditBtn" title="编辑此重要日" style="display:none;"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><div class="imd-top-decor" id="imdBgDots" style="display:none;"></div><div class="imd-top-type-tag" id="imdTopTypeTag"></div><div class="imd-top-name" id="imdTopName"></div><div class="imd-top-date" id="imdTopDate"></div><div class="imd-top-days" id="imdTopDays"></div><div class="imd-top-days-sub" id="imdTopDaysSub"></div><div class="imd-top-empty" id="imdTopEmpty">还没有重要日，在下方添加吧</div></div><div class="imd-bottom-pane"><div class="imd-list-scroll" id="imdListScroll"></div><div class="imd-list-empty" id="imdListEmpty" style="display:none;">点击下方按钮添加重要日</div><div class="imd-add-btn-row"><button class="btn-sm btn-pink" id="btnImdAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加重要日</button></div></div></div></div>
@@ -4679,7 +4879,7 @@ body.dark-mode .user-letter-content .letter-body p {
         const STORAGE_KEYS = { wordbank: 'pc_wordbank_v23', wordbankGroups: 'pc_wordbank_groups_v1', loverNickname: 'pc_lover_nick_v23', loverAvatar: 'pc_lover_av_v23', userNickname: 'pc_user_nick_v23', userAvatar: 'pc_user_av_v23', history: 'pc_history_v23', lastActive: 'pc_last_active_v23', pageBg: 'pc_page_bg_v23', msgAreaBg: 'pc_msg_bg_v23', userBubbleHex: 'pc_user_hex_v23', userBubbleOpacity: 'pc_user_op_v23', userBubbleFont: 'pc_user_font_v1', loverBubbleHex: 'pc_lover_hex_v23', loverBubbleOpacity: 'pc_lover_op_v23', loverBubbleFont: 'pc_lover_font_v1', stickers: 'pc_stickers_v18', bgImage: 'pc_bg_image_v17', dailySignDate: 'pc_dailysign_date_v1', dailySignIdx: 'pc_dailysign_idx_v1', dailyStatusIdx: 'pc_dailystatus_idx_v1', dailyNetQuote: 'pc_dailynet_quote_v1', tideData: 'pc_tide_data_v2', patUserContent: 'pc_pat_user_v1', patLoverContent: 'pc_pat_lover_v1', patUserBank: 'pc_pat_user_bank_v2', patLoverBank: 'pc_pat_lover_bank_v2', loverStatus: 'pc_lover_status_v1', statusBank: 'pc_status_bank_v1', userMsgCount: 'pc_user_msg_count_v1', loverStickers: 'pc_lover_stickers_v1', lastDateDisplay: 'pc_last_date_display_v1', letterSendHistory: 'pc_letter_send_v1', letterReceiveHistory: 'pc_letter_recv_v1', pendingReplies: 'pc_letter_pending_v1', importantDays: 'pc_important_days_v2', importantDaysBgIndex: 'pc_imd_bg_idx_v2', darkMode: 'pc_dark_mode_v1', letterPaperBgUser: 'pc_letter_paper_bg_user_v1', letterPaperBgLover: 'pc_letter_paper_bg_lover_v1', letterPaperBorderUser: 'pc_letter_paper_border_user_v1', letterPaperBorderLover: 'pc_letter_paper_border_lover_v1', replyDelayMin: 'pc_reply_delay_min_v1', replyDelayMax: 'pc_reply_delay_max_v1', activeReplyInterval: 'pc_active_reply_interval_v1', keepAliveEnabled: 'pc_keep_alive_v1', bubbleCustomCss: 'pc_bubble_custom_css_v1', stickerUsage: 'pc_sticker_usage_v1', customDailySigns: 'pc_custom_daily_signs_v1', deletedDefaultSigns: 'pc_deleted_default_signs_v1', callConfig: 'pc_call_config_v1' };
         const FEATURE_ICONS = { systemSettings: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>', statusManager: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="7" cy="12" r="4.5"/><rect x="14" y="8" width="9" height="8" rx="4"/></svg>', patpat: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg>', dailySign: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M8 14h.01"/><path d="M12 14h.01"/><path d="M16 14h.01"/></svg>', tide: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>', dataManagement: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/><line x1="9" y1="9" x2="15" y2="9"/><line x1="9" y1="15" x2="13.5" y2="15"/></svg>', mailbox: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg>', importantDays: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="4"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/><path d="M9 15l2 2 4-4"/></svg>', messageStats: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="6" height="12" rx="1.5"/><rect x="12" y="3" width="6" height="15" rx="1.5"/><circle cx="6" cy="4" r="1.2"/><circle cx="15" cy="1.5" r="1.2"/></svg>', wordbankManager: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' };
         function setModalIcon(pageKey) { const iconHtml = FEATURE_ICONS[pageKey] || FEATURE_ICONS.systemSettings; modalTitleIcon.innerHTML = iconHtml; }
-        const PERIOD_QUOTES = ['夫人，肚子难受就靠过来躺一会。', '手已经焐热了，帮你揉揉肚子好不好？', '宝宝，疼得厉害的话别忍着。', '抱一会儿，会不会好一点？', '揉的力度这样可以吗？', '宝贝，你脸色都白了。', '我在呢，想抱抱吗？', '怎么疼到掉眼泪了，乖乖。', '睡吧，我陪着你。', '手放你小腹上，这样会暖和一些。', '毯子裹好，别把脚露出来。', '宝宝，你今天气色不好，但还是很漂亮。', '疼的时候可以不讲道理。', '你缩成一团的样子，小小一个。', '想抱多久都行。', '来枕在我腿上，这样会舒服些。', '看你疼得出冷汗，心好疼。', '听到你在梦里喊我了，我在这儿，别怕。', '别咬着嘴唇宝宝，可以咬我的手。', '夫人，你手脚很冰。', '腰酸就躺下来，我帮你揉揉。', '你又瘦了，这几天要多喂一点。', '脚伸过来放到我腿上，给你捂捂。', '你不用说话，我知道。', '疼的时候不要逞强，好吗？', '宝宝，你的嘴唇有点干，要记得多喝水。', '你刚才说梦话，叫了我的名字，我就来了。', '多睡会儿。', '你掐我吧，别掐自己。', '好点了吗？', '这样有没有好一点？', '夫人不需要每次都解释为什么心情不好。', '不用道歉，生理期闹脾气很正常，我不会生气。', '看你脸色缓过来一些了，稍微松了口气。', '手上工作先放下，躺过来休息会。', '你蜷起来的样子像只小猫，让人心疼。', '什么也不做，就这么陪你。', '肚子疼就叫我，我在这儿。', '要是疼痛能转移到我身上就好了。', '没力气就不要逞强做事情了，好不好？', '宝贝，不想吃东西也要喝两口热水。', '放心，这几天都会一直陪着你。', '你贴着我的手臂睡吧。', '想听什么歌？给你唱歌会不会放松一点。', '今天不忙，可以陪你。', '我念书给你听，困了就好好睡一觉。', '宝宝，看到你这样疼，我很心疼。', '如果能真的在你身边照顾你就好了。', '多休息，别撑着了。', '身上这么凉，我要抱紧你一些。', '宝贝，我帮你揉揉腰。', '睡一觉会不会好受一点。', '夫人，多喝点热水。', '疼得睡不着的话我给你讲故事吧。', '想睡了就闭眼，我在旁边看着你。', '你小小的手抓着我，抓得很紧。', '今晚不走了，陪你。', '头发别压在身下，我帮你理出来。', '宝宝，你听，外面下雨了。', '想哭就靠在我肩上哭。', '夫人，你睡着的样子很乖。', '看着你疼，我心里闷闷的，很难受。', '宝贝，手放你肚子上，闭眼休息。', '我能感受到你的难受，别怕。', '夫人，揉这里会舒服一点吗。', '你每次经期都强撑着，我看着心疼。', '如果能替你疼就好了。', '什么都别想，身体放松。', '需要我力度重一点还是轻一点？', '多喝水，听话。', '宝宝，你攥着我的手指睡着了。', '如果能抱着你直接睡过去就好了。', '看你疼，我什么也做不了，只能陪着你。', '夫人，吻你额头了，感觉到了吗。', '膝盖蜷起来舒服一点吗。', '好好休息吧，醒了随时叫我。', '宝宝，宫寒的体质，以后得慢慢调理。', '如果在你身边，就能直接抱起你了。', '揉一揉会不会让你入睡快一些。', '宝贝，疼就别玩手机了，闭目养神。', '夫人，睡吧，我在旁边守着你。'];
+        const PERIOD_QUOTES = [];
         let wordBankGroups = [{ name: '默认', items: [...DEFAULT_WORDBANK], collapsed: true }],
             wordBank = [...DEFAULT_WORDBANK],
             wordbankBatchMode = {},
@@ -4720,8 +4920,6 @@ body.dark-mode .user-letter-content .letter-body p {
             settingsDirty = false;
         let tideData = {};
         let tideDisplayYear, tideDisplayMonth, tideSelectedDate = null;
-        let tideQuoteTimer = null,
-            tideQuoteFadeTimer = null;
         let patUserContent = '{user}拍了拍{lover}',
             patLoverContent = '{lover}拍了拍{user}',
             patUserBank = ['{user}拍了拍{lover}', '{user}轻轻地拍了拍{lover}的肩膀', '{user}戳了戳{lover}', '{user}温柔地拍了拍{lover}'],
@@ -4737,6 +4935,7 @@ body.dark-mode .user-letter-content .letter-body p {
             currentStatus = '在线',
             userMsgCount = 0;
         let stickerPanelTab = 'my';
+        let stickerBatchMode = false, stickerBatchSelected = new Set();
         let letterSendHistory = [],
             letterReceiveHistory = [],
             pendingReplies = [],
@@ -4922,7 +5121,7 @@ body.dark-mode .user-letter-content .letter-body p {
             btnSticker = $('btnSticker'),
             stickerPanel = $('stickerPanel'),
             btnAddSticker = $('btnAddSticker'),
-            btnCloseStickerPanel = $('btnCloseStickerPanel'),
+            btnBatchDeleteSticker = $('btnBatchDeleteSticker'),
             stickerFileInput = $('stickerFileInput');
         const bgPreview = $('bgPreview'),
             btnUploadBg = $('btnUploadBg'),
@@ -5548,13 +5747,44 @@ function _doScrollToMsg(targetId) {
 
         function renderStickerPanel() { renderStickerContent(); }
 
-        function renderStickerContent() { const myGrid = document.getElementById('stickerGridMy'); const loverGrid = document.getElementById('stickerGridLover'); const patArea = document.getElementById('patQuickListInSticker'); myGrid.style.display = stickerPanelTab === 'my' ? 'flex' : 'none'; loverGrid.style.display = stickerPanelTab === 'lover' ? 'flex' : 'none'; patArea.style.display = stickerPanelTab === 'pat' ? 'flex' : 'none'; if (stickerPanelTab === 'pat') { patArea.style.flexDirection = 'column'; } if (stickerPanelTab === 'my') { if (stickerBank.length > 20) { renderStickerGridSplit(myGrid, stickerBank); } else { renderStickerGrid(myGrid, stickerBank); } } else if (stickerPanelTab === 'lover') renderStickerGrid(loverGrid, loverStickerBank); else if (stickerPanelTab === 'pat') { patArea.innerHTML = ''; if (!patUserBank.length) { patArea.innerHTML = '<div class="sticker-empty">还没有拍一拍内容，去设置里添加吧</div>'; return; } patUserBank.forEach(template => { const item = document.createElement('div'); item.className = 'pat-quick-item'; const preview = formatPatContent(template, true); item.textContent = preview; item.title = preview; item.addEventListener('click', () => { sendQuickPat(template); }); patArea.appendChild(item); }); } }
+        function renderStickerContent() { const myGrid = document.getElementById('stickerGridMy'); const loverGrid = document.getElementById('stickerGridLover'); const patArea = document.getElementById('patQuickListInSticker'); const batchActions = document.getElementById('stickerBatchActions'); myGrid.style.display = stickerPanelTab === 'my' ? 'flex' : 'none'; loverGrid.style.display = stickerPanelTab === 'lover' ? 'flex' : 'none'; patArea.style.display = stickerPanelTab === 'pat' ? 'flex' : 'none'; if (stickerPanelTab === 'pat') { patArea.style.flexDirection = 'column'; batchActions.style.display = 'none'; btnBatchDeleteSticker.style.display = 'none'; } else { btnBatchDeleteSticker.style.display = 'inline-flex'; batchActions.style.display = stickerBatchMode ? 'flex' : 'none'; } if (stickerPanelTab === 'my') { if (stickerBank.length > 20) { renderStickerGridSplit(myGrid, stickerBank); } else { renderStickerGrid(myGrid, stickerBank); } } else if (stickerPanelTab === 'lover') renderStickerGrid(loverGrid, loverStickerBank); else if (stickerPanelTab === 'pat') { patArea.innerHTML = ''; if (!patUserBank.length) { patArea.innerHTML = '<div class="sticker-empty">还没有拍一拍内容，去设置里添加吧</div>'; return; } patUserBank.forEach(template => { const item = document.createElement('div'); item.className = 'pat-quick-item'; const preview = formatPatContent(template, true); item.textContent = preview; item.title = preview; item.addEventListener('click', () => { sendQuickPat(template); }); patArea.appendChild(item); }); } }
 
-        function renderStickerGrid(grid, bank) { grid.style.flexDirection = ''; grid.style.gap = ''; grid.style.maxHeight = ''; grid.innerHTML = ''; if (!bank.length) { grid.innerHTML = '<div class="sticker-empty">空空的</div>'; return; } bank.forEach((b64, idx) => { const item = document.createElement('div'); item.className = 'sticker-item'; const img = document.createElement('img'); img.src = b64; img.onclick = () => { sendSticker(b64); closeStickerPanel(); }; const del = document.createElement('span'); del.className = 'del-sticker'; del.textContent = '×'; del.onclick = (e) => { e.stopPropagation(); bank.splice(idx, 1); saveStickers(); renderStickerPanel(); }; item.appendChild(img); item.appendChild(del); grid.appendChild(item); }); }
+        function renderStickerGrid(grid, bank) { grid.style.flexDirection = ''; grid.style.gap = ''; grid.style.maxHeight = ''; grid.innerHTML = ''; if (!bank.length) { grid.innerHTML = '<div class="sticker-empty">空空的</div>'; return; } bank.forEach((b64, idx) => { const item = createStickerItem(b64, bank); grid.appendChild(item); }); }
 
         function renderStickerGridSplit(grid, bank) { grid.innerHTML = ''; grid.style.flexDirection = 'column'; grid.style.gap = '0px'; grid.style.maxHeight = '240px'; if (!bank.length) { grid.innerHTML = '<div class="sticker-empty">空空的</div>'; return; } const wrapper = document.createElement('div'); wrapper.className = 'sticker-section-wrapper'; const sorted = bank.slice().sort((a, b) => (stickerUsage[b] || 0) - (stickerUsage[a] || 0)); const top20 = sorted.slice(0, 20); const commonLabel = document.createElement('div'); commonLabel.className = 'sticker-section-label'; commonLabel.textContent = '常用表情'; wrapper.appendChild(commonLabel); const commonGrid = document.createElement('div'); commonGrid.className = 'sticker-section-grid'; top20.forEach(b64 => { const item = createStickerItem(b64, bank); commonGrid.appendChild(item); }); wrapper.appendChild(commonGrid); const divider = document.createElement('div'); divider.className = 'sticker-section-divider'; wrapper.appendChild(divider); const allLabel = document.createElement('div'); allLabel.className = 'sticker-section-label'; const allLabelText = document.createElement('span'); allLabelText.textContent = '全部表情 (' + bank.length + ')'; const toggleBtn = document.createElement('button'); toggleBtn.className = 'sticker-section-toggle'; toggleBtn.textContent = '展开'; allLabel.appendChild(allLabelText); allLabel.appendChild(toggleBtn); wrapper.appendChild(allLabel); const allCollapsed = document.createElement('div'); allCollapsed.className = 'sticker-section-collapsed'; const allGrid = document.createElement('div'); allGrid.className = 'sticker-section-grid'; bank.forEach(b64 => { const item = createStickerItem(b64, bank); allGrid.appendChild(item); }); allCollapsed.appendChild(allGrid); wrapper.appendChild(allCollapsed); toggleBtn.addEventListener('click', () => { const collapsed = allCollapsed.classList.contains('show'); if (collapsed) { allCollapsed.classList.remove('show'); toggleBtn.textContent = '展开'; grid.style.maxHeight = '240px'; } else { allCollapsed.classList.add('show'); toggleBtn.textContent = '收起'; grid.style.maxHeight = '450px'; } }); grid.appendChild(wrapper); }
 
-        function createStickerItem(b64, bank) { const item = document.createElement('div'); item.className = 'sticker-item'; const img = document.createElement('img'); img.src = b64; img.onclick = () => { sendSticker(b64); closeStickerPanel(); }; const del = document.createElement('span'); del.className = 'del-sticker'; del.textContent = '×'; del.onclick = (e) => { e.stopPropagation(); const idx = bank.indexOf(b64); if (idx !== -1) { bank.splice(idx, 1); saveStickers(); renderStickerPanel(); } }; item.appendChild(img); item.appendChild(del); return item; }
+        function createStickerItem(b64, bank) { const item = document.createElement('div'); item.className = 'sticker-item'; if (stickerBatchMode) { item.classList.add('batch-mode'); if (stickerBatchSelected.has(b64)) item.classList.add('batch-selected'); const cb = document.createElement('input'); cb.type = 'checkbox'; cb.className = 'sticker-batch-checkbox'; cb.checked = stickerBatchSelected.has(b64); cb.addEventListener('change', () => { if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); item.appendChild(cb); item.addEventListener('click', (e) => { if (e.target === cb) return; cb.checked = !cb.checked; if (cb.checked) { stickerBatchSelected.add(b64); item.classList.add('batch-selected'); } else { stickerBatchSelected.delete(b64); item.classList.remove('batch-selected'); } }); } else { const img = document.createElement('img'); img.src = b64; img.onclick = () => { sendSticker(b64); closeStickerPanel(); }; const del = document.createElement('span'); del.className = 'del-sticker'; del.textContent = '×'; del.onclick = (e) => { e.stopPropagation(); const idx = bank.indexOf(b64); if (idx !== -1) { bank.splice(idx, 1); saveStickers(); renderStickerPanel(); } }; item.appendChild(img); item.appendChild(del); } return item; }
+
+        function toggleStickerBatchMode() {
+            if (stickerPanelTab === 'pat') return;
+            stickerBatchMode = !stickerBatchMode;
+            if (!stickerBatchMode) stickerBatchSelected.clear();
+            btnBatchDeleteSticker.textContent = stickerBatchMode ? '退出批量' : '🗑 批量删除';
+            renderStickerPanel();
+        }
+
+        function confirmBatchDeleteStickers() {
+            if (stickerBatchSelected.size === 0) { toast('请先选择要删除的贴纸'); return; }
+            const targetBank = stickerPanelTab === 'lover' ? loverStickerBank : stickerBank;
+            let removed = 0;
+            stickerBatchSelected.forEach(b64 => {
+                const idx = targetBank.indexOf(b64);
+                if (idx !== -1) { targetBank.splice(idx, 1); removed++; }
+            });
+            stickerBatchSelected.clear();
+            stickerBatchMode = false;
+            btnBatchDeleteSticker.textContent = '🗑 批量删除';
+            saveStickers();
+            renderStickerPanel();
+            toast('已删除 ' + removed + ' 个贴纸');
+        }
+
+        function cancelBatchMode() {
+            stickerBatchMode = false;
+            stickerBatchSelected.clear();
+            btnBatchDeleteSticker.textContent = '🗑 批量删除';
+            renderStickerPanel();
+        }
 
         function addStickers(files) { if (!files || !files.length) return; let processed = 0; const total = files.length; const targetBank = stickerPanelTab === 'lover' ? loverStickerBank : stickerBank; const batchInfo = document.getElementById('stickerBatchInfo'); batchInfo.style.display = 'block'; batchInfo.textContent = `正在处理 0/${total}...`; Array.from(files).forEach(file => { compressImage(file, 120, 0.6, b64 => { if (!targetBank.includes(b64)) targetBank.push(b64); processed++; batchInfo.textContent = `正在处理 ${processed}/${total}...`; if (processed === total) { saveStickers(); renderStickerPanel();
                     batchInfo.textContent = `✅ 已导入 ${total} 个表情`; setTimeout(() => { batchInfo.style.display = 'none'; }, 2500); toast(`已导入 ${total} 个表情`); } }); }); }
@@ -5565,7 +5795,7 @@ function _doScrollToMsg(targetId) {
 
         function openStickerPanel() { stickerPanel.classList.add('show'); renderStickerPanel(); }
 
-        function closeStickerPanel() { stickerPanel.classList.remove('show'); }
+        function closeStickerPanel() { stickerPanel.classList.remove('show'); stickerBatchMode = false; stickerBatchSelected.clear(); btnBatchDeleteSticker.textContent = '🗑 批量删除'; }
 
         function sendQuickPat(template) { 
             const displayText = formatPatContent(template, true); 
@@ -5573,9 +5803,13 @@ function _doScrollToMsg(targetId) {
             closeStickerPanel(); 
             if (Math.random() < 0.3) setTimeout(() => doPat(false), 2000 + Math.random() * 3000); 
         }
-        stickerTabs.forEach(btn => { btn.addEventListener('click', () => { stickerPanelTab = btn.dataset.tab; stickerTabs.forEach(b => b.classList.remove('active')); btn.classList.add('active'); renderStickerPanel(); if (stickerPanelTab === 'pat') { btnAddSticker.style.display = 'none'; } else { btnAddSticker.style.display = 'inline-flex'; } }); });
+        stickerTabs.forEach(btn => { btn.addEventListener('click', () => { stickerPanelTab = btn.dataset.tab; stickerTabs.forEach(b => b.classList.remove('active')); btn.classList.add('active'); stickerBatchMode = false; stickerBatchSelected.clear(); btnBatchDeleteSticker.textContent = '🗑 批量删除'; renderStickerPanel(); if (stickerPanelTab === 'pat') { btnAddSticker.style.display = 'none'; } else { btnAddSticker.style.display = 'inline-flex'; } }); });
         btnAddSticker.addEventListener('click', () => { if (stickerPanelTab === 'pat') return; stickerFileInput.click(); });
-        btnCloseStickerPanel.addEventListener('click', closeStickerPanel);
+        btnBatchDeleteSticker.addEventListener('click', toggleStickerBatchMode);
+        const btnConfirmBatchDelete = document.getElementById('btnConfirmBatchDelete');
+        const btnCancelBatch = document.getElementById('btnCancelBatch');
+        btnConfirmBatchDelete.addEventListener('click', confirmBatchDeleteStickers);
+        btnCancelBatch.addEventListener('click', cancelBatchMode);
         btnSticker.addEventListener('click', () => { if (stickerPanel.classList.contains('show')) { closeStickerPanel(); } else { openStickerPanel(); } });
 
         function hideAllPages() { featureCardsGrid.style.display = 'none';
@@ -5897,10 +6131,49 @@ function _doScrollToMsg(targetId) {
                 tidePage.style.display = 'flex'; modalTitleText.textContent = '潮汐'; setModalIcon('tide'); const now = new Date();
                 tideDisplayYear = now.getFullYear();
                 tideDisplayMonth = now.getMonth() + 1;
-                tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); triggerPeriodQuote(); }
+                tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); }
 
         function showDataManagementPage() { hideAllPages();
-                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); updateDmStorageMeter(); updateDmMailCalendarOnOpen(); }
+                dataManagementPage.style.display = 'flex'; modalTitleText.textContent = '数据管理'; setModalIcon('dataManagement'); updateDmStorageMeter(); updateDmMailCalendarOnOpen(); initDmCollapseSections(); }
+
+        function initDmCollapseSections() {
+            const sections = dataManagementPage.querySelectorAll('.setting-section');
+            sections.forEach((section, idx) => {
+                // 存储使用情况（第一个section）不折叠
+                if (idx === 0) return;
+                // 如果已经初始化过，跳过
+                if (section.querySelector('.dm-collapse-header')) return;
+                const label = section.querySelector('.section-label');
+                if (!label) return;
+                const parent = label.parentNode;
+                // 创建折叠头部
+                const header = document.createElement('div');
+                header.className = 'dm-collapse-header';
+                const arrow = document.createElement('span');
+                arrow.className = 'dm-collapse-arrow';
+                arrow.innerHTML = '<svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>';
+                header.appendChild(label.cloneNode(true));
+                header.appendChild(arrow);
+                // 创建折叠内容容器
+                const content = document.createElement('div');
+                content.className = 'dm-collapse-content';
+                while (label.nextSibling) {
+                    content.appendChild(label.nextSibling);
+                }
+                // 替换
+                label.remove();
+                parent.insertBefore(header, parent.firstChild);
+                parent.appendChild(content);
+                // 默认折叠
+                header.classList.add('collapsed');
+                content.classList.add('collapsed');
+                // 点击切换
+                header.addEventListener('click', () => {
+                    header.classList.toggle('collapsed');
+                    content.classList.toggle('collapsed');
+                });
+            });
+        }
 
         function updateDmStorageMeter() {
             const fill = document.getElementById('dmStorageFill');
@@ -5948,6 +6221,8 @@ function _doScrollToMsg(targetId) {
         function batchImportStatus() { const raw = statusBatchImportTextarea.value.trim(); if (!raw) return toast('请粘贴内容'); const lines = raw.split(/[\n\r]+/).map(l => l.trim()).filter(l => l.length); if (!lines.length) return toast('未检测到有效行'); let added = 0; lines.forEach(l => { if (!statusBank.includes(l)) { statusBank.push(l); added++; } }); if (added) { saveStatusData(); updateStatusManagerUI();
                     statusBatchImportTextarea.value = ''; toast(`导入 ${added} 条`); } else toast('所有行都已存在'); }
 
+        function exportStatusTxt() { const content = statusBank.join('\n'); const blob = new Blob(['\uFEFF' + content], { type: 'text/plain;charset=utf-8' }); downloadFile(blob, '状态栏.txt'); toast('已导出: 状态栏.txt'); }
+
         function getActivePatBank() { return patActiveTab === 'user' ? patUserBank : patLoverBank; }
 
         function setActivePatBank(bank) { if (patActiveTab === 'user') patUserBank = bank; else patLoverBank = bank; savePatBanks(); }
@@ -5966,6 +6241,8 @@ function _doScrollToMsg(targetId) {
 
         function batchImportPat() { const raw = patBatchImportTextarea.value.trim(); if (!raw) return toast('请粘贴内容'); const lines = raw.split(/[\n\r]+/).map(l => l.trim()).filter(l => l.length); if (!lines.length) return toast('未检测到有效行'); const bank = getActivePatBank(); let added = 0; lines.forEach(l => { if (!bank.includes(l)) { bank.push(l); added++; } }); if (added) { setActivePatBank(bank); updatePatUI();
                     patBatchImportTextarea.value = ''; toast(`导入 ${added} 条`); } else toast('所有行都已存在'); }
+
+        function exportPatTxt() { const bank = getActivePatBank(); const content = bank.join('\n'); const filename = patActiveTab === 'user' ? '拍一拍_用户.txt' : '拍一拍_联系人.txt'; const blob = new Blob(['\uFEFF' + content], { type: 'text/plain;charset=utf-8' }); downloadFile(blob, filename); toast('已导出: ' + filename); }
 
         function openModal() { createBackup(); showCards(); modalOverlay.style.display = 'flex'; document.body.style.overflow = 'hidden'; settingsDirty = false; }
 
@@ -6320,7 +6597,7 @@ function _doScrollToMsg(targetId) {
 
         function updateTideSummary() { const summaryRow = document.getElementById('tideSummaryRow'); const ranges = getPeriodRanges(); if (ranges.length === 0) { summaryRow.innerHTML = '<span>暂无经期记录，点击日期开始记录吧</span>'; return; } const lastRange = ranges[ranges.length - 1]; const periodLength = 7; const lastStartDate = new Date(lastRange.start); const daySum = lastStartDate.getFullYear() + lastStartDate.getMonth() + lastStartDate.getDate(); const cycleLength = 23 + (daySum % 11); const nextStart = new Date(lastStartDate); nextStart.setDate(nextStart.getDate() + cycleLength); const ovuDate = new Date(lastStartDate); ovuDate.setDate(ovuDate.getDate() + Math.floor(cycleLength / 2)); summaryRow.innerHTML = `<span>最近经期：${lastRange.start}</span><span>持续：${periodLength}天</span><span class="highlight">预计排卵：${getDateKey(ovuDate.getFullYear(),ovuDate.getMonth()+1,ovuDate.getDate())}</span><span class="highlight">预计下次：${getDateKey(nextStart.getFullYear(),nextStart.getMonth()+1,nextStart.getDate())}</span>`; }
 
-        function onTideDayClick(dateKey, cell) { tideSelectedDate = dateKey; document.querySelectorAll('.tide-day-cell.selected').forEach(c => c.classList.remove('selected')); if (cell) cell.classList.add('selected'); showTideDetail(dateKey); triggerPeriodQuote(); }
+        function onTideDayClick(dateKey, cell) { tideSelectedDate = dateKey; document.querySelectorAll('.tide-day-cell.selected').forEach(c => c.classList.remove('selected')); if (cell) cell.classList.add('selected'); showTideDetail(dateKey); }
 
         function showTideDetail(dateKey) { const panel = document.getElementById('tideDetailPanel'); const dateLabel = document.getElementById('tideDetailDate'); dateLabel.textContent = dateKey; const existing = tideData[dateKey] || { period: false, flow: 'medium', pain: 'none', mood: 'calm' }; const isPeriod = existing.period === true; document.getElementById('tideDetailDelete').style.display = isPeriod ? 'inline-flex' : 'none'; setTideDetailOpts('tideFlowOptions', existing.flow || 'medium'); setTideDetailOpts('tidePainOptions', existing.pain || 'none'); setTideDetailOpts('tideMoodOptions', existing.mood || 'calm'); panel.style.display = 'flex'; panel.dataset.dateKey = dateKey; panel.dataset.isPeriod = isPeriod ? '1' : '0'; panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
 
@@ -6329,15 +6606,6 @@ function _doScrollToMsg(targetId) {
         function setTideDetailOpts(containerId, activeVal) { const container = document.getElementById(containerId); if (!container) return; container.querySelectorAll('.tide-detail-opt').forEach(opt => { opt.classList.toggle('active', opt.dataset.val === activeVal); }); }
 
         function getTideDetailOptVal(containerId) { const container = document.getElementById(containerId); if (!container) return null; const active = container.querySelector('.tide-detail-opt.active'); return active ? active.dataset.val : null; }
-
-        function triggerPeriodQuote() { const periodDays = getPeriodDaysSet(); if (periodDays.size === 0) { clearTideQuote(); document.getElementById('tideQuoteRefresh').style.display = 'none'; return; } document.getElementById('tideQuoteRefresh').style.display = 'inline-block'; showRandomQuote(); }
-
-        function showRandomQuote() { clearTideQuote(); const bubble = document.getElementById('tideQuoteBubble'); const quote = PERIOD_QUOTES[Math.floor(Math.random() * PERIOD_QUOTES.length)]; bubble.textContent = `"${quote}"`; bubble.style.padding = '12px 16px'; bubble.style.minHeight = '20px'; bubble.style.backgroundColor = hexToRgba(userBubbleHex, 0.75); bubble.classList.remove('fade-out'); bubble.classList.add('fade-in'); bubble.style.opacity = '1';
-                tideQuoteFadeTimer = setTimeout(() => { bubble.classList.remove('fade-in'); bubble.classList.add('fade-out');
-                    tideQuoteFadeTimer = setTimeout(() => { bubble.style.opacity = '0'; bubble.style.padding = '0'; bubble.style.minHeight = '0'; bubble.textContent = ''; bubble.classList.remove('fade-out'); }, 500); }, 20000); }
-
-        function clearTideQuote() { if (tideQuoteFadeTimer) clearTimeout(tideQuoteFadeTimer);
-                tideQuoteFadeTimer = null; const bubble = document.getElementById('tideQuoteBubble'); bubble.style.opacity = '0'; bubble.style.padding = '0'; bubble.style.minHeight = '0'; bubble.textContent = ''; bubble.classList.remove('fade-in', 'fade-out'); }
             featureCardsGrid.addEventListener('click', (e) => { const c = e.target.closest('.feature-card'); if (!c) return; const p = c.dataset.page; if (p === 'systemSettings') showSystemSettings(); else if (p === 'dataManagement') showDataManagementPage(); else if (p === 'wordbankManager') showWordbankManager(); else if (p === 'patpatStatus') showPatpatStatusPage(); });
             patpatStatusPage.addEventListener('click', (e) => { const c = e.target.closest('.feature-card'); if (!c) return; const sub = c.dataset.subpage; if (sub === 'patpat') { showPatpatFromHub(); } else if (sub === 'statusManager') { showStatusFromHub(); } else if (sub === 'dailySign') { showDailySignHub(); } else if (sub === 'tide') { showTideFromHub(); } else if (sub === 'mailbox') { showMailboxFromHub(); } else if (sub === 'importantDays') { showImportantDaysFromHub(); } else if (sub === 'messageStats') { showMessageStatsFromHub(); } else if (sub === 'call') { openCallPage(); } });
 
@@ -6353,6 +6621,9 @@ function _doScrollToMsg(targetId) {
         function getDeletedDefaultIndices() { try { const raw = localStorage.getItem(STORAGE_KEYS.deletedDefaultSigns); if (raw) { const parsed = JSON.parse(raw); if (Array.isArray(parsed)) return parsed; } } catch (e) {} return []; }
         function saveDeletedDefaultIndices(arr) { localStorage.setItem(STORAGE_KEYS.deletedDefaultSigns, JSON.stringify(arr)); }
         function getAllDailySigns() { const deletedIndices = new Set(getDeletedDefaultIndices()); const filteredDefaults = DAILY_SIGNS.filter((_, i) => !deletedIndices.has(i)); return [...filteredDefaults, ...getCustomDailySigns()]; }
+
+        function exportQuotesTxt() { const all = getAllDailySigns(); const lines = []; all.forEach(q => { lines.push(q.quote || ''); lines.push(q.author || ''); lines.push(q.en || ''); lines.push(''); }); const content = lines.join('\n'); const blob = new Blob(['\uFEFF' + content], { type: 'text/plain;charset=utf-8' }); downloadFile(blob, '日签语录.txt'); toast('已导出: 日签语录.txt'); }
+
         let quotesSelectionMode = false;
         let quotesSelectionSet = new Set();
         function renderQuotesList() {
@@ -6596,6 +6867,7 @@ function _doScrollToMsg(targetId) {
                     toast('已恢复默认句子库');
                 });
             });
+            $('btnQuotesExportTxt').addEventListener('click', exportQuotesTxt);
             if ($('quotesSelectAll')) $('quotesSelectAll').addEventListener('change', function() {
                 const container = $('quotesListContainer');
                 const cbs = container.querySelectorAll('input[type="checkbox"]');
@@ -6613,6 +6885,7 @@ function _doScrollToMsg(targetId) {
             btnPatBatchImport.addEventListener('click', batchImportPat);
             btnPatResetUser.addEventListener('click', () => { patActiveTab = 'user'; patTabUser.classList.add('active'); patTabLover.classList.remove('active'); patSearch.value = ''; resetActivePatBank(); });
             btnPatResetLover.addEventListener('click', () => { patActiveTab = 'lover'; patTabLover.classList.add('active'); patTabUser.classList.remove('active'); patSearch.value = ''; resetActivePatBank(); });
+            btnPatExportTxt.addEventListener('click', exportPatTxt);
             btnSend.addEventListener('click', () => { const t = messageInput.value; if (t.trim()) sendUserMsg(t); });
             messageInput.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); const t = messageInput.value; if (t.trim()) sendUserMsg(t); } });
             btnSettings.addEventListener('click', openModal);
@@ -6928,20 +7201,20 @@ function _doScrollToMsg(targetId) {
             ctxAnnotate.addEventListener('click', handleAnnotateMsg);
             ctxDelete.addEventListener('click', handleDeleteMsg);
             quotePreviewClose.addEventListener('click', () => { pendingQuote = null; quotePreviewBar.classList.remove('show'); quotePreviewText.textContent = ''; });
-                        document.getElementById('tidePrevMonth').addEventListener('click', () => { if (tideDisplayMonth === 1) { tideDisplayYear--; tideDisplayMonth = 12; } else tideDisplayMonth--; tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); triggerPeriodQuote(); });
-            document.getElementById('tideNextMonth').addEventListener('click', () => { if (tideDisplayMonth === 12) { tideDisplayYear++; tideDisplayMonth = 1; } else tideDisplayMonth++; tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); triggerPeriodQuote(); });
-            document.getElementById('tideDetailSave').addEventListener('click', () => { const panel = document.getElementById('tideDetailPanel'); const dateKey = panel.dataset.dateKey; if (!dateKey) return; const flow = getTideDetailOptVal('tideFlowOptions') || 'medium'; const pain = getTideDetailOptVal('tidePainOptions') || 'none'; const mood = getTideDetailOptVal('tideMoodOptions') || 'calm'; tideData[dateKey] = { period: true, flow, pain, mood }; saveTideData(); hideTideDetail(); renderTideCalendar(); toast('经期记录已保存'); triggerPeriodQuote(); });
+                        document.getElementById('tidePrevMonth').addEventListener('click', () => { if (tideDisplayMonth === 1) { tideDisplayYear--; tideDisplayMonth = 12; } else tideDisplayMonth--; tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); });
+            document.getElementById('tideNextMonth').addEventListener('click', () => { if (tideDisplayMonth === 12) { tideDisplayYear++; tideDisplayMonth = 1; } else tideDisplayMonth++; tideSelectedDate = null; hideTideDetail(); renderTideCalendar(); });
+            document.getElementById('tideDetailSave').addEventListener('click', () => { const panel = document.getElementById('tideDetailPanel'); const dateKey = panel.dataset.dateKey; if (!dateKey) return; const flow = getTideDetailOptVal('tideFlowOptions') || 'medium'; const pain = getTideDetailOptVal('tidePainOptions') || 'none'; const mood = getTideDetailOptVal('tideMoodOptions') || 'calm'; tideData[dateKey] = { period: true, flow, pain, mood }; saveTideData(); hideTideDetail(); renderTideCalendar(); toast('经期记录已保存'); });
             document.getElementById('tideDetailCancel').addEventListener('click', hideTideDetail);
             document.getElementById('tideDetailDelete').addEventListener('click', () => { const panel = document.getElementById('tideDetailPanel'); const dateKey = panel.dataset.dateKey; if (!dateKey) return; if (tideData[dateKey]) { delete tideData[dateKey]; saveTideData(); } hideTideDetail(); tideSelectedDate = null; renderTideCalendar(); toast('经期记录已删除'); });
             document.getElementById('tideFlowOptions').addEventListener('click', (e) => { const opt = e.target.closest('.tide-detail-opt'); if (opt) setTideDetailOpts('tideFlowOptions', opt.dataset.val); });
             document.getElementById('tidePainOptions').addEventListener('click', (e) => { const opt = e.target.closest('.tide-detail-opt'); if (opt) setTideDetailOpts('tidePainOptions', opt.dataset.val); });
             document.getElementById('tideMoodOptions').addEventListener('click', (e) => { const opt = e.target.closest('.tide-detail-opt'); if (opt) setTideDetailOpts('tideMoodOptions', opt.dataset.val); });
-            document.getElementById('tideQuoteRefresh').addEventListener('click', showRandomQuote);
             statusSearch.addEventListener('input', () => filterStatus(statusSearch.value));
             btnStatusAdd.addEventListener('click', () => addStatusEntry(statusAddInput.value));
             statusAddInput.addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); addStatusEntry(statusAddInput.value); } });
             btnStatusBatchImport.addEventListener('click', batchImportStatus);
             btnStatusReset.addEventListener('click', resetStatusBank);
+            btnStatusExportTxt.addEventListener('click', exportStatusTxt);
 
         function getFilteredHistory(range) { const now = Date.now(); let startTime = 0; if (range === 'today') { const d = new Date(); d.setHours(0, 0, 0, 0); startTime = d.getTime(); } else if (range === 'threeDays') { startTime = now - 3 * 24 * 60 * 60 * 1000; } else if (range === 'thisWeek') { const d = new Date(); const day = d.getDay(); const diff = (day === 0 ? -6 : 1) - day; d.setDate(d.getDate() + diff); d.setHours(0, 0, 0, 0); startTime = d.getTime(); } return chatHistory.filter(m => m.time >= startTime); }
 
@@ -7128,12 +7401,49 @@ function _doScrollToMsg(targetId) {
             dmMailSelectedText.textContent = '已选 ' + dmMailSelectedDates.size + ' 天：' + sorted.join(', ');
         }
 
+        function dmpLetterHtml(entry, isReceive) {
+            const bgColor = isReceive ? letterPaperBgLover : letterPaperBgUser;
+            const borderColor = isReceive ? letterPaperBorderLover : letterPaperBorderUser;
+            const content = entry.content;
+            const dateStr = fdate(new Date(entry.time)) + ' ' + ftime(new Date(entry.time));
+            let bodyHtml = '';
+            if (!isReceive) {
+                const lines = content.split('\n').map(l => l.trim()).filter(l => l);
+                if (lines.length === 0) lines.push(content.trim());
+                bodyHtml = '<div class="letter-body">' + lines.map(p => '<p>' + escapeHtml(p) + '</p>').join('') + '</div>';
+            } else {
+                const lines = content.split('\n');
+                let greeting = '', firstSentence = '', bodyLines = [], signature = '', dateLine = '', mode = 'greeting';
+                for (let line of lines) {
+                    line = line.trim();
+                    if (!line) continue;
+                    if (mode === 'greeting' && line.includes('夫人：')) { greeting = line; mode = 'first'; }
+                    else if (mode === 'first' && line.includes('见字如晤')) { firstSentence = line; mode = 'body'; }
+                    else if (line.includes('顾时夜')) { signature = line; mode = 'signature'; }
+                    else if (mode === 'signature' && /^\d{4}年/.test(line)) { dateLine = line; }
+                    else { if (mode !== 'signature') bodyLines.push(line); }
+                }
+                if (greeting) bodyHtml += '<div class="letter-greeting">' + escapeHtml(greeting) + '</div>';
+                if (firstSentence) bodyHtml += '<div class="letter-first-sentence">' + escapeHtml(firstSentence) + '</div>';
+                if (bodyLines.length) bodyHtml += '<div class="letter-body">' + bodyLines.map(p => '<p>' + escapeHtml(p) + '</p>').join('') + '</div>';
+                if (signature) bodyHtml += '<div class="letter-signature">' + escapeHtml(signature) + '</div>';
+                if (dateLine) bodyHtml += '<div class="letter-date">' + escapeHtml(dateLine) + '</div>';
+            }
+            return '<div class="letter-box" style="background:' + bgColor + ';border-color:' + borderColor + ';">'
+                + '<div class="letter-box-date">' + escapeHtml(dateStr) + '</div>'
+                + '<div class="letter-box-content" style="border-color:' + borderColor + ';outline-color:' + borderColor + ';">'
+                + bodyHtml + '</div></div>';
+        }
+
         function dmExportAllLetters(mode) {
             const data = getLetterDataForMode(mode);
             if (!data.length) { toast('没有可导出的信件'); return; }
-            const exportData = data.map(entry => ({ id: entry.id, content: entry.content, time: entry.time, date: fdate(new Date(entry.time)) + ' ' + ftime(new Date(entry.time)), read: entry.read }));
-            const label = mode === 'send' ? '投递的信' : '回信';
-            downloadJson(exportData, '信箱_' + label + '_' + new Date().toISOString().slice(0,10) + '.json');
+            const isReceive = mode === 'receive';
+            const label = isReceive ? '回信' : '投递的信';
+            const title = isReceive ? '💌 他的回信' : '📨 我投递的信';
+            const lettersHtml = [...data].reverse().map(entry => dmpLetterHtml(entry, isReceive)).join('\n');
+            const html = dmpLetterPageHtml(title, lettersHtml, isReceive);
+            downloadHtml(html, '信箱_' + label + '_' + new Date().toISOString().slice(0,10) + '.html');
             toast(label + '已导出（共 ' + data.length + ' 封）');
         }
 
@@ -7144,11 +7454,34 @@ function _doScrollToMsg(targetId) {
                 const d = new Date(entry.time); return dmMailSelectedDates.has(d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0'));
             });
             if (!selected.length) { toast('选中日期内没有信件'); return; }
-            const exportData = selected.map(entry => ({ id: entry.id, content: entry.content, time: entry.time, date: fdate(new Date(entry.time)) + ' ' + ftime(new Date(entry.time)), read: entry.read }));
-            const label = mode === 'send' ? '投递的信' : '回信';
-            downloadJson(exportData, '信箱_' + label + '_' + [...dmMailSelectedDates].sort().join('_') + '.json');
+            const isReceive = mode === 'receive';
+            const label = isReceive ? '回信' : '投递的信';
+            const title = isReceive ? '💌 他的回信' : '📨 我投递的信';
+            const lettersHtml = [...selected].reverse().map(entry => dmpLetterHtml(entry, isReceive)).join('\n');
+            const html = dmpLetterPageHtml(title, lettersHtml, isReceive);
+            downloadHtml(html, '信箱_' + label + '_' + [...dmMailSelectedDates].sort().join('_') + '.html');
             toast(label + '已导出（共 ' + selected.length + ' 封）');
         }
+
+        function dmpLetterPageHtml(title, lettersHtml, isReceive) {
+            const bgColor = isReceive ? letterPaperBgLover : letterPaperBgUser;
+            const borderColor = isReceive ? letterPaperBorderLover : letterPaperBorderUser;
+            return '<!DOCTYPE html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>' + title + '</title>'
+                + '<style>'
+                + '*{box-sizing:border-box;margin:0;padding:0}'
+                + 'body{font-family:"KaiTi","STKaiti","楷体",serif;background:#f5f0ec;color:#4a3f44;padding:24px 16px 40px;display:flex;flex-direction:column;align-items:center;gap:20px}'
+                + 'h1{font-size:18px;color:#8a7d85;font-weight:400;letter-spacing:2px;margin-bottom:8px;text-align:center}'
+                + '.letter-box{width:100%;max-width:480px;background:' + bgColor + ';border-radius:18px;padding:18px 18px 22px;box-shadow:0 8px 28px rgba(0,0,0,0.08);border:1px solid ' + borderColor + ';display:flex;flex-direction:column;gap:10px}'
+                + '.letter-box-date{font-size:12px;color:#b0a6b4;text-align:right;letter-spacing:0.3px;padding-right:2px}'
+                + '.letter-box-content{font-size:15px;line-height:2.0;letter-spacing:0.4px;padding:20px 18px;border:3px solid ' + borderColor + ';outline:2px dashed ' + borderColor + ';outline-offset:6px;border-radius:8px;margin:4px 2px;white-space:pre-wrap;word-break:break-word}'
+                + '.letter-box-content .letter-greeting,.letter-box-content .letter-first-sentence,.letter-box-content .letter-signature,.letter-box-content .letter-date{color:#5a7a9a;font-weight:500}'
+                + '.letter-box-content .letter-body p{margin:0 0 4px 0;line-height:1.8}'
+                + '.letter-box-content .letter-signature,.letter-box-content .letter-date{text-align:right;margin-top:4px}'
+                + '@media(prefers-color-scheme:dark){body{background:#1e1e24;color:#c8ccd4}h1{color:#9a95a4}}'
+                + '</style></head><body><h1>' + title + '</h1>' + lettersHtml + '</body></html>';
+        }
+
+        function downloadHtml(data, filename) { const blob = new Blob(['\ufeff' + data], { type: 'text/html;charset=utf-8' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); }
 
         function downloadJson(data, filename) { const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }); const url = URL.createObjectURL(blob); const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); URL.revokeObjectURL(url); }
 
@@ -7535,10 +7868,10 @@ function escapeHtml(str) {
             callLastSuccess = isSuccess;
             callFailPattern = CALL_FAIL_PATTERNS[Math.floor(Math.random() * CALL_FAIL_PATTERNS.length)];
 
-            // 两段：1) 横向线条从无到有延伸 2) 交汇后立即向上绘制图案
+            // 两段：1) 横向线条从无到有延伸 2) 交汇后立即向上转折绘制图案（无竖线）
             const seg1 = (Number(callConfig.lineDuration) || 3) * 1000;
-            const seg3 = (Number(callConfig.patternDuration) || 4) * 1000;
-            const total = seg1 + seg3;
+            const seg2 = (Number(callConfig.patternDuration) || 4) * 1000;
+            const total = seg1 + seg2;
             const startT = performance.now();
             callPhase = 'line';
 
@@ -7554,10 +7887,6 @@ function escapeHtml(str) {
                 const centerX = w / 2;
                 const lineW = Math.min(3, Math.max(2, Math.round(w / 180)));
                 const lineColor = callConfig.lineColor || DEFAULT_CALL_CONFIG.lineColor;
-                // 向上绘制的高度
-                const stemH = Math.max(40, h * 0.22);
-                // 图案基准点：交汇点（midY）
-                const patternBaseY = midY;
                 // 图案尺寸
                 const heartSize = Math.min(h * 0.62, w * 0.4);
 
@@ -7577,22 +7906,17 @@ function escapeHtml(str) {
                     ctx.moveTo(w, midY); ctx.lineTo(rightEndX, midY);
                     ctx.stroke();
                 } else {
-                    // 段2：交汇后立即向上绘制图案 —— 竖线+图案同时从交汇点向上展开
+                    // 段2：交汇后立即向上转折绘制图案——无竖线，交汇点=爱心尖端
                     callPhase = 'pattern';
-                    const patT = easeInOutCubic(Math.min(1, (elapsed - seg1) / seg3));
-                    // 先画两条横线（已完成交汇）
+                    const patT = easeInOutCubic(Math.min(1, (elapsed - seg1) / seg2));
+                    // 画两条已完成交汇的横线
                     ctx.beginPath();
                     ctx.moveTo(0, midY); ctx.lineTo(centerX, midY);
                     ctx.moveTo(w, midY); ctx.lineTo(centerX, midY);
                     ctx.stroke();
-                    // 竖线从交汇点向上生长
-                    const stemY = midY - patT * stemH;
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, midY); ctx.lineTo(centerX, stemY);
-                    ctx.stroke();
-                    // 图案从竖线顶端向下展开（尖端朝下为正）
-                    drawHalfPattern(ctx, 'right', centerX, stemY, heartSize, patT, isSuccess);
-                    drawHalfPattern(ctx, 'left', centerX, stemY, heartSize, patT, isSuccess);
+                    // 从交汇点向上绘制图案（尖端朝下，交汇点=尖端）
+                    drawHalfPattern(ctx, 'right', centerX, midY, heartSize, patT, isSuccess);
+                    drawHalfPattern(ctx, 'left', centerX, midY, heartSize, patT, isSuccess);
 
                     if (elapsed >= total) {
                         callPhase = 'showing';
@@ -7621,37 +7945,38 @@ function escapeHtml(str) {
             }
         }
 
-        // 半颗爱心（dir: 1=右半, -1=左半），从顶端(cx,cy)向两侧+下方绘制到底部V点
+        // 半颗爱心（dir: 1=右半, -1=左半），从交汇点(尖端)向上绘制到顶部V
         function drawHalfHeart(ctx, cx, cy, size, dir, t, color) {
             ctx.save();
             ctx.strokeStyle = color;
             ctx.lineWidth = Math.max(2, size * 0.04);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
-            // 用心形参数方程，方向：从顶端 t=π → 沿曲线向底部V点
+            // 心形参数方程：尖端在cx,cy（交汇点），顶部V在上方
             const steps = 80;
             const sx = size / 32, sy = size / 28;
-            // dir=1(右半) 从 t=π 递减到 0
-            // dir=-1(左半) 从 t=π 递增到 2π
-            const startA = Math.PI;
-            const endA = dir > 0 ? 0 : 2 * Math.PI;
+            // dir=1(右半) 从 t=0(尖端) 递增到 π(顶部V)，即向右上方绘制
+            // dir=-1(左半) 从 t=2π(尖端) 递减到 π(顶部V)，即向左上方绘制
+            const startA = dir > 0 ? 0 : 2 * Math.PI;
+            const endA = Math.PI;
             const drawEnd = startA + (endA - startA) * t;
             ctx.beginPath();
             let first = true;
             for (let i = 0; i <= steps; i++) {
                 const a = startA + (endA - startA) * (i / steps);
-                if (dir > 0 ? (a < drawEnd) : (a > drawEnd)) break;
+                if (dir > 0 ? (a > drawEnd) : (a < drawEnd)) break;
                 const hx = 16 * Math.pow(Math.sin(a), 3);
-                const hy = -(13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a));
+                const hy = 13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a);
                 const px = cx + hx * sx;
-                const py = cy - hy * sy;
+                // 尖端朝下：t=0时hy=5→尖端在cy；t=π时hy=-17→V在cy上方
+                const py = cy + (hy - 5) * sy;
                 if (first) { ctx.moveTo(px, py); first = false; } else { ctx.lineTo(px, py); }
             }
             ctx.stroke();
             ctx.restore();
         }
 
-        // 失败的左侧：其他轴对称图案的一半（描边），从顶端(cx,cy)向下方+左侧展开
+        // 失败的左侧：轴对称图案的一半（描边），从交汇点向上方展开
         function drawHalfOther(ctx, cx, cy, size, dir, t, color, kind) {
             ctx.save();
             ctx.strokeStyle = color;
@@ -7661,16 +7986,15 @@ function escapeHtml(str) {
             const halfW = size * 0.5;
             const totalH = size * 0.9;
             const r = size * 0.45;
-            // dir=-1（左侧）
-            const dx = -1; // x 方向系数：负
+            const dx = -1;
             const drawTo = t;
             ctx.beginPath();
+            // 所有图案从交汇点向上方绘制（y为负方向）
             if (kind === 'half_diamond') {
-                // 菱形（左半）：顶端(0,0) → 左中(-halfW, totalH/2) → 底端(0,totalH)
                 const pts = [
                     { x: 0, y: 0 },
-                    { x: dx * halfW, y: totalH / 2 },
-                    { x: 0, y: totalH }
+                    { x: dx * halfW, y: -totalH / 2 },
+                    { x: 0, y: -totalH }
                 ];
                 const seg = drawTo * (pts.length - 1);
                 const segI = Math.floor(seg);
@@ -7682,21 +8006,19 @@ function escapeHtml(str) {
                     ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
                 }
             } else if (kind === 'half_circle') {
-                // 半圆：直径朝右，圆心在(0, r)，从(0,0) 弧到 (0, 2r) 经过 (-2r, r)
-                // 左半：以左为外侧
-                const cxL = dx * r, cyL = r;
-                const startA = -Math.PI / 2;
-                const endA = Math.PI / 2;
+                // 半圆弧向上
+                const cxL = dx * r, cyL = -r;
+                const startA = Math.PI / 2;
+                const endA = -Math.PI / 2;
                 const drawEnd = startA + (endA - startA) * drawTo;
                 ctx.moveTo(cx, cy);
-                ctx.arc(cx + cxL, cy + cyL, r, startA, drawEnd);
+                ctx.arc(cx + cxL, cy + cyL, r, startA, drawEnd, true);
             } else if (kind === 'half_square') {
-                // 左半方块：顶端(0,0) → 左上(-halfW,0) → 左下(-halfW,totalH) → 底端(0,totalH)
                 const pts = [
                     { x: 0, y: 0 },
                     { x: dx * halfW, y: 0 },
-                    { x: dx * halfW, y: totalH },
-                    { x: 0, y: totalH }
+                    { x: dx * halfW, y: -totalH },
+                    { x: 0, y: -totalH }
                 ];
                 const seg = drawTo * (pts.length - 1);
                 const segI = Math.floor(seg);
@@ -7708,11 +8030,10 @@ function escapeHtml(str) {
                     ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
                 }
             } else if (kind === 'half_triangle') {
-                // 左半三角：顶端(0,0) → 左下(-halfW, totalH) → 底端(0,totalH)
                 const pts = [
                     { x: 0, y: 0 },
-                    { x: dx * halfW, y: totalH },
-                    { x: 0, y: totalH }
+                    { x: dx * halfW, y: -totalH },
+                    { x: 0, y: -totalH }
                 ];
                 const seg = drawTo * (pts.length - 1);
                 const segI = Math.floor(seg);
@@ -7724,19 +8045,16 @@ function escapeHtml(str) {
                     ctx.lineTo(cx + (a.x + (b.x - a.x) * segT), cy + (a.y + (b.y - a.y) * segT));
                 }
             } else if (kind === 'half_star') {
-                // 左半五角星：顶端 1 个点，左下/左下角等
-                const cxL = dx * halfW * 0.5, cyL = totalH * 0.5;
+                const cxL = dx * halfW * 0.5, cyL = -totalH * 0.5;
                 const ro = halfW * 0.9, ri = halfW * 0.35;
                 const pts = [];
-                // 10 个点，只取左半（x ≤ 0）的部分
                 for (let i = 0; i < 10; i++) {
-                    const a = -Math.PI / 2 + i * Math.PI / 5;
+                    const a = Math.PI / 2 + i * Math.PI / 5;
                     const rad = i % 2 === 0 ? ro : ri;
                     const x = cxL + rad * Math.cos(a);
-                    if (x > 0) continue; // 跳过右半
+                    if (x > 0) continue;
                     pts.push({ x: x, y: cyL + rad * Math.sin(a) });
                 }
-                // 排序：从顶端开始
                 pts.sort((a, b) => a.y - b.y);
                 const seg = drawTo * (pts.length - 1);
                 const segI = Math.floor(seg);
@@ -7750,11 +8068,10 @@ function escapeHtml(str) {
                     }
                 }
             } else if (kind === 'half_hexagon') {
-                // 左半六边形：顶端(0,0) → 左中(-halfW*0.866, totalH/2) → 底端(0,totalH)
                 const pts = [
                     { x: 0, y: 0 },
-                    { x: dx * halfW * 0.866, y: totalH / 2 },
-                    { x: 0, y: totalH }
+                    { x: dx * halfW * 0.866, y: -totalH / 2 },
+                    { x: 0, y: -totalH }
                 ];
                 const seg = drawTo * (pts.length - 1);
                 const segI = Math.floor(seg);
