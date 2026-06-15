@@ -3167,6 +3167,12 @@
         .dm-mail-legend-dot.send { background: #f0a0b8; }
         .dm-mail-legend-dot.receive { background: #8ab8d8; }
         .dm-mail-selected { display:flex; align-items:center; gap:8px; margin-top:8px; font-size:12px; color:#6a5a6a; }
+        .dm-mail-collapse-toggle {
+            font-size: 11px; color: #b0a6b4; font-weight: 400; cursor: pointer;
+            transition: color 0.2s; user-select: none; letter-spacing: 0.3px;
+        }
+        .dm-mail-collapse-toggle:hover { color: #8a6a7a; }
+        .dm-mail-delete-body { margin-top: 6px; }
         /* 字卡导出导入 */
         .dm-wordcard-section { margin-top: 8px; }
         .dm-wordcard-group-row { display:flex; align-items:center; gap:8px; margin-bottom:6px; font-size:12px; color:#6a5a6a; }
@@ -4300,6 +4306,18 @@
             #patpatPage .wordbank-search { font-size: 12px; }
             #patpatPage .wordbank-count { font-size: 11px; }
             #patpatPage .section-label { font-size: 13px; }
+            /* 状态管理页面移动端适配 */
+            #statusManagerPage .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+            #statusManagerPage .batch-import-textarea { font-size: 12px; padding: 7px 10px 7px 30px; }
+            #statusManagerPage .batch-import-wrapper svg { top: 16px; width: 14px; height: 14px; }
+            #statusManagerPage .wordbank-add-row { gap: 6px; }
+            #statusManagerPage .wordbank-add-row .btn-sm { padding: 5px 10px; font-size: 11.5px; }
+            #statusManagerPage .wordbank-add-row input { font-size: 12px; padding: 6px 10px; }
+            #statusManagerPage .wordbank-search { font-size: 12px; }
+            #statusManagerPage .wordbank-count { font-size: 11px; }
+            #statusManagerPage .wordbank-list { max-height: 150px; }
+            #statusManagerPage .section-label { font-size: 13px; }
+            #statusManagerPage .status-current-display { font-size: 13px; padding: 8px 12px; }
         }
         .msg-stats-grid {
             display: grid;
@@ -4605,6 +4623,7 @@ body.dark-mode .msg-read-badge svg {
 }
 .letter-detail-content .letter-greeting,
 .letter-detail-content .letter-first-sentence,
+.letter-detail-content .letter-signoff,
 .letter-detail-content .letter-signature,
 .letter-detail-content .letter-date {
     color: #5a7a9a !important;
@@ -4614,6 +4633,12 @@ body.dark-mode .msg-read-badge svg {
     margin: 0 0 6px 0;
     line-height: 1.5;
 }
+.letter-detail-content .letter-signoff {
+    text-align: center;
+    font-style: italic;
+    letter-spacing: 1px;
+    margin-top: 8px;
+}
 .letter-detail-content .letter-signature,
 .letter-detail-content .letter-date {
     text-align: right;
@@ -4621,6 +4646,7 @@ body.dark-mode .msg-read-badge svg {
 }
 body.dark-mode .letter-detail-content .letter-greeting,
 body.dark-mode .letter-detail-content .letter-first-sentence,
+body.dark-mode .letter-detail-content .letter-signoff,
 body.dark-mode .letter-detail-content .letter-signature,
 body.dark-mode .letter-detail-content .letter-date {
     color: #7a9ab8 !important;
@@ -4876,7 +4902,7 @@ body.dark-mode .user-letter-content .letter-body p {
                         <button class="btn-save-all" id="btnSaveAll"><svg viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>保存所有设置</button></div></div>
                 <div class="feature-page" id="patpatPage"><button class="btn-sm btn-ghost back-btn" id="backFromPatpat"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="6.5" cy="8.5" r="3.8"/><circle cx="17.5" cy="8.5" r="3.8"/><path d="M6.5 12.3 Q12 17 17.5 12.3"/></svg> 拍一拍</span><div class="pat-tab-row"><button class="pat-tab-btn active" id="patTabUser" data-tab="user">用户拍一拍</button><button class="pat-tab-btn" id="patTabLover" data-tab="lover">联系人拍一拍</button></div><div class="wordbank-header" style="margin-top:6px;"><div class="search-icon-wrapper"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><input type="text" class="wordbank-search" id="patSearch" placeholder="搜索拍一拍..."></div><span class="wordbank-count" id="patCount">共 0 条</span></div><div class="pat-list" id="patList"></div><div class="pat-preview-box" id="patPreviewBox"><div class="pat-preview-label">预览（占位符将替换为实际昵称）</div><div class="pat-preview-text" id="patPreviewText"></div></div><div class="wordbank-add-row"><input type="text" id="patAddInput" placeholder="添加新拍一拍..." maxlength="120"><button class="btn-sm btn-blue" id="btnPatAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加</button></div><div class="batch-import-wrapper"><svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg><textarea class="batch-import-textarea" id="patBatchImportTextarea" rows="3" placeholder="将分行的拍一拍内容粘贴在这里...&#10;支持 {user} 和 {lover} 占位符"></textarea></div><div style="display:flex;gap:8px;margin-top:6px;"><button class="btn-sm btn-pink" id="btnPatBatchImport"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导入</button><span style="font-size:13px;color:#b0a6b4;font-family:var(--font);">自动去重，即时保存</span></div><div style="margin-top:8px;display:flex;gap:8px;"><span id="patResetUserWrapper"><button class="btn-sm btn-pink" id="btnPatResetUser"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复用户默认</button></span><span id="patResetLoverWrapper" style="display:none;"><button class="btn-sm btn-pink" id="btnPatResetLover"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>恢复联系人默认</button></span><button class="btn-sm btn-pink" id="btnPatExportTxt"><svg viewBox="0 0 24 24" width="14" height="14"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>批量导出 (TXT)</button></div></div></div>
                 <div class="feature-page" id="tidePage"><button class="btn-sm btn-ghost back-btn" id="backFromTide"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg> 潮汐 · 经期记录</span><div class="tide-calendar-box" id="tideCalendarBox"><div class="tide-month-nav"><button id="tidePrevMonth" title="上一月"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="tide-month-title" id="tideMonthTitle"></span><button id="tideNextMonth" title="下一月"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="tide-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="tide-days-grid" id="tideDaysGrid"></div><div class="tide-legend"><span><span class="tide-legend-dot period"></span> 经期</span><span><span class="tide-legend-dot ovulation"></span> 排卵期</span><span><span class="tide-legend-dot luteal"></span> 黄体期</span></div><div class="tide-summary-row" id="tideSummaryRow"></div></div></div><div id="tideDetailPanel" class="tide-detail-panel" style="display:none;"><div style="font-weight:600;font-size:14px;color:var(--text-dark);letter-spacing:0.3px;" id="tideDetailDate"></div><div class="tide-detail-row"><span class="tide-detail-label">血量</span><div class="tide-detail-options" id="tideFlowOptions"><span class="tide-detail-opt" data-val="light">少</span><span class="tide-detail-opt active" data-val="medium">中</span><span class="tide-detail-opt" data-val="heavy">多</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">疼痛</span><div class="tide-detail-options" id="tidePainOptions"><span class="tide-detail-opt active" data-val="none">无</span><span class="tide-detail-opt" data-val="mild">轻微</span><span class="tide-detail-opt" data-val="moderate">中等</span><span class="tide-detail-opt" data-val="severe">严重</span></div></div><div class="tide-detail-row"><span class="tide-detail-label">心情</span><div class="tide-detail-options" id="tideMoodOptions"><span class="tide-detail-opt" data-val="happy">开心</span><span class="tide-detail-opt" data-val="calm">平静</span><span class="tide-detail-opt" data-val="sad">难过</span><span class="tide-detail-opt" data-val="irritated">烦躁</span><span class="tide-detail-opt" data-val="tired">疲惫</span></div></div><div class="tide-detail-actions"><button class="btn-sm btn-ghost" id="tideDetailCancel">取消</button><button class="btn-sm btn-danger-sm" id="tideDetailDelete" style="display:none;">删除记录</button><button class="btn-sm btn-pink" id="tideDetailSave">保存</button></div></div></div>
-                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 导出信箱</span><div class="mailbox-export-tab-row"><button class="mailbox-export-tab-btn active" id="dmMailTabSend">投递的信</button><button class="mailbox-export-tab-btn" id="dmMailTabReceive">回信</button></div><div class="dm-mail-calendar" id="dmMailCalendar"><div class="dm-mail-month-nav"><button id="dmMailPrevMonth"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dm-mail-month-title" id="dmMailMonthTitle"></span><button id="dmMailNextMonth"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="dm-mail-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="dm-mail-days-grid" id="dmMailDaysGrid"></div><div class="dm-mail-legend"><span><span class="dm-mail-legend-dot send"></span> 寄出</span><span><span class="dm-mail-legend-dot receive"></span> 回信</span></div><div class="dm-mail-selected" id="dmMailSelected" style="display:none;"><span id="dmMailSelectedText"></span><button class="btn-sm btn-pink" id="btnDmMailExportSelected" style="margin-left:auto;">导出选中日期</button></div></div><div class="dm-btn-row" style="margin-top:6px;"><button class="btn-sm btn-pink" id="btnDmMailExportAllSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部投递信</button><button class="btn-sm btn-blue" id="btnDmMailExportAllReceive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部回信</button></div><div class="dm-info-text" style="margin-top:6px;">月历中粉色圆点表示有信寄出，蓝色圆点表示有回信。点击日期可选择单日或多日导出。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><line x1="12" y1="17" x2="12" y2="21"/></svg> 字卡库管理</span><div class="dm-wordcard-section" id="dmWordcardGroups"><div class="dm-info-text" style="margin-bottom:8px;">选择要导出的字卡分组，导出格式为JSON文件，可用于导入恢复。</div><div id="dmWordcardGroupList" style="max-height:160px;overflow-y:auto;margin-bottom:8px;"></div></div><div class="dm-btn-row" style="margin-top:6px;gap:8px;"><button class="btn-sm btn-pink" id="btnDmWordcardExport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出选中字卡</button><button class="btn-sm btn-blue" id="btnDmWordcardImport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入字卡库</button><input type="file" id="wordcardImportFileInput" accept=".json" style="display:none;"></div><div class="dm-info-text" style="margin-top:6px;">导出格式与导入格式统一，导入后字卡会按分组名合并到对应分组中。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
+                <div class="feature-page" id="dataManagementPage"><button class="btn-sm btn-ghost back-btn" id="backFromDataManagement"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg> 存储使用情况</span><div class="dm-storage-meter" id="dmStorageMeter"><div class="dm-storage-bar"><div class="dm-storage-fill" id="dmStorageFill"></div><div class="dm-storage-num" id="dmStorageNum">0%</div></div><div class="dm-storage-text" id="dmStorageText">已用 0 KB / 剩余 5 MB</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/><path d="M5 12c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5"/></svg> 导出聊天记录</span><div class="dm-export-options" id="dmExportTimeRange"><span class="dm-export-opt active" data-range="today">当日</span><span class="dm-export-opt" data-range="threeDays">近三日</span><span class="dm-export-opt" data-range="thisWeek">本周</span><span class="dm-export-opt" data-range="all">全部记录</span></div><div class="dm-btn-row" style="margin-top:8px;"><button class="btn-sm btn-pink" id="btnExportChatHtml"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg> 导出 HTML</button><button class="btn-sm btn-blue" id="btnExportChatJson"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出 JSON</button></div><div class="dm-info-text" style="margin-top:6px;">导出的聊天记录包含时间、聊天内容、拍一拍、注释（全部内容）、引用，点击引用可跳回原消息并高亮。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 导出信箱</span><div class="mailbox-export-tab-row"><button class="mailbox-export-tab-btn active" id="dmMailTabSend">投递的信</button><button class="mailbox-export-tab-btn" id="dmMailTabReceive">回信</button></div><div class="dm-mail-calendar" id="dmMailCalendar"><div class="dm-mail-month-nav"><button id="dmMailPrevMonth"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dm-mail-month-title" id="dmMailMonthTitle"></span><button id="dmMailNextMonth"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="dm-mail-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="dm-mail-days-grid" id="dmMailDaysGrid"></div><div class="dm-mail-legend"><span><span class="dm-mail-legend-dot send"></span> 寄出</span><span><span class="dm-mail-legend-dot receive"></span> 回信</span></div><div class="dm-mail-selected" id="dmMailSelected" style="display:none;"><span id="dmMailSelectedText"></span><button class="btn-sm btn-pink" id="btnDmMailExportSelected" style="margin-left:auto;">导出选中日期</button></div></div><div class="dm-btn-row" style="margin-top:6px;"><button class="btn-sm btn-pink" id="btnDmMailExportAllSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部投递信</button><button class="btn-sm btn-blue" id="btnDmMailExportAllReceive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部回信</button></div><div class="dm-info-text" style="margin-top:6px;">月历中粉色圆点表示有信寄出，蓝色圆点表示有回信。点击日期可选择单日或多日导出。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除信件<span class="dm-mail-collapse-toggle" id="dmMailDeleteToggle" style="margin-left:auto;">展开 ▼</span></span><div class="dm-mail-delete-body" id="dmMailDeleteBody" style="display:none;"><div class="mailbox-export-tab-row"><button class="mailbox-export-tab-btn active" id="dmMailDelTabSend">投递的信</button><button class="mailbox-export-tab-btn" id="dmMailDelTabReceive">回信</button></div><div class="dm-mail-calendar" id="dmMailDelCalendar"><div class="dm-mail-month-nav"><button id="dmMailDelPrevMonth"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button><span class="dm-mail-month-title" id="dmMailDelMonthTitle"></span><button id="dmMailDelNextMonth"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button></div><div class="dm-mail-weekdays"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div><div class="dm-mail-days-grid" id="dmMailDelDaysGrid"></div><div class="dm-mail-legend"><span><span class="dm-mail-legend-dot send"></span> 寄出</span><span><span class="dm-mail-legend-dot receive"></span> 回信</span></div><div class="dm-mail-selected" id="dmMailDelSelected" style="display:none;"><span id="dmMailDelSelectedText"></span><button class="btn-sm btn-danger-sm" id="btnDmMailDeleteSelected" style="margin-left:auto;">删除选中日期</button></div></div><div class="dm-btn-row" style="margin-top:6px;"><button class="btn-sm btn-danger-sm" id="btnDmMailDeleteAllSend"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>删除全部投递信</button><button class="btn-sm btn-danger-sm" id="btnDmMailDeleteAllReceive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>删除全部回信</button></div><div class="dm-info-text" style="margin-top:6px;">删除操作不可撤销，建议先导出备份。点击日期可选择单日或多日删除。</div></div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5.5" rx="7" ry="2.5"/><path d="M5 5.5v13c0 1.38 3.13 2.5 7 2.5s7-1.12 7-2.5v-13"/></svg> 导出全部数据</span><button class="btn-sm btn-pink" id="btnExportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出全部数据（JSON）</button><div class="dm-info-text" style="margin-top:6px;">导出所有数据为一个JSON文件，包括聊天记录、主题设置、表情包、塔罗记录、经期数据、心情手账、重要日等。可在新页面中完整恢复。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg> 导入全部数据</span><button class="btn-sm btn-blue" id="btnImportAll" style="margin-top:4px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>选择文件并导入</button><input type="file" id="importAllFileInput" accept=".json" style="display:none;"><div class="dm-info-text" style="margin-top:6px;">选择之前导出的JSON文件，将覆盖当前全部数据并恢复。操作不可撤销，建议先备份。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8"/><line x1="12" y1="17" x2="12" y2="21"/></svg> 字卡库管理</span><div class="dm-wordcard-section" id="dmWordcardGroups"><div class="dm-info-text" style="margin-bottom:8px;">选择要导出的字卡分组，导出格式为JSON文件，可用于导入恢复。</div><div id="dmWordcardGroupList" style="max-height:160px;overflow-y:auto;margin-bottom:8px;"></div></div><div class="dm-btn-row" style="margin-top:6px;gap:8px;"><button class="btn-sm btn-pink" id="btnDmWordcardExport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>导出选中字卡</button><button class="btn-sm btn-blue" id="btnDmWordcardImport"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>导入字卡库</button><input type="file" id="wordcardImportFileInput" accept=".json" style="display:none;"></div><div class="dm-info-text" style="margin-top:6px;">导出格式与导入格式统一，导入后字卡会按分组名合并到对应分组中。</div></div><div class="dm-divider"></div><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg> 删除数据</span><div class="dm-btn-row" style="margin-top:6px;flex-direction:column;align-items:stretch;gap:8px;"><button class="btn-sm btn-danger-sm" id="btnDeleteAllChat" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="9" y1="10" x2="15" y2="10"/></svg> 删除全部聊天记录</button><button class="btn-sm btn-danger-sm" id="btnDeleteAllData" style="justify-content:flex-start;padding:9px 14px;font-size:13px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" style="width:15px;height:15px;"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/><line x1="3" y1="6" x2="21" y2="6"/></svg> 删除全部数据（恢复出厂）</button></div><div class="dm-info-text" style="margin-top:6px;">删除全部聊天记录仅清空消息，词库/表情/设置保留；删除全部数据将清空所有内容并恢复至初始状态，建议先导出备份。</div></div></div>
                 <div class="feature-page" id="mailboxPage"><button class="btn-sm btn-ghost back-btn" id="backFromMailbox"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="setting-section"><span class="section-label"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 信箱</span><div class="mailbox-tab-row"><button class="mailbox-tab-btn active" id="mailTabSend">投递的信</button><button class="mailbox-tab-btn" id="mailTabReceive">回信</button></div><div id="mailSendArea" style="display:flex;flex-direction:column;gap:10px;"><button class="btn-sm btn-pink" id="btnNewLetter">写一封信</button><div class="letter-list" id="sendLetterList"></div></div><div id="mailReceiveArea" style="display:none;flex-direction:column;gap:10px;"><div class="letter-list" id="receiveLetterList"></div></div></div></div>
                 <div class="feature-page" id="importantDaysPage"><button class="btn-sm btn-ghost back-btn" id="backFromImportantDays"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>返回</button><div class="imd-page-container"><div class="imd-top-pane" id="imdTopPane"><button class="imd-top-edit-btn" id="imdTopEditBtn" title="编辑此重要日" style="display:none;"><svg viewBox="0 0 24 24"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button><div class="imd-top-decor" id="imdBgDots" style="display:none;"></div><div class="imd-top-type-tag" id="imdTopTypeTag"></div><div class="imd-top-name" id="imdTopName"></div><div class="imd-top-date" id="imdTopDate"></div><div class="imd-top-days" id="imdTopDays"></div><div class="imd-top-days-sub" id="imdTopDaysSub"></div><div class="imd-top-empty" id="imdTopEmpty">还没有重要日，在下方添加吧</div></div><div class="imd-bottom-pane"><div class="imd-list-scroll" id="imdListScroll"></div><div class="imd-list-empty" id="imdListEmpty" style="display:none;">点击下方按钮添加重要日</div><div class="imd-add-btn-row"><button class="btn-sm btn-pink" id="btnImdAdd"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>添加重要日</button></div></div></div></div>
             </div>
@@ -5226,6 +5252,15 @@ body.dark-mode .user-letter-content .letter-body p {
             btnDmMailExportAllSend = $('btnDmMailExportAllSend'), btnDmMailExportAllReceive = $('btnDmMailExportAllReceive'),
             btnDmMailExportSelected = $('btnDmMailExportSelected');
         let dmMailExportMode = 'send', dmMailMonthOffset = 0, dmMailSelectedDates = new Set();
+        // 信件删除功能
+        const dmMailDelTabSend = $('dmMailDelTabSend'), dmMailDelTabReceive = $('dmMailDelTabReceive'),
+            dmMailDelPrevMonth = $('dmMailDelPrevMonth'), dmMailDelNextMonth = $('dmMailDelNextMonth'),
+            dmMailDelMonthTitle = $('dmMailDelMonthTitle'), dmMailDelDaysGrid = $('dmMailDelDaysGrid'),
+            dmMailDelSelected = $('dmMailDelSelected'), dmMailDelSelectedText = $('dmMailDelSelectedText'),
+            btnDmMailDeleteSelected = $('btnDmMailDeleteSelected'),
+            btnDmMailDeleteAllSend = $('btnDmMailDeleteAllSend'), btnDmMailDeleteAllReceive = $('btnDmMailDeleteAllReceive'),
+            dmMailDeleteToggle = $('dmMailDeleteToggle'), dmMailDeleteBody = $('dmMailDeleteBody');
+        let dmMailDelMode = 'send', dmMailDelMonthOffset = 0, dmMailDelSelectedDates = new Set();
         // 字卡导出导入
         const btnDmWordcardExport = $('btnDmWordcardExport'), btnDmWordcardImport = $('btnDmWordcardImport'),
             wordcardImportFileInput = $('wordcardImportFileInput'), dmWordcardGroupList = $('dmWordcardGroupList');
@@ -7429,12 +7464,13 @@ function _doScrollToMsg(targetId) {
                 bodyHtml = '<div class="letter-body">' + lines.map(p => '<p>' + escapeHtml(p) + '</p>').join('') + '</div>';
             } else {
                 const lines = content.split('\n');
-                let greeting = '', firstSentence = '', bodyLines = [], signature = '', dateLine = '', mode = 'greeting';
+                let greeting = '', firstSentence = '', bodyLines = [], signoff = '', signature = '', dateLine = '', mode = 'greeting';
                 for (let line of lines) {
                     line = line.trim();
                     if (!line) continue;
                     if (mode === 'greeting' && line.includes('夫人：')) { greeting = line; mode = 'first'; }
                     else if (mode === 'first' && line.includes('见字如晤')) { firstSentence = line; mode = 'body'; }
+                    else if (line.includes('情长纸短') || line.includes('不尽依依')) { signoff = line; mode = 'signoff'; }
                     else if (line.includes('顾时夜')) { signature = line; mode = 'signature'; }
                     else if (mode === 'signature' && /^\d{4}年/.test(line)) { dateLine = line; }
                     else { if (mode !== 'signature') bodyLines.push(line); }
@@ -7442,6 +7478,7 @@ function _doScrollToMsg(targetId) {
                 if (greeting) bodyHtml += '<div class="letter-greeting">' + escapeHtml(greeting) + '</div>';
                 if (firstSentence) bodyHtml += '<div class="letter-first-sentence">' + escapeHtml(firstSentence) + '</div>';
                 if (bodyLines.length) bodyHtml += '<div class="letter-body">' + bodyLines.map(p => '<p>' + escapeHtml(p) + '</p>').join('') + '</div>';
+                if (signoff) bodyHtml += '<div class="letter-signoff">' + escapeHtml(signoff) + '</div>';
                 if (signature) bodyHtml += '<div class="letter-signature">' + escapeHtml(signature) + '</div>';
                 if (dateLine) bodyHtml += '<div class="letter-date">' + escapeHtml(dateLine) + '</div>';
             }
@@ -7490,8 +7527,9 @@ function _doScrollToMsg(targetId) {
                 + '.letter-box{width:100%;max-width:480px;background:' + bgColor + ';border-radius:18px;padding:18px 18px 22px;box-shadow:0 8px 28px rgba(0,0,0,0.08);border:1px solid ' + borderColor + ';display:flex;flex-direction:column;gap:10px}'
                 + '.letter-box-date{font-size:12px;color:#b0a6b4;text-align:right;letter-spacing:0.3px;padding-right:2px}'
                 + '.letter-box-content{font-size:15px;line-height:2.0;letter-spacing:0.4px;padding:20px 18px;border:3px solid ' + borderColor + ';outline:2px dashed ' + borderColor + ';outline-offset:6px;border-radius:8px;margin:4px 2px;white-space:pre-wrap;word-break:break-word}'
-                + '.letter-box-content .letter-greeting,.letter-box-content .letter-first-sentence,.letter-box-content .letter-signature,.letter-box-content .letter-date{color:#5a7a9a;font-weight:500}'
+                + '.letter-box-content .letter-greeting,.letter-box-content .letter-first-sentence,.letter-box-content .letter-signoff,.letter-box-content .letter-signature,.letter-box-content .letter-date{color:#5a7a9a;font-weight:500}'
                 + '.letter-box-content .letter-body p{margin:0 0 4px 0;line-height:1.8}'
+                + '.letter-box-content .letter-signoff{text-align:center;font-style:italic;margin-top:8px}'
                 + '.letter-box-content .letter-signature,.letter-box-content .letter-date{text-align:right;margin-top:4px}'
                 + '@media(prefers-color-scheme:dark){body{background:#1e1e24;color:#c8ccd4}h1{color:#9a95a4}}'
                 + '</style></head><body><h1>' + title + '</h1>' + lettersHtml + '</body></html>';
@@ -7563,6 +7601,118 @@ function _doScrollToMsg(targetId) {
 
         function updateDmMailCalendarOnOpen() { dmMailMonthOffset = 0; dmMailSelectedDates.clear(); updateDmMailCalendar(); renderDmWordcardGroups(); }
 
+        /* ===== 信件删除功能 ===== */
+        // 折叠/展开删除信件区域
+        dmMailDeleteToggle.addEventListener('click', () => {
+            const collapsed = dmMailDeleteBody.style.display === 'none';
+            dmMailDeleteBody.style.display = collapsed ? 'block' : 'none';
+            dmMailDeleteToggle.textContent = collapsed ? '收起 ▲' : '展开 ▼';
+            if (collapsed) { dmMailDelMonthOffset = 0; dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); }
+        });
+
+        // 投递/回信 tab 切换
+        dmMailDelTabSend.addEventListener('click', () => { dmMailDelTabSend.classList.add('active'); dmMailDelTabReceive.classList.remove('active'); dmMailDelMode = 'send'; dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); });
+        dmMailDelTabReceive.addEventListener('click', () => { dmMailDelTabReceive.classList.add('active'); dmMailDelTabSend.classList.remove('active'); dmMailDelMode = 'receive'; dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); });
+
+        // 月份导航
+        dmMailDelPrevMonth.addEventListener('click', () => { dmMailDelMonthOffset--; dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); });
+        dmMailDelNextMonth.addEventListener('click', () => { dmMailDelMonthOffset++; dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); });
+
+        function updateDmMailDelCalendar() {
+            const now = new Date(), year = now.getFullYear(), month = now.getMonth() + dmMailDelMonthOffset;
+            const displayMonth = month < 0 ? (month % 12 + 12) % 12 : month % 12;
+            const displayYear = year + Math.floor(month / 12);
+            const actualMonth = displayMonth, actualYear = displayYear;
+            dmMailDelMonthTitle.textContent = actualYear + '年 ' + (actualMonth + 1) + '月';
+            const firstDay = new Date(actualYear, actualMonth, 1).getDay();
+            const daysInMonth = new Date(actualYear, actualMonth + 1, 0).getDate();
+            const prevMonthDays = new Date(actualYear, actualMonth, 0).getDate();
+            const sendDates = getSendDates(), receiveDates = getReceiveDates();
+            const todayStr = now.getFullYear() + '-' + String(now.getMonth()+1).padStart(2,'0') + '-' + String(now.getDate()).padStart(2,'0');
+
+            const createDelCell = (day, dateStr, isCurrentMonth) => {
+                const cell = document.createElement('div'); cell.className = 'dm-mail-day-cell';
+                if (dateStr === todayStr) cell.classList.add('today');
+                const hasSend = sendDates.has(dateStr), hasReceive = receiveDates.has(dateStr);
+                if (hasSend && hasReceive) cell.classList.add('has-both');
+                else if (hasSend) cell.classList.add('has-send');
+                else if (hasReceive) cell.classList.add('has-receive');
+                if (dmMailDelSelectedDates.has(dateStr)) cell.classList.add('selected');
+                cell.textContent = day;
+                if (hasSend) { const dot = document.createElement('span'); dot.className = 'dm-mail-day-dot send'; cell.appendChild(dot); }
+                if (hasReceive) { const dot = document.createElement('span'); dot.className = 'dm-mail-day-dot receive'; cell.appendChild(dot); }
+                if (isCurrentMonth) {
+                    cell.addEventListener('click', () => {
+                        if (dmMailDelSelectedDates.has(dateStr)) { dmMailDelSelectedDates.delete(dateStr); }
+                        else { dmMailDelSelectedDates.add(dateStr); }
+                        updateDmMailDelCalendar();
+                    });
+                }
+                return cell;
+            };
+
+            dmMailDelDaysGrid.innerHTML = '';
+            for (let i = firstDay - 1; i >= 0; i--) {
+                const day = prevMonthDays - i; const d = new Date(actualYear, actualMonth - 1, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                const cell = createDelCell(day, ds, false); cell.classList.add('other-month');
+                dmMailDelDaysGrid.appendChild(cell);
+            }
+            for (let day = 1; day <= daysInMonth; day++) {
+                const d = new Date(actualYear, actualMonth, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                dmMailDelDaysGrid.appendChild(createDelCell(day, ds, true));
+            }
+            const remaining = 42 - (firstDay + daysInMonth);
+            for (let day = 1; day <= remaining; day++) {
+                const d = new Date(actualYear, actualMonth + 1, day);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(day).padStart(2,'0');
+                const cell = createDelCell(day, ds, false); cell.classList.add('other-month');
+                dmMailDelDaysGrid.appendChild(cell);
+            }
+            // 更新选中UI
+            if (dmMailDelSelectedDates.size === 0) { dmMailDelSelected.style.display = 'none'; }
+            else {
+                dmMailDelSelected.style.display = 'flex';
+                const sorted = [...dmMailDelSelectedDates].sort();
+                dmMailDelSelectedText.textContent = '已选 ' + dmMailDelSelectedDates.size + ' 天：' + sorted.join(', ');
+            }
+        }
+
+        // 删除选中日期的信件
+        btnDmMailDeleteSelected.addEventListener('click', () => {
+            if (dmMailDelSelectedDates.size === 0) { toast('请先选择要删除的日期'); return; }
+            const target = dmMailDelMode === 'send' ? '删除投递信' : '删除回信';
+            if (!confirm('确定要删除这 ' + dmMailDelSelectedDates.size + ' 天内的' + target + '吗？此操作不可撤销。')) return;
+            const history = dmMailDelMode === 'send' ? letterSendHistory : letterReceiveHistory;
+            for (let i = history.length - 1; i >= 0; i--) {
+                const d = new Date(history[i].time);
+                const ds = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+                if (dmMailDelSelectedDates.has(ds)) history.splice(i, 1);
+            }
+            saveLetterData();
+            dmMailDelSelectedDates.clear();
+            updateDmMailDelCalendar();
+            updateDmMailCalendar();
+            toast('已删除 ' + target);
+        });
+
+        // 删除全部
+        btnDmMailDeleteAllSend.addEventListener('click', () => {
+            if (!letterSendHistory.length) { toast('没有投递信可删除'); return; }
+            if (!confirm('确定要删除全部 ' + letterSendHistory.length + ' 封投递信吗？此操作不可撤销。建议先导出备份。')) return;
+            letterSendHistory = []; saveLetterData();
+            dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); updateDmMailCalendar();
+            toast('已删除全部投递信');
+        });
+        btnDmMailDeleteAllReceive.addEventListener('click', () => {
+            if (!letterReceiveHistory.length) { toast('没有回信可删除'); return; }
+            if (!confirm('确定要删除全部 ' + letterReceiveHistory.length + ' 封回信吗？此操作不可撤销。建议先导出备份。')) return;
+            letterReceiveHistory = []; saveLetterData();
+            dmMailDelSelectedDates.clear(); updateDmMailDelCalendar(); updateDmMailCalendar();
+            toast('已删除全部回信');
+        });
+
         function openNewLetterCompose() { const overlay = document.createElement('div'); overlay.className = 'modal-overlay'; overlay.style.display = 'flex'; overlay.style.zIndex = '130'; const card = document.createElement('div'); card.style.cssText = 'background:#fffdfc;border-radius:22px;width:100%;max-width:440px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 16px 48px rgba(0,0,0,0.16);overflow:hidden;'; if (darkMode) card.style.background = '#282a32'; card.innerHTML = `<div class="modal-header"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="width:22px;height:22px;"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2 8 12 14 22 8"/></svg> 写一封信</h3><button class="btn-close-modal" id="cancelCompose">✕</button></div><div class="modal-body" style="flex:1;overflow-y:auto;padding:14px 18px 18px;display:flex;flex-direction:column;gap:14px;"><textarea class="letter-textarea" id="composeTextarea" placeholder="在这里写下你想说的话……" style="min-height:220px;"></textarea><button class="btn-sm btn-pink letter-send-btn" id="sendLetterBtn">✉️ 投递</button></div>`; overlay.appendChild(card); document.body.appendChild(overlay); const cancel = card.querySelector('#cancelCompose'); const sendBtn = card.querySelector('#sendLetterBtn'); const textarea = card.querySelector('#composeTextarea'); const closeOverlay = () => { overlay.remove(); }; cancel.addEventListener('click', closeOverlay); overlay.addEventListener('click', (e) => { if (e.target === overlay) closeOverlay(); }); sendBtn.addEventListener('click', () => { const content = textarea.value.trim(); if (!content) { toast('请写点什么再投递吧'); return; } letterSendHistory.push({ id: Date.now(), content, time: Date.now() }); const delayMs = 28800000 + Math.floor(Math.random() * 57600000); const replyTime = Date.now() + delayMs; pendingReplies.push({ id: Date.now(), sendId: letterSendHistory[letterSendHistory.length - 1].id, replyTime }); saveLetterData(); closeOverlay(); renderSendLetters(); toast('✉️ 信已投递，对方将在8-24小时内回信'); }); textarea.focus(); }
 
         function renderSendLetters() { sendLetterList.innerHTML = ''; if (!letterSendHistory.length) { sendLetterList.innerHTML = '<div style="padding:20px;text-align:center;color:#c8bcc4;">还没有投递过信</div>'; return; } [...letterSendHistory].reverse().forEach(entry => { const item = document.createElement('div'); item.className = 'letter-item'; item.innerHTML = `<div class="letter-item-header"><span>📨 第${letterSendHistory.indexOf(entry)+1}封</span><span class="letter-item-date">${fdate(new Date(entry.time))} ${ftime(new Date(entry.time))}</span></div><div class="letter-item-preview">${entry.content.substring(0,30)}${entry.content.length>30?'...':''}</div>`; item.onclick = () => viewLetterDetail(entry.content, false); sendLetterList.appendChild(item); }); }
@@ -7609,6 +7759,7 @@ function escapeHtml(str) {
         let greeting = '';
         let firstSentence = '';
         let bodyLines = [];
+        let signoff = '';
         let signature = '';
         let dateLine = '';
         let mode = 'greeting';
@@ -7621,6 +7772,9 @@ function escapeHtml(str) {
             } else if (mode === 'first' && line.includes('见字如晤')) {
                 firstSentence = line;
                 mode = 'body';
+            } else if (line.includes('情长纸短') || line.includes('不尽依依')) {
+                signoff = line;
+                mode = 'signoff';
             } else if (line.includes('顾时夜')) {
                 signature = line;
                 mode = 'signature';
@@ -7636,6 +7790,7 @@ function escapeHtml(str) {
         if (bodyLines.length) {
             html += '<div class="letter-body">' + bodyLines.map(p => '<p>' + escapeHtml(p) + '</p>').join('') + '</div>';
         }
+        if (signoff) html += '<div class="letter-signoff">' + escapeHtml(signoff) + '</div>';
         if (signature) html += '<div class="letter-signature">' + escapeHtml(signature) + '</div>';
         if (dateLine) html += '<div class="letter-date">' + escapeHtml(dateLine) + '</div>';
         contentDiv.innerHTML = html;
@@ -7961,31 +8116,30 @@ function escapeHtml(str) {
             }
         }
 
-        // 半颗爱心（dir: 1=右半, -1=左半），从交汇点(尖端)向上绘制到顶部V
+        // 半颗爱心（dir: 1=右半, -1=左半），从交汇点(底部尖端)向上绘制到顶部V
         function drawHalfHeart(ctx, cx, cy, size, dir, t, color) {
             ctx.save();
             ctx.strokeStyle = color;
             ctx.lineWidth = Math.max(2, size * 0.04);
             ctx.lineCap = 'round';
             ctx.lineJoin = 'round';
-            // 心形参数方程：尖端在cx,cy（交汇点），顶部V在上方
             const steps = 80;
             const sx = size / 32, sy = size / 28;
-            // dir=1(右半) 从 t=0(尖端) 递增到 π(顶部V)，即向右上方绘制
-            // dir=-1(左半) 从 t=2π(尖端) 递减到 π(顶部V)，即向左上方绘制
-            const startA = dir > 0 ? 0 : 2 * Math.PI;
-            const endA = Math.PI;
+            // 从底部尖端(a=π)向上绘制到顶部V(a=0)，drawEnd从π逐步减小到0
+            const startA = Math.PI;
+            const endA = 0;
             const drawEnd = startA + (endA - startA) * t;
             ctx.beginPath();
             let first = true;
             for (let i = 0; i <= steps; i++) {
                 const a = startA + (endA - startA) * (i / steps);
-                if (dir > 0 ? (a > drawEnd) : (a < drawEnd)) break;
-                const hx = 16 * Math.pow(Math.sin(a), 3);
+                if (dir > 0 ? (a < drawEnd) : (a < drawEnd)) break;
+                let hx = 16 * Math.pow(Math.sin(a), 3);
                 const hy = 13 * Math.cos(a) - 5 * Math.cos(2 * a) - 2 * Math.cos(3 * a) - Math.cos(4 * a);
+                if (dir < 0) hx = -hx;
                 const px = cx + hx * sx;
-                // 尖端朝上：t=0时hy=5→尖端在cy上方；t=π时hy=-17→V在cy
-                const py = cy - (hy - 5) * sy;
+                // 尖端(tip, a=π)在交汇点cy，顶部V(a=0)在上方
+                const py = cy + (hy + 17) * sy;
                 if (first) { ctx.moveTo(px, py); first = false; } else { ctx.lineTo(px, py); }
             }
             ctx.stroke();
